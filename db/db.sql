@@ -13,7 +13,7 @@ CREATE TABLE Utente (
     telefono VARCHAR(15),
     password VARCHAR(255) NOT NULL,
     ruolo ENUM('admin', 'utente') DEFAULT 'utente',
-    data_registrazione DATE DEFAULT CURRENT_DATE,
+    data_registrazione DATETIME,
     foto_profilo VARCHAR(255)
 );
 
@@ -29,7 +29,7 @@ CREATE TABLE Annuncio (
     piano INT,
     indirizzo VARCHAR(255),
     stato ENUM('attivo', 'non attivo') DEFAULT 'attivo',
-    foto_annuncio JSON,
+    foto_annuncio TEXT,
     coordinate POINT,
     FOREIGN KEY (utente_id) REFERENCES Utente(id) ON DELETE CASCADE
 );
