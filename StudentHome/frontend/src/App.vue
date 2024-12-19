@@ -1,17 +1,19 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <header>
+    <h1>StudentHome</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><router-link to="/news">News</router-link></li>
+      <li><router-link to="/guida-alla-ricerca-dell-allogio-ideale">Guida alla ricerca dell'allogio ideale</router-link></li>
+      <li><router-link to="/chi-siamo">Chi siamo</router-link></li>
+      <li><router-link to="/contatti">Contatti</router-link></li>
+      <li><router-link to="/login">Login</router-link></li>
+    </ul>
+  </nav>
+  <footer>
+    <p>Ingegneria dei Sistemi Web - A.A. 2024/2025</p>
+  </footer>
 </template>
 
 <style scoped>
