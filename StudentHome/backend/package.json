@@ -11,5 +11,10 @@
   },
   "author": "Antonino Cardillo e Alessandro Rambaldi",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.2"
+  }
 }
