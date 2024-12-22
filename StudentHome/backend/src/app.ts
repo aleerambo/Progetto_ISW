@@ -1,15 +1,15 @@
 import express, { Express } from "express"
 import history from "connect-history-api-fallback"
+import newsRouter from "./routes/news-router"
 
 const app: Express = express()
 const port: number = 3000
 
+app.use(newsRouter)
+
 app.use(history())
 app.use(express.static("public"))
 app.use(express.static("dist-frontend"))
-
-//app.use(articoliRouter)
-
 
 app.use(function(req, res, next) {
   res.setHeader("Content-Type", "text/plain")
