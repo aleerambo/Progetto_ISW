@@ -27,6 +27,9 @@
       <li><router-link to="/login">Login</router-link></li>
     </ul>
   </nav>
+  <main>
+    <router-view />
+  </main>
   <footer>
     <p>Ingegneria dei Sistemi Web - A.A. 2024/2025</p>
   </footer>
