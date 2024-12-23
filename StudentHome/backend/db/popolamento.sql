@@ -24,7 +24,7 @@ INSERT INTO StanzaAppartamento (annuncio_id, tipologia, numero_inquilini, contra
 VALUES
 (1, 'stanza', 1, 6, 12),
 (2, 'appartamento', 2, 12, 24),
-(3, 'posto letto', 2, 3, 6);
+(3, 'stanza', 2, 3, 6);
 
 -- Inserimento nella tabella Servizio
 INSERT INTO Servizio (nome_servizio)

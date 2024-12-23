@@ -38,7 +38,7 @@ CREATE TABLE Annuncio (
 CREATE TABLE StanzaAppartamento (
     id INT AUTO_INCREMENT PRIMARY KEY,
     annuncio_id INT NOT NULL,
-    tipologia ENUM('stanza', 'appartamento', 'posto letto') NOT NULL,
+    tipologia ENUM('stanza', 'appartamento') NOT NULL,
     numero_inquilini INT,
     contratto_min INT,
     contratto_max INT,
