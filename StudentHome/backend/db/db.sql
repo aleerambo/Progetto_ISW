@@ -21,6 +21,7 @@ CREATE TABLE Utente (
 CREATE TABLE Annuncio (
     id INT AUTO_INCREMENT PRIMARY KEY,
     utente_id INT NOT NULL,
+    id_quartiere INT,
     data DATETIME DEFAULT CURRENT_TIMESTAMP,
     prezzo DECIMAL(10, 2) NOT NULL,
     descrizione TEXT,
@@ -28,9 +29,8 @@ CREATE TABLE Annuncio (
     mq INT,
     piano INT,
     indirizzo VARCHAR(255),
-    stato ENUM('attivo', 'non attivo') DEFAULT 'attivo',
+    stato ENUM('attivo', 'non attivo') DEFAULT 'non attivo',
     foto_annuncio TEXT,
-    coordinate POINT,
     FOREIGN KEY (utente_id) REFERENCES Utente(id) ON DELETE CASCADE
 );
 
@@ -65,15 +65,6 @@ CREATE TABLE QuartiereZona (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome_quartiere VARCHAR(100) UNIQUE NOT NULL,
     descrizione TEXT
-);
-
--- Tabella Convenzioni
-CREATE TABLE Convenzione (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome_convenzione VARCHAR(100) NOT NULL,
-    descrizione TEXT,
-    sconto DECIMAL(5, 2),
-    validita DATE
 );
 
 -- Tabella News
