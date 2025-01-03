@@ -7,6 +7,7 @@ import News from "./pages/News.vue"
 import ChiSiamo from "./pages/ChiSiamo.vue"
 import Contatti from "./pages/Contatti.vue"
 import Login from "./pages/Login.vue"
+import Registrazione from "./pages/Registrazione.vue"
 import NotFound from "./pages/NotFound.vue"
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -18,9 +19,32 @@ const router: Router = createRouter({
       { path: "/news", component: News },
       { path: "/chi-siamo", component: ChiSiamo},
       { path: "/contatti", component: Contatti },
-      { path: "/login", component: Login },
+      {
+        path: "/login",
+        component: Login,
+        meta: { requireLogout: true }, // Segna che la rotta richiede il logout
+      },
+      {
+        path: "/register",
+        component: Registrazione,
+        meta: { requireLogout: true }, // Segna che la rotta richiede il logout
+      },
       { path: "/:pathMatch(.*)*", component: NotFound }
     ]
   })
+
+// Funzione che viene eseguita prima di ogni navigazione del router
+router.beforeEach(async (to) => {
+  const res = await axios.get("/api/auth/profile")
+  const user = res.data as User | null
+  // Se la pagina richiede il login, ma l'utente non l'ha effettuato, lo rimanda alla pagina di login
+  if (to.meta.requireLogin && !user) {
+    return { path: "/login" }
+  }
+  // Se la pagina richiede il logout, ma l'utente ha effettuato l'accesso, lo rimanda alla home
+  if (to.meta.requireLogout && user) {
+    return { path: "/" }
+  }
+})
 
 createApp(App).use(router).mount('#app')
