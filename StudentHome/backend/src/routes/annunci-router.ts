@@ -9,5 +9,7 @@ router.get("/api/annunci/:n", annunciController.AnnunciN) //per il dettaglio del
 router.get("/api/annuncinoattivi", annunciController.AnnunciNoAttivi) //per utente admin da attivare
 router.get("/api/annunci/tipo/:tipo", annunciController.allAnnunciTipo) //annunci per tipo
 router.get("/api/annunci/utente/:mail", annunciController.AnnunciUtente) //annunci per utente usando mail come parametro
+router.post("/api/annunci/create", annunciController.createAnnuncio)
+router.delete("/api/annunci/:id", annunciController.deleteAnnuncio)
 
 export default router
