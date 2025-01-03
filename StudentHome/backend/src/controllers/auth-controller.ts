@@ -15,7 +15,7 @@ export const register = async (req: Request, res: Response) => {
   const { mail, password } = req.body
 
   // Verifica che la mail sia disponibile
-  const [users] = await connection.execute("SELECT mail FROM utente WHERE mail=?", [
+  const [users]:any = await connection.execute("SELECT mail FROM utente WHERE mail=?", [
     mail,
   ])
 
@@ -34,7 +34,7 @@ export const register = async (req: Request, res: Response) => {
   ])
 
   // Estrae i dati per il nuovo utente
-  const [results] = await connection.execute(
+  const [results]:any = await connection.execute(
     "SELECT id, mail, role FROM utente WHERE mail=?",
     [mail]
   )
@@ -58,7 +58,7 @@ export const login = async (req: Request, res: Response) => {
   const { mail, password } = req.body
 
   // Esegue la query al database per ottenere i dati dell'utente in base alla mail
-  const [results] = await connection.execute(
+  const [results]:any = await connection.execute(
     "SELECT id, mail, password, role FROM utente WHERE mail=?",
     [mail]
   )
