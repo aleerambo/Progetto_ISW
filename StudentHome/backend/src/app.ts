@@ -6,7 +6,6 @@ import bodyParser from "body-parser"
 import cookieParser from "cookie-parser"
 
 import authRouter from "./routes/auth-router"
-import postsRouter from "./routes/posts-router"
 
 const app: Express = express()
 const port: number = 3000
@@ -18,7 +17,6 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 
 app.use(authRouter)
-app.use(postsRouter)
 
 app.use(history())
 app.use(express.static("public"))
