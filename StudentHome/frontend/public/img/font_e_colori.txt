@@ -1,0 +1,38 @@
+1. Scelta dei Font
+Font per i titoli: Scegli un font sans-serif moderno e leggibile, che trasmetta freschezza e dinamicità. Alcuni esempi sono:
+Poppins: molto popolare per il suo aspetto pulito e moderno.
+Montserrat: ha uno stile che si adatta bene al mondo digitale e risulta leggibile anche in titoli e pulsanti.
+Raleway: è un sans-serif con un tocco elegante, ottimo per i titoli.
+Font per il testo: Per i testi più lunghi, considera un sans-serif più semplice e leggibile, ideale per descrizioni di appartamenti e dettagli. Ecco alcune opzioni:
+Roboto: molto versatile e leggibile.
+Open Sans: un classico nel web design, con un’ottima leggibilità.
+Nunito: amichevole e rotondo, con un tocco giovanile che può funzionare bene per il target.
+Abbinamento suggerito: Poppins per titoli e Open Sans o Roboto per il testo di descrizione.
+
+2. Palette di Colori
+Considerando il target giovanile, è importante che la palette colori sia accogliente, rassicurante e che non risulti troppo "seriosa". Qui ci sono alcune opzioni di combinazioni di colori che puoi usare come base.
+
+Opzione 1: Colori freschi e moderni
+
+Blu scuro (#1E3A8A): per trasmettere affidabilità e professionalità. Usalo nei titoli principali e nei pulsanti importanti.
+Azzurro chiaro (#60A5FA): per creare un contrasto gradevole senza esagerare. Ideale per i dettagli e le icone.
+Bianco (#FFFFFF): sfondo per dare pulizia e facilità di lettura.
+Grigio chiaro (#F3F4F6): per le sezioni che separano contenuti e per gli sfondi di moduli e schede di appartamenti.
+
+Opzione 2: Colori caldi e accoglienti
+
+Arancio chiaro (#FFB74D): per elementi di interazione (es. pulsanti di "Prenota" o "Dettagli").
+Blu navy (#1E293B): come colore primario per testi importanti e titoli.
+Verde menta (#A5D6A7): come accento per i messaggi positivi o gli stati di disponibilità.
+Bianco (#FFFFFF) e Grigio chiaro (#F5F5F5): per creare spazi "respirabili" nel layout.
+
+Opzione 3: Minimal e naturale
+
+Beige chiaro (#F5F5DC): come sfondo per un look morbido.
+Verde oliva (#6B8E23): per pulsanti e dettagli di navigazione.
+Blu scuro (#333366): per i testi principali e i titoli.
+Corallo chiaro (#FF7F50): come accento, per un tocco giovanile che attira senza distrarre.
+
+3. Iconografia e Pattern
+Usa icone semplici e lineari che comunichino subito le funzionalità principali (es. icona della casa per l’annuncio, icona della mappa per la geolocalizzazione, icona del cuore per i preferiti).
+Se vuoi aggiungere pattern grafici di sfondo, considera linee geometriche leggere o forme tondeggianti che richiamano la giovinezza e la dinamicità.
