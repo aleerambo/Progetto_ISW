@@ -318,7 +318,7 @@ export const deleteAnnuncio = async (req: Request, res: Response) => {
   }
 
   // Verifica che l'annuncio esista
-  const [annunci] = await connection.execute("SELECT * FROM annuncio WHERE id=?", [req.params.id])
+  const [annunci]:any = await connection.execute("SELECT * FROM annuncio WHERE id=?", [req.params.id])
   if (!Array.isArray(annunci) || annunci.length == 0) {
     res.status(404).send("Annuncio non trovato.")
     return
