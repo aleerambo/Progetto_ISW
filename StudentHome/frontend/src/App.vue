@@ -25,25 +25,10 @@
             <li class="nav-link"><router-link to="/contatti">Contatti</router-link></li>
             <li class="nav-link"><router-link to="/login">Login</router-link></li>
           </ul>
-          <!--
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="#">Features</a>
-          <a class="nav-link" href="#">Pricing</a>
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        -->
         </div>
       </div>
     </div>
   </nav>
-  <!--
-    <ul>
-      <li><router-link to="/news">News</router-link></li>
-      <li><router-link to="/guida-alla-ricerca-dell-allogio-ideale">Guida alla ricerca dell'allogio ideale</router-link></li>
-      <li><router-link to="/chi-siamo">Chi siamo</router-link></li>
-      <li><router-link to="/contatti">Contatti</router-link></li>
-      <li><router-link to="/login">Login</router-link></li>
-    </ul>
-  -->
   <main>
     <router-view/>
   </main>
