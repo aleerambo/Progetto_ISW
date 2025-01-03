@@ -1,9 +1,9 @@
 import { Router } from "express"
-import * as articoliController from "../controllers/news-controller"
+import * as newsController from "../controllers/news-controller"
 
 const router: Router = Router()
 
-router.get("/api/news", articoliController.allNews)
-router.get("/api/news/:n", articoliController.lastNNews)
+router.get("/api/news", newsController.allNews)
+router.get("/api/news/:n", newsController.lastNNews)
 
 export default router

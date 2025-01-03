@@ -1,6 +1,6 @@
 <template>
-    <h3>404</h3>
-    <h2>Pagina non trovata</h2>
+    <img class="rounded mx-auto d-block" src="/img404.webp" alt="Immagine pagina 404" width="300" height="300" id="Img404">
+    <p class="h2 text-center">Ops! Pagina non trovata</p>
 </template>
   
   <style scoped>

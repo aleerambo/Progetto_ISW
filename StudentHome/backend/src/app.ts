@@ -1,11 +1,12 @@
 import express, { Express } from "express"
 import history from "connect-history-api-fallback"
 import newsRouter from "./routes/news-router"
-
+import annunciRouter from "./routes/annunci-router"
 const app: Express = express()
 const port: number = 3000
 
 app.use(newsRouter)
+app.use(annunciRouter)
 
 app.use(history())
 app.use(express.static("public"))
