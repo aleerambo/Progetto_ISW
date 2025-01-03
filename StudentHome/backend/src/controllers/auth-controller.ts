@@ -15,7 +15,7 @@ export const register = async (req: Request, res: Response) => {
   const { mail, password } = req.body
 
   // Verifica che la mail sia disponibile
-  const [users] = await connection.execute("SELECT mail FROM users WHERE mail=?", [
+  const [users] = await connection.execute("SELECT mail FROM utente WHERE mail=?", [
     mail,
   ])
 
@@ -28,14 +28,14 @@ export const register = async (req: Request, res: Response) => {
   const passwordHash = await bcrypt.hash(password, 10)
 
   // Inserisce l'utente nel database
-  await connection.execute("INSERT INTO users (mail, password) VALUES (?, ?)", [
+  await connection.execute("INSERT INTO utente (mail, password) VALUES (?, ?)", [
     mail,
     passwordHash,
   ])
 
   // Estrae i dati per il nuovo utente
   const [results] = await connection.execute(
-    "SELECT id, mail, role FROM users WHERE mail=?",
+    "SELECT id, mail, role FROM utente WHERE mail=?",
     [mail]
   )
   const newUser = (results as User[])[0]
@@ -59,7 +59,7 @@ export const login = async (req: Request, res: Response) => {
 
   // Esegue la query al database per ottenere i dati dell'utente in base alla mail
   const [results] = await connection.execute(
-    "SELECT id, mail, password, role FROM users WHERE mail=?",
+    "SELECT id, mail, password, role FROM utente WHERE mail=?",
     [mail]
   )
 
