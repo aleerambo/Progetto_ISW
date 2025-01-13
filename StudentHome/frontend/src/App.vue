@@ -2,7 +2,7 @@
 import axios from "axios"
 import { defineComponent } from "vue"
 import UserInfo from "./components/user-info.vue"
-import { User } from "./types"
+import type { User } from "./types";
 
 export default defineComponent({
   components: { UserInfo },

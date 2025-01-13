@@ -1,7 +1,7 @@
 <script lang="ts">
 import axios from "axios"
-import { PropType, defineComponent } from "vue"
-import { User } from "../types"
+import { type PropType, defineComponent } from "vue"
+import type { User } from "../types";
 
 export default defineComponent({
   props: {
@@ -17,7 +17,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <span class="text-sm">{{ user?.username }}</span>
+  <span class="text-sm">{{ user?.mail }}</span>
   <div
     class="h-9 w-9 flex rounded-full"
     :class="{ 'bg-blue-500': user?.role != 'admin', 'bg-rose-500': user?.role == 'admin' }"
