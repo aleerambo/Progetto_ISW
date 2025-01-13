@@ -25,16 +25,16 @@ export default defineComponent({
 
 <template>
   <header>
-  <div class="container-fluid">
-      <RouterLink to="/" class="navbar-brand">
-        <h1 class="text-primary">  
-          <img class="float-start" src="/img/scontornato.png" alt="Logo di student home" width="200" id="LogoImg">
-          <br/>
-          <div id="LogoT">&nbsp;StudentHome</div>
-          <br/>
-        </h1>
-      </RouterLink>
-  </div>
+    <div class="container-fluid">
+        <RouterLink to="/" class="navbar-brand">
+          <h1 class="text-primary">  
+            <img class="float-start" src="/img/scontornato.png" alt="Logo di StudentHome" width="200" id="LogoImg">
+            <br/>
+            <div id="LogoT">&nbsp;StudentHome</div>
+            <br/>
+          </h1>
+        </RouterLink>
+    </div>
   </header>
   <nav class="navbar navbar-expand-lg bg-dark-subtle">
     <div class="container-fluid">
@@ -59,7 +59,7 @@ export default defineComponent({
     <RouterView/>
   </main>
 
-  <footer id="bottom" class="row text-center">
+  <footer id="bottom" class="row text-center fixed-bottom">
     <div class="col-12">
       <p>Ingegneria dei Sistemi Web - A.A. 2024/2025</p>
     </div>
