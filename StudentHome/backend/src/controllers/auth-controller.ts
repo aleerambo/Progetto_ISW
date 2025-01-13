@@ -20,7 +20,7 @@ export const register = async (req: Request, res: Response) => {
   ])
 
   if (Array.isArray(users) && users.length > 0) {
-    res.status(400).send("mail già in uso.")
+    res.status(400).send("Mail già in uso.")
     return
   }
 
@@ -35,9 +35,9 @@ export const register = async (req: Request, res: Response) => {
 
   // Estrae i dati per il nuovo utente
   const [results]:any = await connection.execute(
-    "SELECT id, mail, role FROM utente WHERE mail=?",
-    [mail]
-  )
+    "SELECT id, mail, role FROM utente WHERE mail=?", [
+      mail
+  ])
   const newUser = (results as User[])[0]
 
   // Crea un JWT contenente i dati dell'utente e lo imposta come cookie

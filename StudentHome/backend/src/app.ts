@@ -10,13 +10,12 @@ import authRouter from "./routes/auth-router"
 const app: Express = express()
 const port: number = 3000
 
-app.use(newsRouter)
-app.use(annunciRouter)
-
 app.use(bodyParser.json())
 app.use(cookieParser())
 
 app.use(authRouter)
+app.use(newsRouter)
+app.use(annunciRouter)
 
 app.use(history())
 app.use(express.static("public"))
