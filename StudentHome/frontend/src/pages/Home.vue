@@ -19,7 +19,7 @@
         <option value="" selected>Seleziona...</option>
         <option value="appartamento">Appartamento</option>
         <option value="stanza">Stanza</option>
-        <option value="letto singolo">Letto singolo</option>
+        <option value="posto letto">Posto letto</option>
       </select>
     </div>
     <div class="col-1"></div>
