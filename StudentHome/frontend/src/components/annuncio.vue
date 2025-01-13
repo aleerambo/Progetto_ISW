@@ -23,7 +23,7 @@
           <!-- Sezione Informazioni -->
           <div class="col-md-7">
             <div class="card-body">
-              <h5 class="card-title"><router-link :to="`/annunci/${annuncio.id}`">{{ annuncio.descrizione }}</router-link></h5>
+              <h5 class="card-title"><RouterLink :to="`/annunci/${annuncio.id}`">{{ annuncio.descrizione }}</RouterLink></h5>
               <p class="card-text fs-4 fw-bold text-success">
                 {{ annuncio.prezzo || '---' }} €/mese
               </p>

@@ -1,9 +1,9 @@
 <template>
     <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
-            <li class="breadcrumb-item"><router-link to="/news">News</router-link></li>
-            <li class="breadcrumb-item"><router-link to="/guidaalloggio">Guida alla ricerca dell allogio ideale</router-link></li>
+            <li class="breadcrumb-item"><RouterLink to="/">Home</RouterLink></li>
+            <li class="breadcrumb-item"><RouterLink to="/news">News</RouterLink></li>
+            <li class="breadcrumb-item"><RouterLink to="/guidaalloggio">Guida alla ricerca dell allogio ideale</RouterLink></li>
             <li class="breadcrumb-item active" aria-current="page">Chi siamo</li>
         </ol>
     </nav>
