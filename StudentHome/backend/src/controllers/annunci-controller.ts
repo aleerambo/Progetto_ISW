@@ -51,7 +51,7 @@ export async function allAnnunci(req: Request, res: Response) {
     )
 }
 
-export async function AnnunciN(req: Request, res: Response) {
+export async function AnnuncioDettaglio(req: Request, res: Response) {
     connection.execute(
       `SELECT
           a.id,
@@ -149,6 +149,8 @@ export async function lastAnnunci(req: Request, res: Response) {
       )
   }
   export async function allAnnunciTipo(req: Request, res: Response) {
+    const tipo = req.params.tipo;
+    const prezzomax = req.params.prezzomax;
     connection.execute(
       `SELECT
           a.id,
@@ -166,6 +168,7 @@ export async function lastAnnunci(req: Request, res: Response) {
           a.piano,
           a.indirizzo,
           a.foto_annuncio,
+          a.thumbnails,
           qz.descrizione AS quartiere_zona_descrizione,
           GROUP_CONCAT(s.nome_servizio ORDER BY s.nome_servizio ASC) AS servizi,
           sa.contratto_max,
@@ -184,13 +187,13 @@ export async function lastAnnunci(req: Request, res: Response) {
           studenthome.servizio s ON asv.servizio_id = s.id
       JOIN 
           studenthome.stanzaappartamento sa ON a.id = sa.annuncio_id
-      WHERE a.stato="attivo" AND sa.tipologia=?
+      WHERE a.stato="attivo" AND sa.tipologia=? AND a.prezzo < ?
       GROUP BY 
           a.id, a.data, a.prezzo, a.descrizione, a.locali, a.mq, a.piano, a.indirizzo, 
-          a.foto_annuncio, qz.descrizione, sa.contratto_max, sa.contratto_min, sa.numero_inquilini, sa.tipologia
+          a.foto_annuncio, a.thumbnails, qz.descrizione, sa.contratto_max, sa.contratto_min, sa.numero_inquilini, sa.tipologia
       ORDER BY 
           a.data DESC`,
-      [req.params.tipo],
+      [tipo, prezzomax],
       function (err, results, fields) {
         res.json(results)
       }
@@ -293,7 +296,7 @@ export async function AnnunciUtente(req: Request, res: Response) {
     }
   )
 }
-
+/*
 export const createAnnuncio = async (req: Request, res: Response) => {
   // Verifica che l'utente abbia effettuato il login
   const user = getUser(req, res)
@@ -333,4 +336,6 @@ export const deleteAnnuncio = async (req: Request, res: Response) => {
 
   await connection.execute("DELETE FROM annuncio WHERE id=?", [req.params.id])
   res.json({ success: true })
+  
 }
+*/
