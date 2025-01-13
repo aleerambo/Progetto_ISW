@@ -59,7 +59,7 @@ export default defineComponent({
     <RouterView/>
   </main>
 
-  <footer id="bottom" class="row text-center fixed-bottom">
+  <footer id="bottom" class="row text-center">
     <div class="col-12">
       <p>Ingegneria dei Sistemi Web - A.A. 2024/2025</p>
     </div>
