@@ -41,7 +41,7 @@ export default defineComponent({
     </ol>
   </nav>     
   <div class="prose dark:prose-invert">
-    <h1>Login</h1>
+    <h1 class="p-2 mb-2 bg-secondary-subtle text-center" style="color: #1E3A8A;">Login</h1>
     <form class="not-prose flex flex-col gap-3" @submit.prevent="onSubmit">
       <input
         type="text"
