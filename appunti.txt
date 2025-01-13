@@ -1,3 +1,11 @@
+﻿
+
+ALTER TABLE `studenthome`.`annuncio` 
+ADD COLUMN `thumbnails` TEXT NULL DEFAULT NULL AFTER `foto_annuncio`;
+
+UPDATE `studenthome`.`annuncio` SET `thumbnails` = '[Appartamento1.jpeg, Appartamento2.jpeg]' WHERE (`id` = '1');
+UPDATE `studenthome`.`annuncio` SET `thumbnails` = '[Appaetamento1.jpeg, Appartamento2.jpeg]' WHERE (`id` = '2');
+
 type script 17/10
 vue 24/10
 vue node integrazione 31/10 07/11 
