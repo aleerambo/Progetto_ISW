@@ -9,6 +9,9 @@
         </ol>
     </nav>    
     <div>
+        <h1 class="p-2 mb-2 bg-secondary-subtle text-center" style="color: #1E3A8A;">
+            Contatti
+        </h1>
         <p>Hai bisogno di assistenza o vuoi metterti in contatto con noi? Siamo qui per aiutarti!
 
             Puoi scriverci una mail all’indirizzo:
