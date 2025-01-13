@@ -5,9 +5,13 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   server: {
-    // Reindirizza al backend le richieste che iniziano con /api
     proxy: {
-      "/api": "http://localhost:3000",
+      '/api': {
+        target: 'http://localhost:3000', // Indirizzo del backend
+        changeOrigin: true, // Cambia l'host dell'header origin alla destinazione
+        secure: false, // Disattiva la verifica del certificato SSL (se necessario)
+        //rewrite: (path) => path.replace(/^\/api/, ''), // Rimuove il prefisso /api se richiesto
+      },
     },
   },
 })
