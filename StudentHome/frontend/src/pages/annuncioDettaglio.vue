@@ -1,39 +1,39 @@
 <template>
-    <div v-if="annuncio">
-      <div class="container">
-        <div class="card mb-4 shadow-sm">
-          <div class="row g-0">
-            <div class="col-md-5">
-              <img :src="'/img/' + annuncio.foto_annuncio || 'img/placeholder.jpg'" alt="Immagine annuncio" width="400" height="400" />
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">{{ annuncio.descrizione }}</h5>
-                <p class="card-text fs-4 fw-bold text-success">
-                  Prezzo: {{ annuncio.prezzo || 'Non specificato' }} €
-                </p>
-                <p class="card-text">
-                  Locali: {{ annuncio.locali }} 
-                </p>
-                <p class="card-text">
-                  MQ: {{ annuncio.mq }}
-                </p>
-                <p class="card-text">
-                  Piano: {{ annuncio.piano }}
-                </p>
-                <p class="card-text">
-                  Servizi: {{ annuncio.servizi }}
-                </p>
-                <p class="card-text text-muted">
-                  Inserito {{ ConvertiDataTesto(annuncio.data) || 'di recente' }}
-                </p>
-                <p class="card-text text-muted">
-                  Guarda su maps <a :href="CreaUrlMaps(annuncio.indirizzo)" target="_blank">qui</a>
-                </p>
-                <div class="d-flex">
-                  <button class="btn btn-primary me-2">📨 Contatta</button>
-                  <button class="btn btn-success">📞 Chiama</button>
-                </div>
+  <div v-if="annuncio">
+    <div class="container">
+      <div class="card mb-4 shadow-sm">
+        <div class="row g-0">
+          <div class="col-md-5">
+            <img :src="'/img/' + annuncio.foto_annuncio || 'img/placeholder.jpg'" alt="Immagine annuncio" width="400" height="400" />
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title">{{ annuncio.descrizione }}</h5>
+              <p class="card-text fs-4 fw-bold text-success">
+                Prezzo: {{ annuncio.prezzo || 'Non specificato' }} €
+              </p>
+              <p class="card-text">
+                Locali: {{ annuncio.locali }} 
+              </p>
+              <p class="card-text">
+                MQ: {{ annuncio.mq }}
+              </p>
+              <p class="card-text">
+                Piano: {{ annuncio.piano }}
+              </p>
+              <p class="card-text">
+                Servizi: {{ annuncio.servizi }}
+              </p>
+              <p class="card-text text-muted">
+                Inserito {{ ConvertiDataTesto(annuncio.data) || 'di recente' }}
+              </p>
+              <p class="card-text text-muted">
+                Guarda su maps <a :href="CreaUrlMaps(annuncio.indirizzo)" target="_blank">qui</a>
+              </p>
+              <div class="d-flex">
+                <button class="btn btn-primary me-2">📨 Contatta</button>
+                <button class="btn btn-success">📞 Chiama</button>
+              </div>
             </div>
           </div>
         </div>              

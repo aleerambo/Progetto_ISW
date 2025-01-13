@@ -9,7 +9,7 @@ export interface User {
 }
 
 const JWT_SECRET = "StudentHome"
-const COOKIE_NAME = "vuepost-access-token"
+const COOKIE_NAME = "studenthome-access-token"
 
 /**
  * Codifica l'utente in un access token e lo imposta come cookie.

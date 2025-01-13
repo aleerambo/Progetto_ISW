@@ -1,14 +1,39 @@
+<script lang="ts">
+import axios from "axios"
+import { defineComponent } from "vue"
+import UserInfo from "./components/user-info.vue"
+import type { User } from "./types";
+
+export default defineComponent({
+  components: { UserInfo },
+  data() {
+    return {
+      user: null as User | null,
+    }
+  },
+  methods: {
+    async getUser() {
+      const res = await axios.get("/api/auth/profile")
+      this.user = res.data
+    },
+  },
+  mounted() {
+    this.getUser()
+  },
+})
+</script>
+
 <template>
   <header>
   <div class="container-fluid">
-      <router-link to="/" class="navbar-brand">
+      <RouterLink to="/" class="navbar-brand">
         <h1 class="text-primary">  
-          <img class="float-start" src="/studenthome.jpg" alt="Logo di student home" width="150" height="100" id="LogoImg">
+          <img class="float-start" src="/img/scontornato.png" alt="Logo di student home" width="200" id="LogoImg">
           <br/>
           <div id="LogoT">&nbsp;StudentHome</div>
           <br/>
         </h1>
-      </router-link>
+      </RouterLink>
   </div>
   </header>
   <nav class="navbar navbar-expand-lg bg-dark-subtle">
@@ -19,19 +44,19 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div>
           <ul class="navbar-nav">
-            <li class="nav-link active" aria-current="page"><router-link to="/">Home</router-link></li>
-            <li class="nav-link" ><router-link to="/news">News</router-link></li>
-            <li class="nav-link"><router-link to="/guidaalloggio">Guida alla ricerca dell'allogio ideale</router-link></li>
-            <li class="nav-link"><router-link to="/chi-siamo">Chi siamo</router-link></li>
-            <li class="nav-link"><router-link to="/contatti">Contatti</router-link></li>
-            <li class="nav-link"><router-link to="/login">Login</router-link></li>
+            <li class="nav-link active" aria-current="page"><RouterLink to="/">Home</RouterLink></li>
+            <li class="nav-link" ><RouterLink to="/news">News</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/guidaalloggio">Guida alla ricerca dell'allogio ideale</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/chi-siamo">Chi siamo</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/contatti">Contatti</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/login">Login</RouterLink></li>
           </ul>
         </div>
       </div>
     </div>
   </nav>
   <main>
-    <router-view/>
+    <RouterView/>
   </main>
 
   <footer id="bottom" class="row text-center fixed-bottom">
