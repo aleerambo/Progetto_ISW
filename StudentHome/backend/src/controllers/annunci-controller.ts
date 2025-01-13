@@ -296,7 +296,7 @@ export async function AnnunciUtente(req: Request, res: Response) {
     }
   )
 }
-/*
+
 export const createAnnuncio = async (req: Request, res: Response) => {
   // Verifica che l'utente abbia effettuato il login
   const user = getUser(req, res)
@@ -338,4 +338,3 @@ export const deleteAnnuncio = async (req: Request, res: Response) => {
   res.json({ success: true })
   
 }
-*/

@@ -40,11 +40,14 @@ const router: Router = createRouter({
       path: "/contatti", 
       component: Contatti 
     },
+    { 
+      path: "/annunci/:n", 
+      component: AnnuncioDettaglio 
+    },
     {
       path: "/login",
       component: Login,
       // meta: { requireLogout: true }, // Segna che la rotta richiede il logout
-      { path: "/annunci/:n", component: AnnuncioDettaglio },
     },
     {
       path: "/registrazione",
