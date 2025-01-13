@@ -7,11 +7,11 @@
             <li class="breadcrumb-item active" aria-current="page">Chi siamo</li>
         </ol>
     </nav>
+    <h1 class="p-2 mb-2 bg-secondary-subtle text-center" style="color: #1E3A8A;">Chi siamo</h1>
     <div class="container my-5">
         <div class="row align-items-center">
             <!-- Colonna per il testo -->
             <div class="col-12 col-md-6 order-2 order-md-1">
-                <h1 class="mb-4">Chi siamo</h1>
                 <p>
                     Benvenuto su StudentHome! 
 
@@ -24,7 +24,7 @@
             </div>
             <!-- Colonna per l'immagine -->
             <div class="col-12 col-md-6 order-1 order-md-2 text-center">
-                <img src="..\..\public\img\scontornato.png" class="img-fluid" alt="...">
+                <img src="/img/scontornato.png" class="img-fluid" alt="Logo StudentHome">
             </div>
         </div>   
     </div>
