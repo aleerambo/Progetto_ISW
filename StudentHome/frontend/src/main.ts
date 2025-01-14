@@ -4,6 +4,7 @@ import { createRouter, createWebHistory, type Router } from 'vue-router'
 
 import App from './App.vue'
 import Home from "./pages/Home.vue"
+import ArchivioNews from './pages/ArchivioNews.vue'
 import News from "./pages/News.vue"
 import GuidaAlloggio from "./pages/GuidaAlloggio.vue"
 import ChiSiamo from "./pages/ChiSiamo.vue"
@@ -25,11 +26,11 @@ const router: Router = createRouter({
       component: Home 
     },
     { 
-      path: "/news", 
-      component: News 
+      path: "/archivio-news", 
+      component: ArchivioNews 
     },
     { 
-      path: "/guidaalloggio", 
+      path: "/guida-alloggio", 
       component: GuidaAlloggio
     },
     { 
@@ -43,6 +44,10 @@ const router: Router = createRouter({
     { 
       path: "/annunci/:n", 
       component: AnnuncioDettaglio 
+    },
+    {
+      path: "/news/:id",
+      component: News
     },
     {
       path: "/login",
