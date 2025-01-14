@@ -45,7 +45,7 @@ export default defineComponent({
         <div>
           <ul class="navbar-nav">
             <li class="nav-link active" aria-current="page"><RouterLink to="/">Home</RouterLink></li>
-            <li class="nav-link"><RouterLink to="/news">News</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/archivio-news">News</RouterLink></li>
             <li class="nav-link"><RouterLink to="/guidaalloggio">Guida alla ricerca dell'allogio ideale</RouterLink></li>
             <li class="nav-link"><RouterLink to="/chi-siamo">Chi siamo</RouterLink></li>
             <li class="nav-link"><RouterLink to="/contatti">Contatti</RouterLink></li>

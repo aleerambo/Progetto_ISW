@@ -33,7 +33,7 @@ export default defineComponent({
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">Home</RouterLink></li>
-        <li class="breadcrumb-item"><RouterLink to="/news">News</RouterLink></li>
+        <li class="breadcrumb-item"><RouterLink to="/archivio-news">News</RouterLink></li>
         <li class="breadcrumb-item"><RouterLink to="/guidaalloggio">Guida alla ricerca dell allogio ideale</RouterLink></li>
         <li class="breadcrumb-item"><RouterLink to="/chisiamo">Chi siamo</RouterLink></li>
         <li class="breadcrumb-item"><RouterLink to="/contatti">Contatti</RouterLink></li>
@@ -54,12 +54,13 @@ export default defineComponent({
           </p>
           <p>
             Iscrivendoti, avrai accesso a funzionalità esclusive:
+          </p>
             <ul>
               <li>Ricerca rapida e personalizzata: filtra gli alloggi in base alle tue preferenze e trova quello perfetto in pochi clic.</li>
               <li>Consigli e supporto: ricevi suggerimenti pratici e assistenza dedicata durante tutta la tua ricerca.</li>
               <li>Un mondo di opportunità: scopri offerte esclusive e soluzioni abitative che combinano comodità, qualità e convenienza.</li>
             </ul>
-
+          <p>
             Non lasciare che trovare casa diventi una fonte di stress: StudentHome è qui per rendere il processo semplice e veloce.
             Iscriviti subito e fai il primo passo verso il tuo alloggio ideale
           </p>
