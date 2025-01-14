@@ -57,23 +57,8 @@
   <script lang="ts">
   import { defineComponent } from 'vue';
   import { ConvertiDataTesto, CreaUrlMaps } from '../utils/metodiComuni';
-  
-  interface Annuncio {
-    id: number;
-    prezzo: string;
-    dettagli: string;
-    descrizione: string;
-    data: string;
-    servizi: string;
-    foto_annuncio: string;
-    //thumbnails: string | string[];
-    locali?: number;
-    mq?: number;
-    piano?: number;
-    distanza?: string;
-    indirizzo: string;
-  }
-  
+  import type { Annuncio } from '../types'
+    
   export default defineComponent({
     name: 'Annuncio',
     props: {

@@ -46,22 +46,7 @@
   import { defineComponent } from 'vue';
   //import { useRoute } from 'vue-router';
   import * as metodiComuni from '../utils/metodiComuni';
-  
-  
-  interface Annuncio {
-    id: number;
-    prezzo: string;
-    dettagli: string;
-    descrizione: string;
-    data: string;
-    servizi: string;
-    foto_annuncio: string;
-    locali?: number;
-    mq?: number;
-    piano?: number;
-    distanza?: string;
-    indirizzo: string;
-  }
+  import type { Annuncio } from '../types'
   
   export default defineComponent({
   name: 'AnnuncioDettaglio',
