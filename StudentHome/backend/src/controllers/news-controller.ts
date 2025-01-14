@@ -4,7 +4,8 @@ import { connection } from "../utils/db"
 export async function allNews(req: Request, res: Response) {
     connection.execute(
       `SELECT * 
-       FROM news`,
+       FROM news
+       ORDER BY data_pubblicazione DESC`,
       [],
       function (err, results, fields) {
         res.json(results)
