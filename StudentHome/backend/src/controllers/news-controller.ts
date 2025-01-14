@@ -12,12 +12,12 @@ export async function allNews(req: Request, res: Response) {
     )
 }
 
-export async function lastNNews(req: Request, res: Response) {
+export async function newsFromID(req: Request, res: Response) {
     connection.execute(
       `SELECT * 
-       FROM news
-       ORDER BY data_pubblicazione DESC LIMIT ?`,
-      [req.params.n],
+       FROM news 
+       WHERE id=?`,
+      [req.params.id],
       function (err, results, fields) {
         res.json(results)
       }
