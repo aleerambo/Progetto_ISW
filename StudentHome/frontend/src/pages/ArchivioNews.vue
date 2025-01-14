@@ -32,6 +32,7 @@ export default defineComponent({
                     <img :src="'/img/' + news.foto_news" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title">{{ news.titolo }}</h5>
+                        <p>{{ news.data_pubblicazione.slice(0, 10) }}</p>
                         <RouterLink :to="'/news/' + news.id">Leggi tutto</RouterLink>
                     </div>
                 </div>
