@@ -84,7 +84,7 @@ export default defineComponent({
             <div class="mb-3">
               <input
                 type="password"
-                v-model="password"
+                v-model="confirmPassword"
                 class="form-control"
                 placeholder="Conferma password"
               />
