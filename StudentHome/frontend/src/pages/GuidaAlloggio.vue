@@ -1,14 +1,5 @@
 <template>
-    <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-            <li class="breadcrumb-item"><RouterLink to="/">Home</RouterLink></li>
-            <li class="breadcrumb-item"><RouterLink to="/archivio-news">News</RouterLink></li>
-            <li class="breadcrumb-item active" aria-current="page">Guida alla ricerca dell allogio ideale</li>
-        </ol>
-    </nav>
-    <h1 class="p-2 mb-2 bg-secondary-subtle text-center" style="color: #1E3A8A;">
-        Guida alla ricerca dell'alloggio ideale
-    </h1>
+    <h1 class="p-2 mb-2 bg-secondary-subtle text-center mt-4" style="color: #1E3A8A;">Guida alla ricerca dell'alloggio ideale</h1>
     <div class="container my-5">
         <div class="row align-items-center">
             <!-- Colonna per il testo -->

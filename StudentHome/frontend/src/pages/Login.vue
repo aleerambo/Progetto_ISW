@@ -30,18 +30,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><RouterLink to="/">Home</RouterLink></li>
-        <li class="breadcrumb-item"><RouterLink to="/archivio-news">News</RouterLink></li>
-        <li class="breadcrumb-item"><RouterLink to="/guida-alloggio">Guida alla ricerca dell allogio ideale</RouterLink></li>
-        <li class="breadcrumb-item"><RouterLink to="/chi-siamo">Chi siamo</RouterLink></li>
-        <li class="breadcrumb-item"><RouterLink to="/contatti">Contatti</RouterLink></li>
-        <li class="breadcrumb-item active" aria-current="page">Login</li>
-    </ol>
-  </nav>
-
-  <h1 class="p-2 mb-2 bg-secondary-subtle text-center" style="color: #1E3A8A;">Login</h1>
+  <h1 class="p-2 mb-2 bg-secondary-subtle text-center mt-4" style="color: #1E3A8A;">Login</h1>
   
   <div class="container">
     <div class="row">
