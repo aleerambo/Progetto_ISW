@@ -4,7 +4,7 @@
             <li class="breadcrumb-item"><RouterLink to="/">Home</RouterLink></li>
             <li class="breadcrumb-item"><RouterLink to="/archivio-news">News</RouterLink></li>
             <li class="breadcrumb-item"><RouterLink to="/guida-alloggio">Guida alla ricerca dell allogio ideale</RouterLink></li>
-            <li class="breadcrumb-item"><RouterLink to="/chisiamo">Chi siamo</RouterLink></li>
+            <li class="breadcrumb-item"><RouterLink to="/chi-siamo">Chi siamo</RouterLink></li>
             <li class="breadcrumb-item active" aria-current="page">Contatti</li>
         </ol>
     </nav>    
