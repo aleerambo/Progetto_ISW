@@ -56,7 +56,7 @@ h1 {
     <div class="row align-items-start">
     <div class="col-1"></div>
     <div class="col-1">
-      <label class="form-label" for="cerco">Cerco:</label>
+      <label class="form-label" for="cerco">Cerca:</label>
     </div>
     <div class="col-2">
       <!-- bg-body-secondary -->
