@@ -1,54 +1,3 @@
-<template>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page">Home</li>
-    </ol>
-  </nav>
-  <div class="container bg-body-secondary">
-    <div class="row align-items-start">
-    <div class="col-1"></div>
-    <div class="col-1">
-      <label class="form-label" for="cerco">Cerco:</label>
-    </div>
-    <div class="col-2">
-      <!-- bg-body-secondary -->
-      <select class="form-select form-select-sm bg-body-secondary" 
-       aria-label=".form-select-sm example" 
-       id="cerco"
-       v-model="selectedCategory">
-        <option value="" selected>Seleziona...</option>
-        <option value="appartamento">Appartamento</option>
-        <option value="stanza">Stanza</option>
-        <option value="posto letto">Posto letto</option>
-      </select>
-    </div>
-    <div class="col-1"></div>
-    <div class="col-2">
-      <label class="form-label" for="prezzo">Prezzo max:</label>
-    </div>
-    <div class="col-3">
-      <input type="range" 
-        class="form-control-range" 
-        min="100" 
-        max="1200" 
-        step="50" 
-        id="prezzo" 
-        v-model="rangeValue"
-        @input="updateRangeValue">
-    </div>
-    <div class="col-1"><label id="rangeval">€ {{ rangeValue }}</label></div>
-    <div class="col-1"><button type="button" class="btn btn-secondary" @click="updateApiPath">Cerca</button></div>
-  </div>
-  </div>
-  <br/>
- 
-  <br/>
-  <div>
-    <!-- Inclusione del componente Annuncio -->
-    <Annuncio :apiPath= "apiPath" v-if="showAnnuncio" />
-  </div>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Annuncio from '../components/annuncio.vue';
@@ -101,3 +50,54 @@ h1 {
   margin-top: 10px;
 }
 </style>
+ 
+<template>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Home</li>
+    </ol>
+  </nav>
+  <div class="container bg-body-secondary">
+    <div class="row align-items-start">
+    <div class="col-1"></div>
+    <div class="col-1">
+      <label class="form-label" for="cerco">Cerco:</label>
+    </div>
+    <div class="col-2">
+      <!-- bg-body-secondary -->
+      <select class="form-select form-select-sm bg-body-secondary" 
+       aria-label=".form-select-sm example" 
+       id="cerco"
+       v-model="selectedCategory">
+        <option value="" selected>Seleziona...</option>
+        <option value="appartamento">Appartamento</option>
+        <option value="stanza">Stanza</option>
+        <option value="posto letto">Posto letto</option>
+      </select>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-2">
+      <label class="form-label" for="prezzo">Prezzo max:</label>
+    </div>
+    <div class="col-3">
+      <input type="range" 
+        class="form-control-range" 
+        min="100" 
+        max="1200" 
+        step="50" 
+        id="prezzo" 
+        v-model="rangeValue"
+        @input="updateRangeValue">
+    </div>
+    <div class="col-1"><label id="rangeval">€ {{ rangeValue }}</label></div>
+    <div class="col-1"><button type="button" class="btn btn-secondary" @click="updateApiPath">Cerca</button></div>
+  </div>
+  </div>
+  <br/>
+ 
+  <br/>
+  <div>
+    <!-- Inclusione del componente Annuncio -->
+    <Annuncio :apiPath= "apiPath" v-if="showAnnuncio" />
+  </div>
+</template>
