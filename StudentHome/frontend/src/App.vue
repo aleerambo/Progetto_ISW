@@ -44,12 +44,12 @@ export default defineComponent({
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div>
           <ul class="navbar-nav">
-            <li class="nav-link active" aria-current="page"><RouterLink to="/">Home</RouterLink></li>
-            <li class="nav-link"><RouterLink to="/archivio-news">News</RouterLink></li>
-            <li class="nav-link"><RouterLink to="/guida-alloggio">Guida alla ricerca dell'allogio ideale</RouterLink></li>
-            <li class="nav-link"><RouterLink to="/chi-siamo">Chi siamo</RouterLink></li>
-            <li class="nav-link"><RouterLink to="/contatti">Contatti</RouterLink></li>
-            <li class="nav-link"><RouterLink to="/login">Login</RouterLink></li>
+            <li class="nav-link active" aria-current="page"><RouterLink to="/" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Home</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/archivio-news" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">News</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/guida-alloggio" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Guida alla ricerca dell'allogio ideale</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/chi-siamo" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Chi siamo</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/contatti" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Contatti</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/login" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Login</RouterLink></li>
           </ul>
         </div>
       </div>

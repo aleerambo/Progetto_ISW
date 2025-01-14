@@ -28,14 +28,15 @@ export default defineComponent({
         <div class="row g-4"> <!-- g-4 aggiunge spazio tra le card -->
             <!-- Wrappa ogni card in una col -->
             <div class="col-sm-6 col-md-4 col-lg-3" v-for="news in datiNews">
-                <div class="card h-100"> <!-- h-100 rende tutte le card della stessa altezza -->
-                    <img :src="'/img/' + news.foto_news" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ news.titolo }}</h5>
-                        <p>{{ news.data_pubblicazione.slice(0, 10) }}</p>
-                        <RouterLink :to="'/news/' + news.id">Leggi tutto</RouterLink>
+                <RouterLink :to="'/news/' + news.id" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                    <div class="card h-100"> <!-- h-100 rende tutte le card della stessa altezza -->
+                        <img :src="'/img/' + news.foto_news" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ news.titolo }}</h5>
+                            <p>{{ news.data_pubblicazione.slice(0, 10) }}</p>
+                        </div>
                     </div>
-                </div>
+                </RouterLink>
             </div>
         </div>
     </div>
