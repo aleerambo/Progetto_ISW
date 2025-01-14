@@ -52,11 +52,6 @@ h1 {
 </style>
  
 <template>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page">Home</li>
-    </ol>
-  </nav>
   <div class="container bg-body-secondary">
     <div class="row align-items-start">
     <div class="col-1"></div>
