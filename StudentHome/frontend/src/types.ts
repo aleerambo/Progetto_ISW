@@ -11,3 +11,11 @@ export interface News {
   data_pubblicazione: string
   foto_news: string
 }
+
+export interface DettagliNews {
+  id: number
+  titolo: string
+  contenuto: string
+  data_pubblicazione: string
+  foto_news: string
+}
