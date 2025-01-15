@@ -3,6 +3,9 @@ import jwt from "jsonwebtoken"
 
 // Campi da inserire nell'access token
 export interface User {
+  nome: string
+  cognome: string
+  telefono: number
   id: number
   mail: string
   ruolo: "admin" | "utente"
