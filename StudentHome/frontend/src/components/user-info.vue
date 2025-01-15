@@ -5,21 +5,33 @@ import type { User } from "../types";
 
 export default defineComponent({
   props: {
-    user: Object as PropType<User>,
+    user: {
+      type: Object as PropType<User>,
+      required: true
+    }
+  },
+  data() {
+    return {
+      annunci: [] as Array<any>
+    };
   },
   methods: {
+    async profilo() {
+      this.$router.push({ path: "/utente" });
+    },
     async logout() {
       await axios.post("/api/auth/logout")
       location.reload()
-    },
-  },
+    }
+  }
 })
 </script>
 
 <template>
   <div class="d-flex align-items-center position-absolute end-0 me-3">
-    <span class="text-sm">{{ user?.mail }}</span>
-    <div
+    <span class="text-sm me-2">{{ user?.mail }}</span>
+    <button
+      @click="profilo"
       class="d-flex justify-content-center align-items-center rounded-circle"
       :class="{ 'bg-primary': user?.ruolo !== 'admin', 'bg-danger': user?.ruolo === 'admin' }"
       style="width: 40px; height: 40px;"
@@ -38,7 +50,7 @@ export default defineComponent({
           d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
         />
       </svg>
-    </div>
+    </button>
     <button class="btn btn-light ms-3 px-2" @click="logout">
       <svg
         xmlns="http://www.w3.org/2000/svg"
