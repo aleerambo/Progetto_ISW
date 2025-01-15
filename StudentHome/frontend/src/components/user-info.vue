@@ -17,7 +17,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="d-flex align-items-center">
+  <div class="d-flex align-items-center position-absolute end-0 me-3">
     <span class="text-sm">{{ user?.mail }}</span>
     <div
       class="d-flex justify-content-center align-items-center rounded-circle"
