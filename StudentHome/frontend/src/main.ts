@@ -52,12 +52,12 @@ const router: Router = createRouter({
     {
       path: "/login",
       component: Login,
-      // meta: { requireLogout: true }, // Segna che la rotta richiede il logout
+      meta: { requireLogout: true }, // Segna che la rotta richiede il logout
     },
     {
       path: "/registrazione",
       component: Registrazione,
-      // meta: { requireLogout: true }, // Segna che la rotta richiede il logout
+      meta: { requireLogout: true }, // Segna che la rotta richiede il logout
     },
     { 
       path: "/:pathMatch(.*)*", 
