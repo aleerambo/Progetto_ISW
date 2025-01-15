@@ -49,7 +49,14 @@ export async function allAnnunci(req: Request, res: Response) {
 }
 
 export async function AnnuncioDettaglio(req: Request, res: Response) {
-  const [results] = await connection.execute(
+  const id = req.params.id;
+  if (!id) {
+    res.status(400).send("ID annuncio mancante.");
+    return;
+  }
+
+  try {
+    const [results] = await connection.execute(
     `SELECT
         a.id,
         u.cognome,
@@ -88,9 +95,14 @@ export async function AnnuncioDettaglio(req: Request, res: Response) {
     GROUP BY 
         a.id, a.data, a.prezzo, a.descrizione, a.locali, a.mq, a.piano, a.indirizzo, 
         a.foto_annuncio, qz.descrizione, sa.contratto_max, sa.contratto_min, sa.numero_inquilini, sa.tipologia
-    `
-  )
-  res.json(results)
+    `,
+    [id]
+  );
+  res.json(results);
+} catch (error) {
+  console.error("Errore durante la query:", error);
+  res.status(500).send("Errore del server.");
+}
 }
 
 export async function lastAnnunci(req: Request, res: Response) {
