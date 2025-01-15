@@ -329,7 +329,7 @@ export const deleteAnnuncio = async (req: Request, res: Response) => {
 
   // Verifica che l'utente abbia i permessi per eliminare il post
   const annuncio = annunci[0] as any
-  if (annuncio.utente_id != user.id && user.role != "admin") {
+  if (annuncio.utente_id != user.id && user.ruolo != "admin") {
     res.status(403).send("Non hai i permessi per eliminare questo post.")
     return
   }

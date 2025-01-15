@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken"
 export interface User {
   id: number
   mail: string
-  role: "admin" | "user"
+  ruolo: "admin" | "utente"
 }
 
 const JWT_SECRET = "StudentHome"
