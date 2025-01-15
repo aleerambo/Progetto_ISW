@@ -1,7 +1,7 @@
 export interface User {
   id: number
   mail: string
-  role: "admin" | "user"
+  ruolo: "admin" | "utente"
 }
 
 export interface News {

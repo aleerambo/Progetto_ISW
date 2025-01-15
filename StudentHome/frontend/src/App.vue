@@ -49,14 +49,18 @@ export default defineComponent({
             <li class="nav-link"><RouterLink to="/guida-alloggio" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Guida alla ricerca dell'allogio ideale</RouterLink></li>
             <li class="nav-link"><RouterLink to="/chi-siamo" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Chi siamo</RouterLink></li>
             <li class="nav-link"><RouterLink to="/contatti" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Contatti</RouterLink></li>
-            <li class="nav-link"><RouterLink to="/login" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Login</RouterLink></li>
+            <UserInfo v-if="user" :user="user" />
+            <template v-else>
+              <li class="nav-link"><RouterLink to="/login" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Login</RouterLink></li>
+            </template>
           </ul>
         </div>
       </div>
     </div>
   </nav>
   <main>
-    <RouterView/>
+    <!-- Passa l'utente come prop a tutte le pagine del router -->
+    <RouterView :user="user" />
   </main>
 
   <footer id="bottom" class="row text-center fixed-bottom">
