@@ -58,7 +58,7 @@ h1 {
     <div class="col-1">
       <label class="form-label" for="cerco">Cerca:</label>
     </div>
-    <div class="col-2">
+    <div class="col-2 float-sm-start">
       <!-- bg-body-secondary -->
       <select class="form-select form-select-sm bg-body-secondary" 
        aria-label=".form-select-sm example" 
@@ -71,7 +71,7 @@ h1 {
       </select>
     </div>
     <div class="col-1"></div>
-    <div class="col-2">
+    <div class="col-2 float-sm-start">
       <label class="form-label" for="prezzo">Prezzo max:</label>
     </div>
     <div class="col-3">
