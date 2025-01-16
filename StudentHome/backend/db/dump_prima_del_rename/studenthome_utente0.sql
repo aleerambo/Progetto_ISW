@@ -16,30 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `annuncioservizio`
+-- Table structure for table `utente`
 --
 
-DROP TABLE IF EXISTS `annuncioservizio`;
+DROP TABLE IF EXISTS `utente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `annuncioservizio` (
-  `annuncio_id` int(11) NOT NULL,
-  `servizio_id` int(11) NOT NULL,
-  PRIMARY KEY (`annuncio_id`,`servizio_id`),
-  KEY `servizio_id` (`servizio_id`),
-  CONSTRAINT `annuncioservizio_ibfk_1` FOREIGN KEY (`annuncio_id`) REFERENCES `annuncio` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `annuncioservizio_ibfk_2` FOREIGN KEY (`servizio_id`) REFERENCES `servizio` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `utente` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cognome` varchar(50) DEFAULT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `mail` varchar(100) NOT NULL,
+  `telefono` varchar(15) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `ruolo` enum('admin','utente') DEFAULT 'utente',
+  `data_registrazione` datetime DEFAULT current_timestamp(),
+  `foto_profilo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mail` (`mail`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `annuncioservizio`
+-- Dumping data for table `utente`
 --
 
-LOCK TABLES `annuncioservizio` WRITE;
-/*!40000 ALTER TABLE `annuncioservizio` DISABLE KEYS */;
-INSERT INTO `annuncioservizio` VALUES (1,1),(1,2),(2,1),(2,3),(3,1),(3,4);
-/*!40000 ALTER TABLE `annuncioservizio` ENABLE KEYS */;
+LOCK TABLES `utente` WRITE;
+/*!40000 ALTER TABLE `utente` DISABLE KEYS */;
+INSERT INTO `utente` VALUES (1,'Rossi','Marco','marco.rossi@studenthome.com','3331112222','hashed_password1','utente','2023-12-01 10:00:00',NULL),(2,'Bianchi','Luca','luca.bianchi@studenthome.com','3332223333','hashed_password2','utente','2023-12-10 14:30:00',NULL),(3,'Verdi','Anna','anna.verdi@studenthome.com','3333334444','hashed_password3','admin','2023-11-20 08:15:00',NULL),(17,'test','test','test@test.com','3336669696','$2b$10$uyTdqh08rodh4KvQGw6.Zuhwpb0haJpftCFK/UBXEkW7cX9WEyxcu','admin','2025-01-15 18:29:10',NULL);
+/*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-14  9:49:09
+-- Dump completed on 2025-01-16 10:46:02

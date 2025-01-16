@@ -13,6 +13,7 @@ import Login from "./pages/Login.vue"
 import Registrazione from "./pages/Registrazione.vue"
 import AnnuncioDettaglio from "./pages/annuncioDettaglio.vue"
 import Utente from "./pages/Utente.vue"
+import InserimentoAnnuncio from './pages/InserimentoAnnuncio.vue'
 import NotFound from "./pages/NotFound.vue"
 import type { User } from "./types"
 import 'bootstrap'
@@ -64,6 +65,11 @@ const router: Router = createRouter({
       path: "/utente",
       component: Utente,
       meta: { requireLogin: true }, // Segna che la rotta richiede il login
+    },
+    {
+      path: "/inserimento-annuncio",
+      component: InserimentoAnnuncio,
+      meta: { requireLogin: true }, // Assicurati che l'utente sia loggato
     },
     { 
       path: "/:pathMatch(.*)*", 

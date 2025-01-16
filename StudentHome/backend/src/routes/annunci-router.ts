@@ -9,6 +9,9 @@ router.get("/api/annunci/:id", annunciController.AnnuncioDettaglio) //per il det
 router.get("/api/annuncinoattivi", annunciController.AnnunciNoAttivi) //per utente admin da attivare
 router.get("/api/annunci/tipo/:tipo/:prezzomax", annunciController.allAnnunciTipo) //annunci per tipo e prezzo massimo
 router.get("/api/annunci/utente/:mail", annunciController.AnnunciUtente) //annunci per utente usando mail come parametro
+router.get("/api/tipi-annuncio", annunciController.allTipiAnnuncio)
+router.get("/api/servizi", annunciController.allServizi)
+router.get("/api/quartieri", annunciController.allQuartieri)
 router.post("/api/annunci/create", annunciController.createAnnuncio)
 router.delete("/api/annunci/delete/:id", annunciController.deleteAnnuncio)
 

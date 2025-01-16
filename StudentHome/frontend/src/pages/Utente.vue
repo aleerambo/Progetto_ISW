@@ -1,20 +1,31 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { type PropType, defineComponent } from 'vue';
 import axios from 'axios';
-import type { Annuncio } from '../types';
+import type { Annuncio, User } from '../types';
 
 export default defineComponent({
+  props: {
+    user: {
+      type: Object as PropType<User>,
+      required: true
+    }
+  },
   data() {
     return {
       annunci: [] as Annuncio[],
     };
   },
   async created() {
-    const userMail = this.$route.query.mail as string;
+    const userMail = this.user.mail as string;
     if (userMail) {
-      const response = await axios.get(`/api/annunci/profilo/${userMail}`);
+      const response = await axios.get(`/api/annunci/utente/${userMail}`);
       this.annunci = response.data;
     }
+  },
+  methods: {
+    inserisciAnnuncio() {
+      this.$router.push({ path: "/inserimento-annuncio" });
+    },
   },
 });
 </script>
@@ -22,6 +33,7 @@ export default defineComponent({
 <template>
   <div>
     <h1>I miei annunci</h1>
+    <button @click="inserisciAnnuncio" class="btn btn-primary mb-4">Inserisci nuovo annuncio</button>
     <div v-if="annunci.length === 0" class="h2 bg-secondary text-white-50 text-center">
       Non hai ancora pubblicato alcun annuncio!
     </div>

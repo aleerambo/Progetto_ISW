@@ -38,3 +38,19 @@ export interface Annuncio {
   distanza?: string;
   indirizzo: string;
 }
+
+export interface Quartiere {
+  id: number;
+  nome_quartiere: string;
+  descrizione: string;
+}
+
+export interface Servizio {
+  id: number;
+  nome_servizio: string;
+}
+
+export interface tipologiaAnnuncio {
+  id: number;
+  nome: string;
+}

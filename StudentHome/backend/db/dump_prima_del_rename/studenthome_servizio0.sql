@@ -27,7 +27,7 @@ CREATE TABLE `servizio` (
   `nome_servizio` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nome_servizio` (`nome_servizio`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `servizio` (
 
 LOCK TABLES `servizio` WRITE;
 /*!40000 ALTER TABLE `servizio` DISABLE KEYS */;
-INSERT INTO `servizio` VALUES (4,'Aria Condizionata'),(3,'Ascensore'),(2,'Riscaldamento'),(1,'Wi-Fi');
+INSERT INTO `servizio` VALUES (4,'Aria Condizionata'),(3,'Ascensore'),(5,'Garage'),(7,'Netflix'),(2,'Riscaldamento'),(6,'Sky'),(1,'Wi-Fi');
 /*!40000 ALTER TABLE `servizio` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-14  9:49:08
+-- Dump completed on 2025-01-16 10:46:01

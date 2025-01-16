@@ -39,7 +39,7 @@ export const register = async (req: Request, res: Response) => {
     nome, 
     mail, 
     telefono, 
-    password
+    passwordHash
   ])
 
   // Estrae i dati per il nuovo utente
