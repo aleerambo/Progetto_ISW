@@ -48,7 +48,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div v-if="annuncio">
+  <div class="mt-4" v-if="annuncio">
     <div class="container">
       <div class="card mb-4 shadow-sm">
         <div class="row g-0">
