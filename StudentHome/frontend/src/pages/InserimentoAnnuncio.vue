@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import axios from 'axios';
-import type { Servizio, Quartiere } from '../types';
+import type { Servizio, Quartiere, tipologiaAnnuncio } from '../types';
 
 export default defineComponent({
   data() {
@@ -10,8 +10,13 @@ export default defineComponent({
       indirizzo: "",
       prezzo: 0,
       locali: 0,
-      mq: 0,
+      mq: "",
       piano: 0,
+      tipiAnnuncio: [] as tipologiaAnnuncio[],
+      tipologia: 1,
+      numero_inquilini: 0,
+      contratto_min: 0,
+      contratto_max: 0,
       servizi: [] as Servizio[],
       selectedServizi: [],
       quartiere: 1, // Default to 'Centro'
@@ -19,6 +24,10 @@ export default defineComponent({
     };
   },
   methods: {
+    getTipiAnnuncio() {
+      axios.get('/api/tipi-annuncio')
+        .then(response => this.tipiAnnuncio = response.data);
+    },
     getServizi() {
       axios.get('/api/servizi')
         .then(response => this.servizi = response.data);
@@ -28,8 +37,8 @@ export default defineComponent({
         .then(response => this.quartieri = response.data);
     },
     async inserisciAnnuncio() {
-      const nuovoAnnuncio = {
-        quartiereId: this.quartiere,
+      await axios.post('/api/annunci/create', {
+        id_quartiere: this.quartiere,
         prezzo: this.prezzo,
         descrizione: this.descrizione,
         locali: this.locali,
@@ -37,12 +46,16 @@ export default defineComponent({
         piano: this.piano,
         indirizzo: this.indirizzo,
         selectedServizi: this.selectedServizi,
-      };
-      await axios.post('/api/annunci/create', {nuovoAnnuncio});
+        tipologia: this.tipologia,
+        numero_inquilini: this.numero_inquilini,
+        contratto_min: this.contratto_min,
+        contratto_max: this.contratto_max,
+      });
       this.$router.push({ path: '/utente' });
     },
   },
   mounted() {
+    this.getTipiAnnuncio();
     this.getServizi();
     this.getQuartieri();
   },
@@ -50,9 +63,18 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
+  <div class="mx-3">
     <h1>Inserisci nuovo annuncio</h1>
     <form @submit.prevent="inserisciAnnuncio">
+      <div class="mb-3">
+        <label for="tipologia" class="form-label">Tipologia</label>
+        <div v-for="t in tipiAnnuncio" :key="t.id" class="form-check">
+          <input class="form-check-input" type="radio" :value="t.id" v-model="tipologia">
+          <label class="form-check-label">
+            {{ t.nome }}
+          </label>
+        </div>
+      </div>
       <div class="mb-3">
         <label for="descrizione" class="form-label">Descrizione</label>
         <input type="text" class="form-control" id="descrizione" v-model="descrizione" required>
@@ -66,6 +88,18 @@ export default defineComponent({
         <input type="number" class="form-control" id="prezzo" v-model="prezzo" required>
       </div>
       <div class="mb-3">
+        <label for="numero_inquilini" class="form-label">Numero inquilini</label>
+        <input type="number" class="form-control" id="numero_inquilini" v-model="numero_inquilini" required>
+      </div>
+      <div class="mb-3">
+        <label for="contratto_min" class="form-label">Contratto minimo (mesi)</label>
+        <input type="number" class="form-control" id="contratto_min" v-model="contratto_min" required>
+      </div>
+      <div class="mb-3">
+        <label for="contratto_max" class="form-label">Contratto massimo (mesi)</label>
+        <input type="number" class="form-control" id="contratto_max" v-model="contratto_max" required>
+      </div>
+      <div class="mb-3">
         <label for="locali" class="form-label">Locali</label>
         <input type="number" class="form-control" id="locali" v-model="locali" required>
       </div>
@@ -75,14 +109,14 @@ export default defineComponent({
       </div>
       <div class="mb-3">
         <label for="piano" class="form-label">Piano</label>
-        <input type="text" class="form-control" id="piano" v-model="piano" required>
+        <input type="number" class="form-control" id="piano" v-model="piano" required>
       </div>
       <div class="mb-3">
         <label for="servizi" class="form-label">Servizi</label>
         <ul class="list-group">
           <li class="list-group-item" v-for="s in servizi" required>
-            <input class="form-check-input me-1" type="checkbox" v-model="selectedServizi" :key="s.id" :value="s.id" id="s.id">
-            <label class="form-check-label" for="s.id">{{ s.nome_servizio }}</label>
+            <input class="form-check-input me-1" type="checkbox" v-model="selectedServizi" :key="s.id" :value="s.id">
+            <label class="form-check-label">{{ s.nome_servizio }}</label>
           </li>
         </ul>
       </div>
