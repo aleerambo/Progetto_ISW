@@ -31,7 +31,7 @@ export default defineComponent({
       if (!confirmed) {
         return;
       }
-      
+
       try {
         await axios.delete(`/api/annunci/delete/${annuncioID}`);
         this.$emit("delete")
@@ -64,7 +64,9 @@ export default defineComponent({
                   <img :src="'img/' + annuncio.foto_annuncio || 'img/placeholder.jpg'" class="img-fluid rounded-start" alt="Immagine principale annuncio" width="300px" height="300px" />
               </div>
             <div class="card-body col-md-5">
-                <h5 class="card-title">{{ annuncio.descrizione }}</h5>
+                <h5 class="card-title">
+                  <RouterLink :to="`/annunci/${annuncio.id}`">{{ annuncio.descrizione }}</RouterLink>
+                </h5>
                 <p class="card-text">{{ annuncio.prezzo }} €/mese</p>
                 <p class="card-text">{{ annuncio.locali }} locali</p>
                 <p class="card-text">{{ annuncio.mq }} mq</p>
