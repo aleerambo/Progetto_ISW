@@ -1,6 +1,8 @@
 <script lang="ts">
+import axios from 'axios';
 import { defineComponent } from 'vue';
 import Annuncio from '../components/annuncio.vue';
+import type { tipologiaAnnuncio } from '../types';
 
 export default defineComponent({
   name: 'Home',
@@ -10,6 +12,7 @@ export default defineComponent({
   data() {
     return {
       rangeValue: 100, // Default value for the range input
+      tipiAnnuncio: [] as tipologiaAnnuncio[], // Array per memorizzare i tipi di annuncio
       selectedCategory: '', // Default value for the select
       apiPath: '/api/lastannunci', // Default API path
       showAnnuncio: true, // Flag per montare/smontare il componente
@@ -36,8 +39,15 @@ export default defineComponent({
       this.$nextTick(() => {
         this.showAnnuncio = true;
       });
-    }
-  }
+    },
+    getTipiAnnuncio() {
+      axios.get('/api/tipi-annuncio')
+        .then(response => this.tipiAnnuncio = response.data);
+    },
+  },
+  mounted() {
+    this.getTipiAnnuncio();
+  },
   })
 </script>
 
@@ -65,9 +75,7 @@ h1 {
        id="cerco"
        v-model="selectedCategory">
         <option value="" selected>Seleziona...</option>
-        <option value="appartamento">Appartamento</option>
-        <option value="stanza">Stanza</option>
-        <option value="posto letto">Posto letto</option>
+        <option v-for="t in tipiAnnuncio" :value="t.id">{{ t.nome }}</option>
       </select>
     </div>
     <div class="col-1"></div>
