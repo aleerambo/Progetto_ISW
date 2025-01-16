@@ -16,35 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `utente`
+-- Table structure for table `stanzaappartamento`
 --
 
-DROP TABLE IF EXISTS `utente`;
+DROP TABLE IF EXISTS `stanzaappartamento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `utente` (
+CREATE TABLE `stanzaappartamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cognome` varchar(50) DEFAULT NULL,
-  `nome` varchar(50) DEFAULT NULL,
-  `mail` varchar(100) NOT NULL,
-  `telefono` varchar(15) DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `ruolo` enum('admin','utente') DEFAULT 'utente',
-  `data_registrazione` datetime DEFAULT NULL,
-  `foto_profilo` varchar(255) DEFAULT NULL,
+  `annuncio_id` int(11) NOT NULL,
+  `tipologia` enum('stanza','appartamento','posto letto') NOT NULL,
+  `numero_inquilini` int(11) DEFAULT NULL,
+  `contratto_min` int(11) DEFAULT NULL,
+  `contratto_max` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `mail` (`mail`)
+  KEY `annuncio_id` (`annuncio_id`),
+  CONSTRAINT `stanzaappartamento_ibfk_1` FOREIGN KEY (`annuncio_id`) REFERENCES `annuncio` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `utente`
+-- Dumping data for table `stanzaappartamento`
 --
 
-LOCK TABLES `utente` WRITE;
-/*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` VALUES (1,'Rossi','Marco','marco.rossi@studenthome.com','3331112222','hashed_password1','utente','2023-12-01 10:00:00',NULL),(2,'Bianchi','Luca','luca.bianchi@studenthome.com','3332223333','hashed_password2','utente','2023-12-10 14:30:00',NULL),(3,'Verdi','Anna','anna.verdi@studenthome.com','3333334444','hashed_password3','admin','2023-11-20 08:15:00',NULL);
-/*!40000 ALTER TABLE `utente` ENABLE KEYS */;
+LOCK TABLES `stanzaappartamento` WRITE;
+/*!40000 ALTER TABLE `stanzaappartamento` DISABLE KEYS */;
+INSERT INTO `stanzaappartamento` VALUES (1,1,'stanza',1,6,12),(2,2,'appartamento',2,12,24),(3,3,'posto letto',2,3,6);
+/*!40000 ALTER TABLE `stanzaappartamento` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-14  9:49:08
+-- Dump completed on 2025-01-16 10:46:01
