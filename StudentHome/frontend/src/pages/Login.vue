@@ -63,10 +63,11 @@ export default defineComponent({
           <form @submit.prevent="onSubmit">
             <div class="mb-3">
               <input
-                type="text"
+                type="email"
                 v-model="mail"
                 class="form-control"
                 placeholder="Mail"
+                required
               />
             </div>
             <div class="mb-3">
@@ -75,6 +76,7 @@ export default defineComponent({
                 v-model="password"
                 class="form-control"
                 placeholder="Password"
+                required
               />
             </div>
             <button type="submit" class="btn btn-primary w-100">Accedi</button>

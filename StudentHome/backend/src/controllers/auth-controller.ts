@@ -11,8 +11,14 @@ export const register = async (req: Request, res: Response) => {
     return
   }
 
-  // Estrae mail e password dal body della richiesta
-  const { mail, password } = req.body
+  // Estrae cognome, nome, mail, telefono e password dal body della richiesta
+  const { cognome, nome, mail, telefono, password } = req.body
+
+  // Verifica che tutti i campi siano presenti
+  if (!nome || !cognome || !telefono || !mail || !password) {
+    res.status(400).send("Tutti i campi sono obbligatori.");
+    return;
+  }
 
   // Verifica che la mail sia disponibile
   const [users] = await connection.execute("SELECT mail FROM utente WHERE mail=?", [
@@ -28,9 +34,12 @@ export const register = async (req: Request, res: Response) => {
   const passwordHash = await bcrypt.hash(password, 10)
 
   // Inserisce l'utente nel database
-  await connection.execute("INSERT INTO utente (mail, password) VALUES (?, ?)", [
-    mail,
-    passwordHash,
+  await connection.execute("INSERT INTO utente (cognome, nome, mail, telefono, password) VALUES (?, ?, ?, ?, ?)", [
+    cognome, 
+    nome, 
+    mail, 
+    telefono, 
+    password
   ])
 
   // Estrae i dati per il nuovo utente
@@ -54,8 +63,8 @@ export const login = async (req: Request, res: Response) => {
     return
   }
 
-  // Estrae mail e password dal body della richiesta
-  const { mail, password } = req.body
+  // Estrae nome, cognome, telefono, mail e password dal body della richiesta
+  const { nome, cognome, telefono, mail, password } = req.body;
 
   // Esegue la query al database per ottenere i dati dell'utente in base alla mail
   const [results] = await connection.execute(

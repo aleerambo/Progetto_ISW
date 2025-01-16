@@ -5,6 +5,9 @@ import { defineComponent } from "vue"
 export default defineComponent({
   data() {
     return {
+      nome: "",
+      cognome: "",
+      telefono: "",
       mail: "",
       password: "",
       confirmPassword: "",
@@ -18,6 +21,9 @@ export default defineComponent({
       }
       try {
         await axios.post("/api/auth/register", {
+          nome: this.nome,
+          cognome: this.cognome,
+          telefono: this.telefono,
           mail: this.mail,
           password: this.password,
         })
@@ -67,26 +73,57 @@ export default defineComponent({
           <form @submit.prevent="onSubmit">
             <div class="mb-3">
               <input
-                type="text"
-                v-model="mail"
-                class="form-control"
-                placeholder="Mail"
+              type="text"
+              v-model="nome"
+              class="form-control"
+              placeholder="Nome"
+              required
               />
             </div>
             <div class="mb-3">
               <input
-                type="password"
-                v-model="password"
-                class="form-control"
-                placeholder="Password"
+              type="text"
+              v-model="cognome"
+              class="form-control"
+              placeholder="Cognome"
+              required
               />
             </div>
             <div class="mb-3">
               <input
-                type="password"
-                v-model="confirmPassword"
-                class="form-control"
-                placeholder="Conferma password"
+              type="tel"
+              pattern="[0-9]{10}"
+              v-model="telefono"
+              class="form-control"
+              placeholder="Telefono (es. 3337779911)"
+              required
+              />
+            </div>
+            <div class="mb-3">
+              <input
+              type="email"
+              v-model="mail"
+              class="form-control"
+              placeholder="Mail"
+              required
+              />
+            </div>
+            <div class="mb-3">
+              <input
+              type="password"
+              v-model="password"
+              class="form-control"
+              placeholder="Password"
+              required
+              />
+            </div>
+            <div class="mb-3">
+              <input
+              type="password"
+              v-model="confirmPassword"
+              class="form-control"
+              placeholder="Conferma password"
+              required
               />
             </div>
             <button type="submit" class="btn btn-primary w-100">Registrati</button>

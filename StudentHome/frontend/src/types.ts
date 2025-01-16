@@ -1,4 +1,7 @@
 export interface User {
+  nome: string
+  cognome: string
+  telefono: number
   id: number
   mail: string
   ruolo: "admin" | "utente"
