@@ -334,6 +334,11 @@ export async function AnnunciUtente(req: Request, res: Response) {
   res.json(results)
 }
 
+export async function allTipiAnnuncio(req: Request, res: Response) {
+  const [results] = await connection.execute("SELECT * FROM studenthome.tipologia")
+  res.json(results)
+}
+
 export async function allServizi(req: Request, res: Response) {
   const [results] = await connection.execute("SELECT * FROM studenthome.servizio")
   res.json(results)
@@ -352,7 +357,19 @@ export const createAnnuncio = async (req: Request, res: Response) => {
     return
   }
 
-  const { id_quartiere, prezzo, descrizione, locali, mq, piano, indirizzo, selectedServizi } = req.body
+  const { id_quartiere, prezzo, descrizione, locali, mq, piano, indirizzo, selectedServizi, tipologia, numero_inquilini, contratto_min, contratto_max } = req.body
+  console.log("id_quartiere", id_quartiere)
+  console.log("prezzo", prezzo)
+  console.log("descrizione", descrizione)
+  console.log("locali", locali)
+  console.log("mq", mq)
+  console.log("piano", piano)
+  console.log("indirizzo", indirizzo)
+  console.log("selectedServizi", selectedServizi)
+  console.log("tipologia", tipologia)
+  console.log("numero_inquilini", numero_inquilini)
+  console.log("contratto_min", contratto_min)
+  console.log("contratto_max", contratto_max)
 
   const [result]:any = await connection.execute("INSERT INTO annuncio (utente_id, id_quartiere, prezzo, descrizione, locali, mq, piano, indirizzo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [
     user.id,
@@ -375,6 +392,14 @@ export const createAnnuncio = async (req: Request, res: Response) => {
       servizioID
     ])
   }
+
+  await connection.execute("INSERT INTO dettagli_annuncio (annuncio_id, tipologia_id, numero_inquilini, contratto_min, contratto_max) VALUES (?, ?, ?, ?, ?)", [
+    annuncioID,
+    tipologia,
+    numero_inquilini,
+    contratto_min,
+    contratto_max
+  ])
 }
 
 export const deleteAnnuncio = async (req: Request, res: Response) => {

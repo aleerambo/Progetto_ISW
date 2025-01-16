@@ -49,3 +49,8 @@ export interface Servizio {
   id: number;
   nome_servizio: string;
 }
+
+export interface tipologiaAnnuncio {
+  id: number;
+  nome: string;
+}
