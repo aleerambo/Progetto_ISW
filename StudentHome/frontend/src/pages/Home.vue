@@ -62,10 +62,10 @@ h1 {
 </style>
  
 <template>
-  <div class="container bg-body-secondary">
+  <div class="container bg-body-secondary mt-3">
     <div class="row align-items-start">
     <div class="col-1"></div>
-    <div class="col-1">
+    <div class="col-1 mt-1">
       <label class="form-label" for="cerco">Cerca:</label>
     </div>
     <div class="col-2">

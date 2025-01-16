@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { connection } from "../utils/db"
 import { getUser } from "../utils/auth"
+import { deleteFile } from "../utils/file"
 
 export async function allAnnunci(req: Request, res: Response) {
   const [results] = await connection.execute(
@@ -357,21 +358,36 @@ export const createAnnuncio = async (req: Request, res: Response) => {
     return
   }
 
-  const { id_quartiere, prezzo, descrizione, locali, mq, piano, indirizzo, selectedServizi, tipologia, numero_inquilini, contratto_min, contratto_max } = req.body
-  console.log("id_quartiere", id_quartiere)
-  console.log("prezzo", prezzo)
-  console.log("descrizione", descrizione)
-  console.log("locali", locali)
-  console.log("mq", mq)
-  console.log("piano", piano)
-  console.log("indirizzo", indirizzo)
-  console.log("selectedServizi", selectedServizi)
-  console.log("tipologia", tipologia)
-  console.log("numero_inquilini", numero_inquilini)
-  console.log("contratto_min", contratto_min)
-  console.log("contratto_max", contratto_max)
+  const { 
+    id_quartiere, 
+    prezzo, 
+    descrizione, 
+    locali, 
+    mq, 
+    piano, 
+    indirizzo, 
+    selectedServizi, 
+    tipologia, 
+    numero_inquilini, 
+    contratto_min, 
+    contratto_max 
+  } = req.body
 
-  const [result]:any = await connection.execute("INSERT INTO annuncio (utente_id, id_quartiere, prezzo, descrizione, locali, mq, piano, indirizzo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [
+  const foto_annuncio = req.file ? req.file.filename : null;
+
+  const [result]:any = await connection.execute(
+    `INSERT INTO annuncio (
+      utente_id, 
+      id_quartiere, 
+      prezzo, 
+      descrizione, 
+      locali, 
+      mq, 
+      piano, 
+      indirizzo,
+      foto_annuncio
+    ) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [
     user.id,
     id_quartiere,
     prezzo,
@@ -379,14 +395,16 @@ export const createAnnuncio = async (req: Request, res: Response) => {
     locali,
     mq,
     piano,
-    indirizzo
+    indirizzo,
+    foto_annuncio
   ])
   res.json({ success: true })
 
   const annuncioID = result.insertId
-  console.log("annuncioID", annuncioID)
 
-  for (const servizioID of selectedServizi) {
+  const servizi = JSON.parse(selectedServizi);
+
+  for (const servizioID of servizi) {
     await connection.execute("INSERT INTO annuncioservizio (annuncio_id, servizio_id) VALUES (?, ?)", [
       annuncioID,
       servizioID
@@ -422,6 +440,11 @@ export const deleteAnnuncio = async (req: Request, res: Response) => {
   if (annuncio.utente_id != user.id && user.ruolo != "admin") {
     res.status(403).send("Non hai i permessi per eliminare questo post.")
     return
+  }
+
+  // Elimina l'immagine associata all'annuncio
+  if (annuncio.foto_annuncio) {
+    deleteFile(annuncio.foto_annuncio);
   }
 
   await connection.execute("DELETE FROM annuncio WHERE id=?", [req.params.id])

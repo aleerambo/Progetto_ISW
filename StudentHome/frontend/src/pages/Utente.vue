@@ -1,6 +1,7 @@
 <script lang="ts">
 import { type PropType, defineComponent } from 'vue';
 import axios from 'axios';
+import { getImageUrl } from '../utils/metodiComuni'
 import type { Annuncio, User } from '../types';
 
 export default defineComponent({
@@ -45,6 +46,7 @@ export default defineComponent({
         }
       }
     },
+    getImageUrl,
   },
 });
 </script>
@@ -60,18 +62,18 @@ export default defineComponent({
         <div v-for="annuncio in annunci" :key="annuncio.id" class="card mb-4 shadow-sm">
           <div class="row g-0">
               <!-- Sezione Immagini -->
-              <div class="col-md-4">
-                  <img :src="'img/' + annuncio.foto_annuncio || 'img/placeholder.jpg'" class="img-fluid rounded-start" alt="Immagine principale annuncio" width="300px" height="300px" />
+              <div class="col-md-3">
+                <img :src="getImageUrl(annuncio.foto_annuncio)" class="img-fluid rounded" alt="Immagine principale annuncio" />
               </div>
             <div class="card-body col-md-5">
                 <h5 class="card-title">
                   <RouterLink :to="`/annunci/${annuncio.id}`">{{ annuncio.descrizione }}</RouterLink>
                 </h5>
                 <p class="card-text">{{ annuncio.prezzo }} €/mese</p>
-                <p class="card-text">{{ annuncio.locali }} locali</p>
-                <p class="card-text">{{ annuncio.mq }} mq</p>
-                <p class="card-text">{{ annuncio.piano }} piano</p>
-                <p class="card-text">{{ annuncio.servizi }}</p>
+                <p class="card-text">Locali: {{ annuncio.locali }}</p>
+                <p class="card-text">MQ: {{ annuncio.mq }}</p>
+                <p class="card-text">Piano: {{ annuncio.piano }}</p>
+                <p class="card-text">Servizi: {{ annuncio.servizi }}</p>
               </div>
             </div>
             <div class="position-absolute top-0 end-0">

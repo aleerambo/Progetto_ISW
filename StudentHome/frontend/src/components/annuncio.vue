@@ -43,7 +43,7 @@ export default defineComponent({
       <div class="row g-0">
         <!-- Sezione Immagini -->
         <div class="col-md-5">
-          <img :src="'img/' + annuncio.foto_annuncio || 'img/placeholder.jpg'" class="img-fluid rounded-start" alt="Immagine principale" width="300px" height="300px" />
+          <img :src="`/api/uploads/${annuncio.foto_annuncio}`" class="img-fluid rounded" alt="Immagine principale" />
           <!--
           <div class="d-flex mt-2">
             <img
