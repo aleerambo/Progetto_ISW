@@ -60,7 +60,7 @@ export default defineComponent({
         <!-- Sezione Informazioni -->
         <div class="col-md-7">
           <div class="card-body">
-            <h5 class="card-title">
+            <h5 class="card-title text-truncate" style="max-width: 600px;">
               <RouterLink :to="`/annunci/${annuncio.id}`">{{ annuncio.descrizione }}</RouterLink>
             </h5>
             <p class="card-text fs-4 fw-bold text-success">

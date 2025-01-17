@@ -84,10 +84,10 @@ h1 {
     <div class="mt-3 row bg-body-secondary p-3">
       <div class="col-12">
         <div class="row align-items-center">
-          <div class="col-auto">
+          <div class="col-12 col-md-auto mb-2 mb-md-0">
             <label class="form-label mb-0" for="cerco">Cerca tipologia:</label>
           </div>
-          <div class="col-md-3">
+          <div class="col-12 col-md-3 mb-2 mb-md-0">
             <select class="form-select form-select-sm bg-body-secondary" 
               aria-label="form-select-sm" 
               id="cerco tipo"
@@ -96,10 +96,10 @@ h1 {
               <option v-for="t in tipiAnnuncio" :value="t.nome">{{ t.nome }}</option>
             </select>
           </div>
-          <div class="col-auto">
+          <div class="col-12 col-md-auto mb-2 mb-md-0">
             <label class="form-label mb-0" for="cerco">Zona:</label>
           </div>
-          <div class="col-md-3">
+          <div class="col-12 col-md-3 mb-2 mb-md-0">
             <select class="form-select form-select-sm bg-body-secondary" 
               aria-label="form-select-sm" 
               id="cerco quartiere"
@@ -108,10 +108,10 @@ h1 {
               <option v-for="q in quartieri" :key="q.id" :value="q.id">{{ q.nome_quartiere }}</option>
             </select>
           </div>
-          <div class="col-auto">
+          <div class="col-12 col-md-auto mb-2 mb-md-0">
             <label class="form-label mb-0" for="prezzo">Prezzo max:</label>
           </div>
-          <div class="col-md-3">
+          <div class="col-12 col-md-3 mb-2 mb-md-0">
             <input type="range" 
               class="form-control-range" 
               min="100" 
@@ -121,10 +121,10 @@ h1 {
               v-model="rangeValue"
               @input="updateRangeValue">
           </div>
-          <div class="col-auto">
+          <div class="col-12 col-md-auto mb-2 mb-md-0">
             <label id="rangeval">€ {{ rangeValue }}</label>
           </div>
-          <div class="col-auto">
+          <div class="col-12 col-md-auto">
             <button type="button" class="btn btn-secondary" @click="updateApiPath">Cerca</button>
           </div>
         </div>

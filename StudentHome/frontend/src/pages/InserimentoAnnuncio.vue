@@ -87,75 +87,179 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="mx-3 vw-100">
-    <h1>Inserisci nuovo annuncio</h1>
+  <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">Inserisci Nuovo Annuncio</h1>
+  <div class="container mx-auto px-3 mt-4">
     <form @submit.prevent="inserisciAnnuncio">
+      <!-- Sezione Tipologia -->
       <div class="mb-3">
-        <label for="tipologia" class="form-label">Tipologia</label>
-        <div v-for="t in tipiAnnuncio" :key="t.id" class="form-check">
-          <input class="form-check-input" type="radio" :value="t.id" v-model="tipologia">
-          <label class="form-check-label">
-            {{ t.nome }}
-          </label>
+        <label for="tipologia" class="form-label fw-bold">Tipologia</label>
+        <div class="d-flex flex-wrap gap-3">
+          <div 
+            v-for="t in tipiAnnuncio" 
+            :key="t.id" 
+            class="form-check">
+            <input 
+              class="form-check-input" 
+              type="radio" 
+              :value="t.id" 
+              v-model="tipologia" 
+              id="tipologia-{{ t.id }}">
+            <label class="form-check-label" :for="'tipologia-' + t.id">
+              {{ t.nome }}
+            </label>
+          </div>
         </div>
       </div>
-      <div class="mb-3">
-        <label for="descrizione" class="form-label">Descrizione</label>
-        <input type="text" class="form-control" id="descrizione" v-model="descrizione" required>
+
+      <!-- Input Generici -->
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="descrizione" class="form-label fw-bold">Descrizione</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="descrizione" 
+            v-model="descrizione" 
+            required>
+        </div>
+        <div class="col-md-6">
+          <label for="indirizzo" class="form-label fw-bold">Indirizzo</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="indirizzo" 
+            v-model="indirizzo" 
+            required>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="indirizzo" class="form-label">Indirizzo</label>
-        <input type="text" class="form-control" id="indirizzo" v-model="indirizzo" required>
+
+      <!-- Prezzo e Numero Inquilini -->
+      <div class="row g-3 mt-3">
+        <div class="col-md-6">
+          <label for="prezzo" class="form-label fw-bold">Prezzo (€/mese)</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            id="prezzo" 
+            v-model="prezzo" 
+            required>
+        </div>
+        <div class="col-md-6">
+          <label for="numero_inquilini" class="form-label fw-bold">Numero inquilini</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            id="numero_inquilini" 
+            v-model="numero_inquilini" 
+            required>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="prezzo" class="form-label">Prezzo (€/mese)</label>
-        <input type="number" class="form-control" id="prezzo" v-model="prezzo" required>
+
+      <!-- Contratto -->
+      <div class="row g-3 mt-3">
+        <div class="col-md-6">
+          <label for="contratto_min" class="form-label fw-bold">Contratto Minimo (mesi)</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            id="contratto_min" 
+            v-model="contratto_min" 
+            required>
+        </div>
+        <div class="col-md-6">
+          <label for="contratto_max" class="form-label fw-bold">Contratto Massimo (mesi)</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            id="contratto_max" 
+            v-model="contratto_max" 
+            required>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="numero_inquilini" class="form-label">Numero inquilini</label>
-        <input type="number" class="form-control" id="numero_inquilini" v-model="numero_inquilini" required>
+
+      <!-- Locali e Metri Quadrati -->
+      <div class="row g-3 mt-3">
+        <div class="col-md-6">
+          <label for="locali" class="form-label fw-bold">Locali</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            id="locali" 
+            v-model="locali" 
+            required>
+        </div>
+        <div class="col-md-6">
+          <label for="mq" class="form-label fw-bold">Metri Quadrati</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            id="mq" 
+            v-model="mq" 
+            required>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="contratto_min" class="form-label">Contratto minimo (mesi)</label>
-        <input type="number" class="form-control" id="contratto_min" v-model="contratto_min" required>
+
+      <!-- Piano -->
+      <div class="mt-3">
+        <label for="piano" class="form-label fw-bold">Piano</label>
+        <input 
+          type="number" 
+          class="form-control" 
+          id="piano" 
+          v-model="piano" 
+          required>
       </div>
-      <div class="mb-3">
-        <label for="contratto_max" class="form-label">Contratto massimo (mesi)</label>
-        <input type="number" class="form-control" id="contratto_max" v-model="contratto_max" required>
-      </div>
-      <div class="mb-3">
-        <label for="locali" class="form-label">Locali</label>
-        <input type="number" class="form-control" id="locali" v-model="locali" required>
-      </div>
-      <div class="mb-3">
-        <label for="mq" class="form-label">Metri quadrati</label>
-        <input type="number" class="form-control" id="mq" v-model="mq" required>
-      </div>
-      <div class="mb-3">
-        <label for="piano" class="form-label">Piano</label>
-        <input type="number" class="form-control" id="piano" v-model="piano" required>
-      </div>
-      <div class="mb-3">
-        <label for="servizi" class="form-label">Servizi</label>
+
+      <!-- Servizi -->
+      <div class="mt-3">
+        <label for="servizi" class="form-label fw-bold">Servizi</label>
         <ul class="list-group">
-          <li class="list-group-item" v-for="s in servizi" required>
-            <input class="form-check-input me-1" type="checkbox" v-model="selectedServizi" :key="s.id" :value="s.id">
-            <label class="form-check-label">{{ s.nome_servizio }}</label>
+          <li class="list-group-item" v-for="s in servizi" :key="s.id">
+            <input 
+              class="form-check-input me-1" 
+              type="checkbox" 
+              v-model="selectedServizi" 
+              :value="s.id" 
+              id="servizio-{{ s.id }}">
+            <label class="form-check-label" :for="'servizio-' + s.id">
+              {{ s.nome_servizio }}
+            </label>
           </li>
         </ul>
       </div>
-      <div class="mb-3">
-        <label for="quartiere" class="form-label">Quartiere</label>
-        <select class="form-select" id="quartiere" v-model="quartiere" required>
-          <option v-for="q in quartieri" :key="q.id" :value="q.id">{{ q.nome_quartiere }}</option>
+
+      <!-- Quartiere -->
+      <div class="mt-3">
+        <label for="quartiere" class="form-label fw-bold">Quartiere</label>
+        <select 
+          class="form-select form-select-lg" 
+          id="quartiere" 
+          v-model="quartiere" 
+          required>
+          <option v-for="q in quartieri" :key="q.id" :value="q.id">
+            {{ q.nome_quartiere }}
+          </option>
         </select>
       </div>
-      <div class="mb-3">
-        <label for="foto_annuncio">Carica Immagine</label>
-        <input type="file" id="foto_annuncio" @change="onFileChange" class="form-control" accept="image/*" />
+
+      <!-- Carica Immagine -->
+      <div class="mt-3">
+        <label for="foto_annuncio" class="form-label fw-bold">Carica Immagine</label>
+        <input 
+          type="file" 
+          id="foto_annuncio" 
+          @change="onFileChange" 
+          class="form-control" 
+          accept="image/*">
       </div>
-      <button type="submit" class="btn btn-primary">Inserisci</button>
+
+      <!-- Pulsante di Invio -->
+      <button type="submit" class="btn btn-primary mt-4 w-100">Inserisci</button>
     </form>
-    <div v-if="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+
+    <!-- Messaggio di Errore -->
+    <div v-if="errorMessage" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
   </div>
 </template>
