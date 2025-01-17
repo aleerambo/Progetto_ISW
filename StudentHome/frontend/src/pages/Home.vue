@@ -87,49 +87,51 @@ h1 {
           <div class="col-auto">
             <label class="form-label mb-0" for="cerco">Cerca:</label>
           </div>
-          <div class="col-md-2">
+            <div class="col-md-2">
+              <select class="form-select form-select-sm bg-body-secondary" 
+                aria-label="form-select-sm" 
+                id="cerco"
+                v-model="selectedCategory">
+                <option value="" selected>Seleziona...</option>
+                <option v-for="t in tipiAnnuncio" :value="t.nome">{{ t.nome }}</option>
+              </select>
+            </div>
+          <div class="col-1 mt-1">
+            <label class="form-label" for="cerco">Zona:</label>
+          </div>
+          <div class="col-2">
+            <!-- bg-body-secondary -->
             <select class="form-select form-select-sm bg-body-secondary" 
-              aria-label="form-select-sm" 
-              id="cerco"
-              v-model="selectedCategory">
-        <option value="" selected>Seleziona...</option>
-        <option v-for="t in tipiAnnuncio" :value="t.nome">{{ t.nome }}</option>
-      </select>
-    </div>
-    <div class="col-1 mt-1">
-      <label class="form-label" for="cerco">Zona:</label>
-    </div>
-    <div class="col-2">
-      <!-- bg-body-secondary -->
-      <select class="form-select form-select-sm bg-body-secondary" 
-       aria-label=".form-select-sm example" 
-       id="cerco"
-       v-model="selectedQuartiere">
-        <option value="" selected>Seleziona...</option>
-        <option v-for="q in quartieri" :key="q.id" :value="q.id">{{ q.nome_quartiere }}</option>
-      </select>
-    </div>
-      <div class="col-auto">
+            aria-label=".form-select-sm example" 
+            id="cerco"
+            v-model="selectedQuartiere">
+              <option value="" selected>Seleziona...</option>
+              <option v-for="q in quartieri" :key="q.id" :value="q.id">{{ q.nome_quartiere }}</option>
+            </select>
+          </div>
+          <div class="col-auto">
             <label class="form-label mb-0" for="prezzo">Prezzo max:</label>
           </div>
-    <div class="col-3">
-      <input type="range" 
-        class="form-control-range" 
-        min="100" 
-        max="1200" 
-        step="50" 
-        id="prezzo" 
-        v-model="rangeValue"
-        @input="updateRangeValue">
+          <div class="col-3">
+            <input type="range" 
+              class="form-control-range" 
+              min="100" 
+              max="1200" 
+              step="50" 
+              id="prezzo" 
+              v-model="rangeValue"
+              @input="updateRangeValue">
+          </div>
+          <div class="col-1"><label id="rangeval">€ {{ rangeValue }}</label></div>
+          <div class="col-1"><button type="button" class="btn btn-secondary" @click="updateApiPath">Cerca</button></div>
+        </div>
+      </div>
     </div>
-    <div class="col-1"><label id="rangeval">€ {{ rangeValue }}</label></div>
-    <div class="col-1"><button type="button" class="btn btn-secondary" @click="updateApiPath">Cerca</button></div>
-  </div>
-  </div>
-  <div class="row mt-4">
-    <div class="col-12 px-4">
-    <!-- Inclusione del componente Annuncio -->
-    <Annuncio :apiPath= "apiPath" v-if="showAnnuncio" />
+    <div class="row mt-4">
+      <div class="col-12 px-4">
+      <!-- Inclusione del componente Annuncio -->
+      <Annuncio :apiPath= "apiPath" v-if="showAnnuncio" />
+      </div>
     </div>
   </div>
 </template>
