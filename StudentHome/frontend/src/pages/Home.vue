@@ -79,31 +79,31 @@ h1 {
 </style>
  
 <template>
-  <div class="w-100 vw-100">
+  <div class="w-100 vw-99">
     <!-- Sezione di ricerca -->
     <div class="row bg-body-secondary p-3">
       <div class="col-12">
         <div class="row align-items-center">
           <div class="col-auto">
-            <label class="form-label mb-0" for="cerco">Cerca:</label>
+            <label class="form-label mb-0" for="cerco">Cerca tipologia:</label>
           </div>
             <div class="col-md-2">
               <select class="form-select form-select-sm bg-body-secondary" 
                 aria-label="form-select-sm" 
-                id="cerco"
+                id="cerco tipo"
                 v-model="selectedCategory">
                 <option value="" selected>Seleziona...</option>
                 <option v-for="t in tipiAnnuncio" :value="t.nome">{{ t.nome }}</option>
               </select>
             </div>
-          <div class="col-1 mt-1">
-            <label class="form-label" for="cerco">Zona:</label>
+          <div class="col-auto">
+            <label class="form-label mb-0" for="cerco">Zona:</label>
           </div>
-          <div class="col-2">
+          <div class="col-md-2">
             <!-- bg-body-secondary -->
             <select class="form-select form-select-sm bg-body-secondary" 
-            aria-label=".form-select-sm example" 
-            id="cerco"
+            aria-label="form-select-sm" 
+            id="cerco quartiere"
             v-model="selectedQuartiere">
               <option value="" selected>Seleziona...</option>
               <option v-for="q in quartieri" :key="q.id" :value="q.id">{{ q.nome_quartiere }}</option>
@@ -112,7 +112,7 @@ h1 {
           <div class="col-auto">
             <label class="form-label mb-0" for="prezzo">Prezzo max:</label>
           </div>
-          <div class="col-3">
+          <div class="col-md-4">
             <input type="range" 
               class="form-control-range" 
               min="100" 
@@ -122,8 +122,11 @@ h1 {
               v-model="rangeValue"
               @input="updateRangeValue">
           </div>
-          <div class="col-1"><label id="rangeval">€ {{ rangeValue }}</label></div>
-          <div class="col-1"><button type="button" class="btn btn-secondary" @click="updateApiPath">Cerca</button></div>
+          <div class="col-auto">
+            <label id="rangeval">€ {{ rangeValue }}</label>
+          </div>
+          <div class="col-auto">
+            <button type="button" class="btn btn-secondary" @click="updateApiPath">Cerca</button></div>
         </div>
       </div>
     </div>
