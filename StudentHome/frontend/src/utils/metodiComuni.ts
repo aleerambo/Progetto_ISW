@@ -1,13 +1,13 @@
 // src/utils/utils.ts
 
 export function ConvertiDataTesto(dateString: string): string {
-    const announcementDate = new Date(dateString);
-    const today = new Date();
-    const diffDays = Math.floor((today.getTime() - announcementDate.getTime()) / (1000 * 60 * 60 * 24));
-    if (diffDays < 30) return "recente";
-    if (diffDays < 60) return "poco recente";
-    return "meno recente";
-  }
+  const announcementDate = new Date(dateString)
+  const today = new Date()
+  const diffDays = Math.floor((today.getTime() - announcementDate.getTime()) / (1000 * 60 * 60 * 24))
+  if (diffDays < 30) return "recente"
+  if (diffDays < 60) return "poco recente"
+  return "meno recente"
+}
   
 export function CreaUrlMaps(indirizzo: string): string {
     const baseUrl = "https://www.google.com/maps/dir/?api=1&origin=";

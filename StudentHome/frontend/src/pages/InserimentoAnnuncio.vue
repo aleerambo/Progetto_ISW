@@ -1,7 +1,7 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
-import axios from 'axios';
-import type { Servizio, Quartiere, tipologiaAnnuncio } from '../types';
+import { defineComponent } from 'vue'
+import axios from 'axios'
+import type { Servizio, Quartiere, tipologiaAnnuncio } from '../types'
 
 export default defineComponent({
   data() {
@@ -21,45 +21,69 @@ export default defineComponent({
       selectedServizi: [],
       quartiere: 1, // Default to 'Centro'
       quartieri: [] as Quartiere[],
-    };
+      file: null as File | null,
+      errorMessage: "",
+    }
   },
   methods: {
     getTipiAnnuncio() {
       axios.get('/api/tipi-annuncio')
-        .then(response => this.tipiAnnuncio = response.data);
+        .then(response => this.tipiAnnuncio = response.data)
     },
     getServizi() {
       axios.get('/api/servizi')
-        .then(response => this.servizi = response.data);
+        .then(response => this.servizi = response.data)
     },
     getQuartieri() {
       axios.get('/api/quartieri')
-        .then(response => this.quartieri = response.data);
+        .then(response => this.quartieri = response.data)
     },
     async inserisciAnnuncio() {
-      await axios.post('/api/annunci/create', {
-        id_quartiere: this.quartiere,
-        prezzo: this.prezzo,
-        descrizione: this.descrizione,
-        locali: this.locali,
-        mq: this.mq,
-        piano: this.piano,
-        indirizzo: this.indirizzo,
-        selectedServizi: this.selectedServizi,
-        tipologia: this.tipologia,
-        numero_inquilini: this.numero_inquilini,
-        contratto_min: this.contratto_min,
-        contratto_max: this.contratto_max,
-      });
-      this.$router.push({ path: '/utente' });
+      const formData = new FormData()
+      formData.append('id_quartiere', this.quartiere.toString())
+      formData.append('prezzo', this.prezzo.toString())
+      formData.append('descrizione', this.descrizione)
+      formData.append('locali', this.locali.toString())
+      formData.append('mq', this.mq)
+      formData.append('piano', this.piano.toString())
+      formData.append('indirizzo', this.indirizzo)
+      formData.append('selectedServizi', JSON.stringify(this.selectedServizi))
+      formData.append('tipologia', this.tipologia.toString())
+      formData.append('numero_inquilini', this.numero_inquilini.toString())
+      formData.append('contratto_min', this.contratto_min.toString())
+      formData.append('contratto_max', this.contratto_max.toString())
+      if (this.file) {
+        formData.append('foto_annuncio', this.file)
+      }
+
+      try {
+        await axios.post('/api/annunci/create', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        this.$router.push({ path: '/utente' })
+      } catch (error: any) {
+        if (error.response) {
+          this.errorMessage = error.response.data.error
+        } else {
+          this.errorMessage = error.message
+        }
+      }
+    },
+    onFileChange(event: Event) {
+      const target = event.target as HTMLInputElement
+      if (target.files && target.files.length > 0) {
+        this.file = target.files[0]
+      }
     },
   },
   mounted() {
-    this.getTipiAnnuncio();
-    this.getServizi();
-    this.getQuartieri();
+    this.getTipiAnnuncio()
+    this.getServizi()
+    this.getQuartieri()
   },
-});
+})
 </script>
 
 <template>
@@ -126,7 +150,12 @@ export default defineComponent({
           <option v-for="q in quartieri" :key="q.id" :value="q.id">{{ q.nome_quartiere }}</option>
         </select>
       </div>
+      <div class="mb-3">
+        <label for="foto_annuncio">Carica Immagine</label>
+        <input type="file" id="foto_annuncio" @change="onFileChange" class="form-control" accept="image/*" />
+      </div>
       <button type="submit" class="btn btn-primary">Inserisci</button>
     </form>
+    <div v-if="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
   </div>
 </template>

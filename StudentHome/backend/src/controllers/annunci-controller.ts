@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { connection } from "../utils/db"
 import { getUser } from "../utils/auth"
+import { deleteFile } from "../utils/file"
 
 export async function allAnnunci(req: Request, res: Response) {
   const [results] = await connection.execute(
@@ -169,6 +170,62 @@ export async function lastAnnunci(req: Request, res: Response) {
   res.json(results)
 }
 
+export async function allAnnunciPrezzo(req: Request, res: Response) {
+  const prezzomax = req.params.prezzomax;
+  const [results] = await connection.execute(
+    `SELECT
+      a.id,
+      u.cognome,
+      u.nome,
+      u.mail,
+      u.telefono,
+      u.ruolo,
+      u.foto_profilo,
+      a.data,
+      a.prezzo,
+      a.descrizione,
+      a.locali,
+      a.mq,
+      a.piano,
+      a.indirizzo,
+      a.foto_annuncio,
+      a.thumbnails,
+      qz.descrizione AS quartiere_zona_descrizione,
+      GROUP_CONCAT(s.nome_servizio ORDER BY s.nome_servizio ASC) AS servizi,
+      da.contratto_max,
+      da.contratto_min,
+      da.numero_inquilini,
+      t.nome AS tipologia
+    FROM 
+          studenthome.annuncio a
+    JOIN 
+          studenthome.utente u ON a.utente_id = u.id
+    JOIN
+          studenthome.quartierezona qz ON a.id_quartiere = qz.id
+    JOIN 
+          studenthome.annuncioservizio asv ON a.id = asv.annuncio_id
+    JOIN 
+          studenthome.servizio s ON asv.servizio_id = s.id
+    JOIN 
+          studenthome.dettagli_annuncio da ON a.id = da.annuncio_id
+    JOIN 
+          studenthome.tipologia t ON da.tipologia_id = t.id
+    WHERE 
+          a.stato = "attivo"
+          AND a.prezzo < ?
+    GROUP BY 
+          a.id, u.cognome, u.nome, u.mail, u.telefono, u.ruolo, u.foto_profilo,
+          a.data, a.prezzo, a.descrizione, a.locali, a.mq, a.piano, a.indirizzo,
+          a.foto_annuncio, a.thumbnails, qz.descrizione, da.contratto_max, da.contratto_min,
+          da.numero_inquilini, t.nome
+    ORDER BY 
+          a.prezzo;
+  `, [
+    prezzomax
+  ])
+res.json(results)
+}
+
 export async function allAnnunciTipo(req: Request, res: Response) {
   const tipo = req.params.tipo;
   const prezzomax = req.params.prezzomax;
@@ -225,6 +282,127 @@ export async function allAnnunciTipo(req: Request, res: Response) {
         tipo,
         prezzomax
       ])
+  res.json(results)
+}
+
+export async function allAnnunciQuartiere(req: Request, res: Response) {
+  const id = req.params.id;
+  const prezzomax = req.params.prezzomax;
+  const [results] = await connection.execute(
+    `SELECT
+      a.id,
+      u.cognome,
+      u.nome,
+      u.mail,
+      u.telefono,
+      u.ruolo,
+      u.foto_profilo,
+      a.data,
+      a.prezzo,
+      a.descrizione,
+      a.locali,
+      a.mq,
+      a.piano,
+      a.indirizzo,
+      a.foto_annuncio,
+      a.thumbnails,
+      qz.descrizione AS quartiere_zona_descrizione,
+      GROUP_CONCAT(s.nome_servizio ORDER BY s.nome_servizio ASC) AS servizi,
+      da.contratto_max,
+      da.contratto_min,
+      da.numero_inquilini,
+      t.nome AS tipologia
+    FROM 
+          studenthome.annuncio a
+    JOIN 
+          studenthome.utente u ON a.utente_id = u.id
+    JOIN
+          studenthome.quartierezona qz ON a.id_quartiere = qz.id
+    JOIN 
+          studenthome.annuncioservizio asv ON a.id = asv.annuncio_id
+    JOIN 
+          studenthome.servizio s ON asv.servizio_id = s.id
+    JOIN 
+          studenthome.dettagli_annuncio da ON a.id = da.annuncio_id
+    JOIN 
+          studenthome.tipologia t ON da.tipologia_id = t.id
+    WHERE 
+          a.stato = "attivo"
+          AND qz.id = ?
+          AND a.prezzo < ?
+    GROUP BY 
+          a.id, u.cognome, u.nome, u.mail, u.telefono, u.ruolo, u.foto_profilo,
+          a.data, a.prezzo, a.descrizione, a.locali, a.mq, a.piano, a.indirizzo,
+          a.foto_annuncio, a.thumbnails, qz.descrizione, da.contratto_max, da.contratto_min,
+          da.numero_inquilini, t.nome
+    ORDER BY 
+          a.data DESC;`
+    , [
+        id,
+        prezzomax
+      ])
+  res.json(results)
+}
+
+export async function allAnnunciFilter(req: Request, res: Response) {
+  const tipo = req.params.tipo;
+  const quartiere = req.params.quartiere;
+  const prezzomax = req.params.prezzomax;
+  const [results] = await connection.execute(
+    `SELECT
+      a.id,
+      u.cognome,
+      u.nome,
+      u.mail,
+      u.telefono,
+      u.ruolo,
+      u.foto_profilo,
+      a.data,
+      a.prezzo,
+      a.descrizione,
+      a.locali,
+      a.mq,
+      a.piano,
+      a.indirizzo,
+      a.foto_annuncio,
+      a.thumbnails,
+      qz.descrizione AS quartiere_zona_descrizione,
+      GROUP_CONCAT(s.nome_servizio ORDER BY s.nome_servizio ASC) AS servizi,
+      da.contratto_max,
+      da.contratto_min,
+      da.numero_inquilini,
+      t.nome AS tipologia
+    FROM 
+          studenthome.annuncio a
+    JOIN 
+          studenthome.utente u ON a.utente_id = u.id
+    JOIN
+          studenthome.quartierezona qz ON a.id_quartiere = qz.id
+    JOIN 
+          studenthome.annuncioservizio asv ON a.id = asv.annuncio_id
+    JOIN 
+          studenthome.servizio s ON asv.servizio_id = s.id
+    JOIN 
+          studenthome.dettagli_annuncio da ON a.id = da.annuncio_id
+    JOIN 
+          studenthome.tipologia t ON da.tipologia_id = t.id
+    WHERE 
+          a.stato = "attivo"
+          AND t.nome = ?
+          AND qz.id = ?
+          AND a.prezzo < ?
+    GROUP BY 
+          a.id, u.cognome, u.nome, u.mail, u.telefono, u.ruolo, u.foto_profilo,
+          a.data, a.prezzo, a.descrizione, a.locali, a.mq, a.piano, a.indirizzo,
+          a.foto_annuncio, a.thumbnails, qz.descrizione, da.contratto_max, da.contratto_min,
+          da.numero_inquilini, t.nome
+    ORDER BY 
+          a.data DESC;
+    `, [
+      tipo,
+      quartiere,
+      prezzomax
+  ])
   res.json(results)
 }
 
@@ -357,21 +535,36 @@ export const createAnnuncio = async (req: Request, res: Response) => {
     return
   }
 
-  const { id_quartiere, prezzo, descrizione, locali, mq, piano, indirizzo, selectedServizi, tipologia, numero_inquilini, contratto_min, contratto_max } = req.body
-  console.log("id_quartiere", id_quartiere)
-  console.log("prezzo", prezzo)
-  console.log("descrizione", descrizione)
-  console.log("locali", locali)
-  console.log("mq", mq)
-  console.log("piano", piano)
-  console.log("indirizzo", indirizzo)
-  console.log("selectedServizi", selectedServizi)
-  console.log("tipologia", tipologia)
-  console.log("numero_inquilini", numero_inquilini)
-  console.log("contratto_min", contratto_min)
-  console.log("contratto_max", contratto_max)
+  const { 
+    id_quartiere, 
+    prezzo, 
+    descrizione, 
+    locali, 
+    mq, 
+    piano, 
+    indirizzo, 
+    selectedServizi, 
+    tipologia, 
+    numero_inquilini, 
+    contratto_min, 
+    contratto_max 
+  } = req.body
 
-  const [result]:any = await connection.execute("INSERT INTO annuncio (utente_id, id_quartiere, prezzo, descrizione, locali, mq, piano, indirizzo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [
+  const foto_annuncio = req.file ? req.file.filename : null;
+
+  const [result]:any = await connection.execute(
+    `INSERT INTO annuncio (
+      utente_id, 
+      id_quartiere, 
+      prezzo, 
+      descrizione, 
+      locali, 
+      mq, 
+      piano, 
+      indirizzo,
+      foto_annuncio
+    ) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [
     user.id,
     id_quartiere,
     prezzo,
@@ -379,14 +572,16 @@ export const createAnnuncio = async (req: Request, res: Response) => {
     locali,
     mq,
     piano,
-    indirizzo
+    indirizzo,
+    foto_annuncio
   ])
   res.json({ success: true })
 
   const annuncioID = result.insertId
-  console.log("annuncioID", annuncioID)
 
-  for (const servizioID of selectedServizi) {
+  const servizi = JSON.parse(selectedServizi);
+
+  for (const servizioID of servizi) {
     await connection.execute("INSERT INTO annuncioservizio (annuncio_id, servizio_id) VALUES (?, ?)", [
       annuncioID,
       servizioID
@@ -422,6 +617,11 @@ export const deleteAnnuncio = async (req: Request, res: Response) => {
   if (annuncio.utente_id != user.id && user.ruolo != "admin") {
     res.status(403).send("Non hai i permessi per eliminare questo post.")
     return
+  }
+
+  // Elimina l'immagine associata all'annuncio
+  if (annuncio.foto_annuncio) {
+    deleteFile(annuncio.foto_annuncio);
   }
 
   await connection.execute("DELETE FROM annuncio WHERE id=?", [req.params.id])

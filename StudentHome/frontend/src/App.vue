@@ -24,16 +24,12 @@ export default defineComponent({
 </script>
 
 <template>
-  <header>
-    <div class="container-fluid">
-        <RouterLink to="/" class="navbar-brand">
-          <h1 class="text-primary">  
-            <img class="float-start" src="/img/scontornato.png" alt="Logo di StudentHome" width="200" id="LogoImg">
-            <br/>
-            <div id="LogoT">&nbsp;StudentHome</div>
-            <br/>
-          </h1>
-        </RouterLink>
+  <header class="bg-light py-3">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <RouterLink to="/" class="navbar-brand d-flex align-items-center">
+        <img src="/img/scontornato.png" alt="Logo di StudentHome" width="200" class="me-2">
+        <h1 class="mb-0 text-primary">StudentHome</h1>
+      </RouterLink>
     </div>
   </header>
   <nav class="navbar navbar-expand-lg bg-dark-subtle">

@@ -53,7 +53,7 @@ export default defineComponent({
       <div class="card mb-4 shadow-sm">
         <div class="row g-0">
           <div class="col-md-5">
-            <img :src="'/img/' + annuncio.foto_annuncio || 'img/placeholder.jpg'" alt="Immagine annuncio" width="400" height="400" />
+            <img :src="`/api/uploads/${annuncio.foto_annuncio}`" class="img-fluid rounded" alt="Immagine principale" />
           </div>
           <div class="col-md-7">
             <div class="card-body">
