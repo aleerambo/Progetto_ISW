@@ -527,6 +527,44 @@ export async function allQuartieri(req: Request, res: Response) {
   res.json(results)
 }
 
+export async function addPreferito(req: Request, res: Response) {
+  const user = getUser(req, res);
+  if (!user) {
+    res.status(401).send("Questa operazione richiede l'autenticazione.");
+    return;
+  }
+
+  const { annuncio_id } = req.body;
+  await connection.execute("INSERT INTO preferiti (utente_id, annuncio_id) VALUES (?, ?)", [user.id, annuncio_id]);
+  res.json({ success: true });
+}
+
+export async function removePreferito(req: Request, res: Response) {
+  const user = getUser(req, res);
+  if (!user) {
+    res.status(401).send("Questa operazione richiede l'autenticazione.");
+    return;
+  }
+
+  const { annuncio_id } = req.params;
+  await connection.execute("DELETE FROM preferiti WHERE utente_id = ? AND annuncio_id = ?", [user.id, annuncio_id]);
+  res.json({ success: true });
+}
+
+export async function getPreferiti(req: Request, res: Response) {
+  const user = getUser(req, res);
+  if (!user) {
+    res.status(401).send("Questa operazione richiede l'autenticazione.");
+    return;
+  }
+
+  const [results] = await connection.execute(
+    `SELECT a.* FROM annuncio a
+     JOIN preferiti p ON a.id = p.annuncio_id
+     WHERE p.utente_id = ?`, [user.id]);
+  res.json(results);
+}
+
 export const createAnnuncio = async (req: Request, res: Response) => {
   // Verifica che l'utente abbia effettuato il login
   const user = getUser(req, res)

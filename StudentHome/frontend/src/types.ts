@@ -39,6 +39,7 @@ export interface Annuncio {
   indirizzo: string;
   mail: string;
   telefono: string;
+  isPreferito?: boolean;
 }
 
 export interface Quartiere {

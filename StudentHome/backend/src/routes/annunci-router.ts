@@ -63,6 +63,9 @@ router.get("/api/annunci/utente/:mail", annunciController.AnnunciUtente) //annun
 router.get("/api/tipi-annuncio", annunciController.allTipiAnnuncio)
 router.get("/api/servizi", annunciController.allServizi)
 router.get("/api/quartieri", annunciController.allQuartieri)
+router.post("/api/preferiti", annunciController.addPreferito);
+router.delete("/api/preferiti/:annuncio_id", annunciController.removePreferito);
+router.get("/api/preferiti", annunciController.getPreferiti);
 router.post("/api/annunci/create", uploadMiddleware, annunciController.createAnnuncio)
 router.delete("/api/annunci/delete/:id", annunciController.deleteAnnuncio)
 
