@@ -19,17 +19,9 @@ export default defineComponent({
   methods: {
     async fetchAnnuncio(id: string) {
       try {
-        console.log("sono in metodo fetchAnnuncio e id è: " + id);
         const response = await fetch(`/api/annunci/${id}`);
-        console.log(`HTTP status: ${response.status}`);
-        if (!response.ok) {
-          console.log("qualcosa non va");
-        } else {
-          console.log("response è ok");
-        }
         const data = await response.json();
         this.annuncio = Array.isArray(data) ? data[0] : data;
-        console.log('Received data:', this.annuncio);
       } catch (error) {
         console.error('Errore durante il caricamento dell\'annuncio:', error);
       }
@@ -51,8 +43,6 @@ export default defineComponent({
   },
   created() {
     const id = this.$route.params.n as string;
-    console.log('Component created, route params:', this.$route.params);
-    console.log("questo è id:" + id);
     if (typeof id === 'string') {
       this.fetchAnnuncio(id);
     } else {
