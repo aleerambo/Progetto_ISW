@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `studenthome` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `studenthome`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: studenthome
@@ -41,7 +39,7 @@ CREATE TABLE `annuncio` (
   PRIMARY KEY (`id`),
   KEY `utente_id` (`utente_id`),
   CONSTRAINT `annuncio_ibfk_1` FOREIGN KEY (`utente_id`) REFERENCES `utente` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +48,7 @@ CREATE TABLE `annuncio` (
 
 LOCK TABLES `annuncio` WRITE;
 /*!40000 ALTER TABLE `annuncio` DISABLE KEYS */;
-INSERT INTO `annuncio` VALUES (1,1,1,'2025-01-02 09:00:00',500.00,'Camera singola vicino al centro.',1,20,2,'via nervi 10, cesena','attivo','Appartamento1.jpeg','Appartamento1.jpeg, Appartamento2.jpeg'),(2,2,2,'2023-12-12 11:30:00',800.00,'Appartamento bilocale arredato.',2,60,1,'Via Cerchia di Sant\'Egidio, 807, Cesena','attivo','Appartamento2.jpeg','Appartamento1.jpeg, Appartamento2.jpeg'),(3,1,3,'2023-12-05 15:00:00',300.00,'Posto letto in stanza doppia.',1,15,3,'Via Portofino, 280, Cesena','attivo','postoletto.jpeg','Appartamento1.jpeg, Appartamento2.jpeg'),(9,17,NULL,'2025-01-15 18:34:11',500.00,'Ampio appartamento in zona Ippodromo',4,60,0,'Via L.C. Farini, 380','attivo',NULL,NULL),(10,17,4,'2015-01-16 10:24:33',270.00,'Pippo Baudo',6,20,200,'via stromboli 10, Cesena','attivo',NULL,NULL);
+INSERT INTO `annuncio` VALUES (1,1,1,'2025-01-02 09:00:00',500.00,'Camera singola vicino al centro.',1,20,2,'via nervi 10, cesena','attivo','Appartamento1.jpeg','Appartamento1.jpeg, Appartamento2.jpeg'),(2,2,2,'2023-12-12 11:30:00',800.00,'Appartamento bilocale arredato.',2,60,1,'Via Cerchia di Sant\'Egidio, 807, Cesena','attivo','Appartamento2.jpeg','Appartamento1.jpeg, Appartamento2.jpeg'),(3,1,3,'2023-12-05 15:00:00',300.00,'Posto letto in stanza doppia.',1,15,3,'Via Portofino, 280, Cesena','attivo','postoletto.jpeg','Appartamento1.jpeg, Appartamento2.jpeg'),(25,17,1,'2025-01-16 18:18:45',0.00,'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',0,3,0,'AAAAAAAAAAAAAAAAAAAAAAAA','attivo','1737047925302-DJI_0840.JPG',NULL),(26,19,4,'2025-01-17 09:22:13',0.00,'gggggggg',0,5,0,'gggggg','non attivo','1737102133274-DJI_0839.JPG',NULL);
 /*!40000 ALTER TABLE `annuncio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,7 +75,7 @@ CREATE TABLE `annuncioservizio` (
 
 LOCK TABLES `annuncioservizio` WRITE;
 /*!40000 ALTER TABLE `annuncioservizio` DISABLE KEYS */;
-INSERT INTO `annuncioservizio` VALUES (1,1),(1,2),(2,1),(2,3),(3,1),(3,4),(10,1),(10,2);
+INSERT INTO `annuncioservizio` VALUES (1,1),(1,2),(2,1),(2,3),(3,1),(3,4),(25,6),(26,1);
 /*!40000 ALTER TABLE `annuncioservizio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +105,7 @@ CREATE TABLE `dettagli_annuncio` (
 
 LOCK TABLES `dettagli_annuncio` WRITE;
 /*!40000 ALTER TABLE `dettagli_annuncio` DISABLE KEYS */;
-INSERT INTO `dettagli_annuncio` VALUES (1,1,1,6,12),(2,2,2,12,24),(3,3,2,3,6),(10,1,4,6,48);
+INSERT INTO `dettagli_annuncio` VALUES (1,1,1,6,12),(2,2,2,12,24),(3,3,2,3,6),(25,1,0,0,0),(26,3,0,0,0);
 /*!40000 ALTER TABLE `dettagli_annuncio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,6 +134,33 @@ LOCK TABLES `news` WRITE;
 /*!40000 ALTER TABLE `news` DISABLE KEYS */;
 INSERT INTO `news` VALUES (1,'Nuovi appartamenti disponibili!','Scopri le ultime offerte vicino al centro.','2023-12-20 10:00:00','news1.jpeg'),(2,'Promozione Natale','Sconti fino al 20% su alcune stanze per studenti.','2023-12-18 09:30:00','news2.jpeg'),(3,'Da oggi StudentHome è anche su mobile!','Siamo entusiasti di annunciare una grande novità:\n\nStudentHome è finalmente disponibile anche su dispositivi mobile! \n\nLa nostra piattaforma è stata ottimizzata per offrirti un’esperienza semplice, fluida e accessibile direttamente dal tuo smartphone o tablet.\n\nChe tu sia in viaggio, in pausa tra le lezioni o comodamente seduto sul divano, potrai cercare appartamenti o camere in affitto con la stessa facilità della versione desktop. Navigare tra gli annunci, salvare le tue opzioni preferite e contattare i proprietari non è mai stato così comodo e veloce.\n\nNon importa dove ti trovi: con StudentHome la tua nuova casa è sempre a portata di mano. Prova subito la nostra versione mobile e scopri quanto è facile trovare il tuo prossimo alloggio!','2025-01-13 08:08:08','news3.jpg'),(4,'Qualche imperdibile notizia!','StudentHome è lieta di annunciare una nuova partnership con il Cinema Aurora! \n\nA partire da oggi, tutti gli studenti registrati sulla nostra piattaforma potranno beneficiare di uno sconto del 20% sui biglietti per i film in programmazione.\n\nChe tu voglia rilassarti dopo una lunga giornata di studio o organizzare una serata con i coinquilini, questa è l’occasione perfetta per vivere momenti di svago a prezzi vantaggiosi.\n\nNon dimenticare di mostrare il tuo badge digitale StudentHome alla cassa per ottenere lo sconto.\n\nBuona visione!','2025-01-13 08:08:08','news4.jpg');
 /*!40000 ALTER TABLE `news` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `preferiti`
+--
+
+DROP TABLE IF EXISTS `preferiti`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `preferiti` (
+  `utente_id` int(11) NOT NULL,
+  `annuncio_id` int(11) NOT NULL,
+  PRIMARY KEY (`utente_id`,`annuncio_id`),
+  KEY `annuncio_id` (`annuncio_id`),
+  CONSTRAINT `preferiti_ibfk_1` FOREIGN KEY (`utente_id`) REFERENCES `utente` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `preferiti_ibfk_2` FOREIGN KEY (`annuncio_id`) REFERENCES `annuncio` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `preferiti`
+--
+
+LOCK TABLES `preferiti` WRITE;
+/*!40000 ALTER TABLE `preferiti` DISABLE KEYS */;
+INSERT INTO `preferiti` VALUES (19,1);
+/*!40000 ALTER TABLE `preferiti` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -232,7 +257,7 @@ CREATE TABLE `utente` (
   `foto_profilo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `mail` (`mail`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +266,7 @@ CREATE TABLE `utente` (
 
 LOCK TABLES `utente` WRITE;
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` VALUES (1,'Rossi','Marco','marco.rossi@studenthome.com','3331112222','hashed_password1','utente','2023-12-01 10:00:00',NULL),(2,'Bianchi','Luca','luca.bianchi@studenthome.com','3332223333','hashed_password2','utente','2023-12-10 14:30:00',NULL),(3,'Verdi','Anna','anna.verdi@studenthome.com','3333334444','hashed_password3','admin','2023-11-20 08:15:00',NULL),(17,'test','test','test@test.com','3336669696','$2b$10$uyTdqh08rodh4KvQGw6.Zuhwpb0haJpftCFK/UBXEkW7cX9WEyxcu','admin','2025-01-15 18:29:10',NULL);
+INSERT INTO `utente` VALUES (1,'Rossi','Marco','marco.rossi@studenthome.com','3331112222','hashed_password1','utente','2023-12-01 10:00:00',NULL),(2,'Bianchi','Luca','luca.bianchi@studenthome.com','3332223333','hashed_password2','utente','2023-12-10 14:30:00',NULL),(3,'Verdi','Anna','anna.verdi@studenthome.com','3333334444','hashed_password3','admin','2023-11-20 08:15:00',NULL),(17,'test','test','test@test.com','3336669696','$2b$10$uyTdqh08rodh4KvQGw6.Zuhwpb0haJpftCFK/UBXEkW7cX9WEyxcu','admin','2025-01-15 18:29:10',NULL),(19,'utente','utente','utente@utente.com','1234567890','$2b$10$aSwF/FlUnzxIdgzSBCtiDuYKMOpiqTEDL.e/rS.7aFKzNGvvFJJQK','utente','2025-01-17 09:21:07',NULL);
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -254,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-16 11:42:30
+-- Dump completed on 2025-01-17 19:02:54
