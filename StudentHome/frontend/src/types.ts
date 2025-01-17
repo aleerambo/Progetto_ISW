@@ -37,6 +37,8 @@ export interface Annuncio {
   piano?: number;
   distanza?: string;
   indirizzo: string;
+  mail: string;
+  telefono: string;
 }
 
 export interface Quartiere {
