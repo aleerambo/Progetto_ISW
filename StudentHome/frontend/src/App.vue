@@ -58,12 +58,12 @@ export default defineComponent({
       </div>
     </div>
   </nav>
-  <main>
+  <main class="container-fluid">
     <!-- Passa l'utente come prop a tutte le pagine del router -->
-    <RouterView :user="user" />
+        <RouterView :user="user" />
   </main>
 
-  <footer id="bottom" class="row text-center fixed-bottom">
+  <footer id="bottom" class="text-center mt-auto">
     <div class="col-12">
       <p>Ingegneria dei Sistemi Web - A.A. 2024/2025</p>
     </div>

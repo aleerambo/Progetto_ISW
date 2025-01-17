@@ -31,7 +31,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
+  <div class="container-fluid vw-100">
     <h1>I miei annunci</h1>
     <button @click="inserisciAnnuncio" class="btn btn-primary mb-4">Inserisci nuovo annuncio</button>
     <div v-if="annunci.length === 0" class="h2 bg-secondary text-white-50 text-center">

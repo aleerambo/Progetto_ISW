@@ -63,7 +63,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="mx-3">
+  <div class="mx-3 vw-100">
     <h1>Inserisci nuovo annuncio</h1>
     <form @submit.prevent="inserisciAnnuncio">
       <div class="mb-3">

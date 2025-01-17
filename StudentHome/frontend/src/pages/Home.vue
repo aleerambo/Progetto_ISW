@@ -52,47 +52,53 @@ h1 {
 </style>
  
 <template>
-  <div class="container bg-body-secondary">
-    <div class="row align-items-start">
-    <div class="col-1"></div>
-    <div class="col-1">
-      <label class="form-label" for="cerco">Cerca:</label>
+  <div class="w-100 vw-100">
+    <!-- Sezione di ricerca -->
+    <div class="row bg-body-secondary p-3">
+      <div class="col-12">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <label class="form-label mb-0" for="cerco">Cerca:</label>
+          </div>
+          <div class="col-md-2">
+            <select class="form-select form-select-sm bg-body-secondary" 
+              aria-label="form-select-sm" 
+              id="cerco"
+              v-model="selectedCategory">
+              <option value="" selected>Seleziona...</option>
+              <option value="appartamento">Appartamento</option>
+              <option value="stanza">Stanza</option>
+              <option value="posto letto">Posto letto</option>
+            </select>
+          </div>
+          <div class="col-auto">
+            <label class="form-label mb-0" for="prezzo">Prezzo max:</label>
+          </div>
+          <div class="col-md-4">
+            <input type="range" 
+              class="form-control-range" 
+              min="100" 
+              max="1200" 
+              step="50" 
+              id="prezzo" 
+              v-model="rangeValue"
+              @input="updateRangeValue">
+          </div>
+          <div class="col-auto">
+            <label id="rangeval">€ {{ rangeValue }}</label>
+          </div>
+          <div class="col-auto">
+            <button type="button" class="btn btn-secondary" @click="updateApiPath">Cerca</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-2 float-sm-start">
-      <!-- bg-body-secondary -->
-      <select class="form-select form-select-sm bg-body-secondary" 
-       aria-label=".form-select-sm example" 
-       id="cerco"
-       v-model="selectedCategory">
-        <option value="" selected>Seleziona...</option>
-        <option value="appartamento">Appartamento</option>
-        <option value="stanza">Stanza</option>
-        <option value="posto letto">Posto letto</option>
-      </select>
+
+    <!-- Sezione degli annunci -->
+    <div class="row mt-4">
+      <div class="col-12 px-4">
+        <Annuncio :apiPath="apiPath" v-if="showAnnuncio" />
+      </div>
     </div>
-    <div class="col-1"></div>
-    <div class="col-2 float-sm-start">
-      <label class="form-label" for="prezzo">Prezzo max:</label>
-    </div>
-    <div class="col-3">
-      <input type="range" 
-        class="form-control-range" 
-        min="100" 
-        max="1200" 
-        step="50" 
-        id="prezzo" 
-        v-model="rangeValue"
-        @input="updateRangeValue">
-    </div>
-    <div class="col-1"><label id="rangeval">€ {{ rangeValue }}</label></div>
-    <div class="col-1"><button type="button" class="btn btn-secondary" @click="updateApiPath">Cerca</button></div>
-  </div>
-  </div>
-  <br/>
- 
-  <br/>
-  <div>
-    <!-- Inclusione del componente Annuncio -->
-    <Annuncio :apiPath= "apiPath" v-if="showAnnuncio" />
   </div>
 </template>

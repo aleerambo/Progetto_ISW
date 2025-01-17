@@ -11,7 +11,7 @@ export function ConvertiDataTesto(dateString: string): string {
   
 export function CreaUrlMaps(indirizzo: string): string {
     const baseUrl = "https://www.google.com/maps/dir/?api=1&origin=";
-    const destUrl = "+FC&destination=via+dell%27università%2B+50%2C+cesena%2C+FC&travelmode=bicycling";
+    const destUrl = "Cesena+FC&destination=via+dell%27università%2B+50%2C+cesena%2C+FC&travelmode=bicycling";
     const encodeIndirizzo = encodeURIComponent(indirizzo)
         .replace(/%20/g, "+"); 
     /*const encodeIndirizzo=indirizzo

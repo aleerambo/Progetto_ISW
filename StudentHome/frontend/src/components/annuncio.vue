@@ -35,7 +35,6 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="container">
     <div class="h2 bg-secondary text-white-50 text-center" v-if="annunci.length === 0">
       Annuncio non trovato con i filtri utilizzati!
     </div>
@@ -94,5 +93,4 @@ export default defineComponent({
         </button>
       </div>
     </div>
-  </div>
 </template>

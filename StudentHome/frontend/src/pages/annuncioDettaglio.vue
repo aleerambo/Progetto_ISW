@@ -48,8 +48,8 @@ export default defineComponent({
 </script>
 
 <template>
+  <div class="container-fluid vw-100">
   <div v-if="annuncio">
-    <div class="container">
       <div class="card mb-4 shadow-sm">
         <div class="row g-0">
           <div class="col-md-5">
@@ -88,5 +88,5 @@ export default defineComponent({
         </div>              
       </div>
     </div>
-  </div>    
+    </div>
 </template>
