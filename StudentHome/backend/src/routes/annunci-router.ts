@@ -55,12 +55,15 @@ router.get("/api/annunci", annunciController.allAnnunci)
 router.get("/api/lastannunci", annunciController.lastAnnunci) //per la home ha limit 2
 router.get("/api/annunci/:id", annunciController.AnnuncioDettaglio) //per il dettaglio del singolo annuncio
 router.get("/api/annuncinoattivi", annunciController.AnnunciNoAttivi) //per utente admin da attivare
+router.get("/api/annunci/prezzo/:prezzomax", annunciController.allAnnunciPrezzo) //annunci per prezzo massimo
 router.get("/api/annunci/tipo/:tipo/:prezzomax", annunciController.allAnnunciTipo) //annunci per tipo e prezzo massimo
+router.get("/api/annunci/quartiere/:id/:prezzomax", annunciController.allAnnunciQuartiere) //annunci per quartiere e prezzo massimo
+router.get("/api/annunci/filter/:tipo/:quartiere/:prezzomax", annunciController.allAnnunciFilter) //annunci per tipo, quartiere e prezzo massimo
 router.get("/api/annunci/utente/:mail", annunciController.AnnunciUtente) //annunci per utente usando mail come parametro
 router.get("/api/tipi-annuncio", annunciController.allTipiAnnuncio)
 router.get("/api/servizi", annunciController.allServizi)
 router.get("/api/quartieri", annunciController.allQuartieri)
-router.post("/api/annunci/create", upload.single('foto_annuncio'), annunciController.createAnnuncio)
+router.post("/api/annunci/create", uploadMiddleware, annunciController.createAnnuncio)
 router.delete("/api/annunci/delete/:id", annunciController.deleteAnnuncio)
 
 // Rotta dedicata per servire le immagini

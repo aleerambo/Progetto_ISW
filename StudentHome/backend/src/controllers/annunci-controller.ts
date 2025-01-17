@@ -170,6 +170,62 @@ export async function lastAnnunci(req: Request, res: Response) {
   res.json(results)
 }
 
+export async function allAnnunciPrezzo(req: Request, res: Response) {
+  const prezzomax = req.params.prezzomax;
+  const [results] = await connection.execute(
+    `SELECT
+      a.id,
+      u.cognome,
+      u.nome,
+      u.mail,
+      u.telefono,
+      u.ruolo,
+      u.foto_profilo,
+      a.data,
+      a.prezzo,
+      a.descrizione,
+      a.locali,
+      a.mq,
+      a.piano,
+      a.indirizzo,
+      a.foto_annuncio,
+      a.thumbnails,
+      qz.descrizione AS quartiere_zona_descrizione,
+      GROUP_CONCAT(s.nome_servizio ORDER BY s.nome_servizio ASC) AS servizi,
+      da.contratto_max,
+      da.contratto_min,
+      da.numero_inquilini,
+      t.nome AS tipologia
+    FROM 
+          studenthome.annuncio a
+    JOIN 
+          studenthome.utente u ON a.utente_id = u.id
+    JOIN
+          studenthome.quartierezona qz ON a.id_quartiere = qz.id
+    JOIN 
+          studenthome.annuncioservizio asv ON a.id = asv.annuncio_id
+    JOIN 
+          studenthome.servizio s ON asv.servizio_id = s.id
+    JOIN 
+          studenthome.dettagli_annuncio da ON a.id = da.annuncio_id
+    JOIN 
+          studenthome.tipologia t ON da.tipologia_id = t.id
+    WHERE 
+          a.stato = "attivo"
+          AND a.prezzo < ?
+    GROUP BY 
+          a.id, u.cognome, u.nome, u.mail, u.telefono, u.ruolo, u.foto_profilo,
+          a.data, a.prezzo, a.descrizione, a.locali, a.mq, a.piano, a.indirizzo,
+          a.foto_annuncio, a.thumbnails, qz.descrizione, da.contratto_max, da.contratto_min,
+          da.numero_inquilini, t.nome
+    ORDER BY 
+          a.prezzo;
+  `, [
+    prezzomax
+  ])
+res.json(results)
+}
+
 export async function allAnnunciTipo(req: Request, res: Response) {
   const tipo = req.params.tipo;
   const prezzomax = req.params.prezzomax;
@@ -226,6 +282,127 @@ export async function allAnnunciTipo(req: Request, res: Response) {
         tipo,
         prezzomax
       ])
+  res.json(results)
+}
+
+export async function allAnnunciQuartiere(req: Request, res: Response) {
+  const id = req.params.id;
+  const prezzomax = req.params.prezzomax;
+  const [results] = await connection.execute(
+    `SELECT
+      a.id,
+      u.cognome,
+      u.nome,
+      u.mail,
+      u.telefono,
+      u.ruolo,
+      u.foto_profilo,
+      a.data,
+      a.prezzo,
+      a.descrizione,
+      a.locali,
+      a.mq,
+      a.piano,
+      a.indirizzo,
+      a.foto_annuncio,
+      a.thumbnails,
+      qz.descrizione AS quartiere_zona_descrizione,
+      GROUP_CONCAT(s.nome_servizio ORDER BY s.nome_servizio ASC) AS servizi,
+      da.contratto_max,
+      da.contratto_min,
+      da.numero_inquilini,
+      t.nome AS tipologia
+    FROM 
+          studenthome.annuncio a
+    JOIN 
+          studenthome.utente u ON a.utente_id = u.id
+    JOIN
+          studenthome.quartierezona qz ON a.id_quartiere = qz.id
+    JOIN 
+          studenthome.annuncioservizio asv ON a.id = asv.annuncio_id
+    JOIN 
+          studenthome.servizio s ON asv.servizio_id = s.id
+    JOIN 
+          studenthome.dettagli_annuncio da ON a.id = da.annuncio_id
+    JOIN 
+          studenthome.tipologia t ON da.tipologia_id = t.id
+    WHERE 
+          a.stato = "attivo"
+          AND qz.id = ?
+          AND a.prezzo < ?
+    GROUP BY 
+          a.id, u.cognome, u.nome, u.mail, u.telefono, u.ruolo, u.foto_profilo,
+          a.data, a.prezzo, a.descrizione, a.locali, a.mq, a.piano, a.indirizzo,
+          a.foto_annuncio, a.thumbnails, qz.descrizione, da.contratto_max, da.contratto_min,
+          da.numero_inquilini, t.nome
+    ORDER BY 
+          a.data DESC;`
+    , [
+        id,
+        prezzomax
+      ])
+  res.json(results)
+}
+
+export async function allAnnunciFilter(req: Request, res: Response) {
+  const tipo = req.params.tipo;
+  const quartiere = req.params.quartiere;
+  const prezzomax = req.params.prezzomax;
+  const [results] = await connection.execute(
+    `SELECT
+      a.id,
+      u.cognome,
+      u.nome,
+      u.mail,
+      u.telefono,
+      u.ruolo,
+      u.foto_profilo,
+      a.data,
+      a.prezzo,
+      a.descrizione,
+      a.locali,
+      a.mq,
+      a.piano,
+      a.indirizzo,
+      a.foto_annuncio,
+      a.thumbnails,
+      qz.descrizione AS quartiere_zona_descrizione,
+      GROUP_CONCAT(s.nome_servizio ORDER BY s.nome_servizio ASC) AS servizi,
+      da.contratto_max,
+      da.contratto_min,
+      da.numero_inquilini,
+      t.nome AS tipologia
+    FROM 
+          studenthome.annuncio a
+    JOIN 
+          studenthome.utente u ON a.utente_id = u.id
+    JOIN
+          studenthome.quartierezona qz ON a.id_quartiere = qz.id
+    JOIN 
+          studenthome.annuncioservizio asv ON a.id = asv.annuncio_id
+    JOIN 
+          studenthome.servizio s ON asv.servizio_id = s.id
+    JOIN 
+          studenthome.dettagli_annuncio da ON a.id = da.annuncio_id
+    JOIN 
+          studenthome.tipologia t ON da.tipologia_id = t.id
+    WHERE 
+          a.stato = "attivo"
+          AND t.nome = ?
+          AND qz.id = ?
+          AND a.prezzo < ?
+    GROUP BY 
+          a.id, u.cognome, u.nome, u.mail, u.telefono, u.ruolo, u.foto_profilo,
+          a.data, a.prezzo, a.descrizione, a.locali, a.mq, a.piano, a.indirizzo,
+          a.foto_annuncio, a.thumbnails, qz.descrizione, da.contratto_max, da.contratto_min,
+          da.numero_inquilini, t.nome
+    ORDER BY 
+          a.data DESC;
+    `, [
+      tipo,
+      quartiere,
+      prezzomax
+  ])
   res.json(results)
 }
 
