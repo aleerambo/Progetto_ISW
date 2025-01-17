@@ -79,7 +79,7 @@ h1 {
 </style>
  
 <template>
-  <div class="w-100 vw-99">
+  <div class="w-100 vw-100">
     <!-- Sezione di ricerca -->
     <div class="row bg-body-secondary p-3">
       <div class="col-12">
