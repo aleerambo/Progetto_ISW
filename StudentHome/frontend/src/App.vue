@@ -23,6 +23,12 @@ export default defineComponent({
 })
 </script>
 
+<style>
+.link-color {
+  color:#1E3A8A
+}
+</style>
+
 <template>
   <header class="py-3">
     <div class="container-fluid d-flex justify-content-between align-items-center">
@@ -40,14 +46,14 @@ export default defineComponent({
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div>
           <ul class="navbar-nav">
-            <li class="nav-link active" aria-current="page"><RouterLink to="/" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Home</RouterLink></li>
-            <li class="nav-link"><RouterLink to="/archivio-news" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">News</RouterLink></li>
-            <li class="nav-link"><RouterLink to="/guida-alloggio" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Guida alla ricerca dell'allogio ideale</RouterLink></li>
-            <li class="nav-link"><RouterLink to="/chi-siamo" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Chi siamo</RouterLink></li>
-            <li class="nav-link"><RouterLink to="/contatti" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Contatti</RouterLink></li>
+            <li class="nav-link active" aria-current="page"><RouterLink to="/" class="link-color link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Home</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/archivio-news" class="link-color link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">News</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/guida-alloggio" class="link-color link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Guida alla ricerca dell'allogio ideale</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/chi-siamo" class="link-color link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Chi siamo</RouterLink></li>
+            <li class="nav-link"><RouterLink to="/contatti" class="link-color link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Contatti</RouterLink></li>
             <UserInfo v-if="user" :user="user" />
             <template v-else>
-              <li class="nav-link"><RouterLink to="/login" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Login</RouterLink></li>
+              <li class="nav-link"><RouterLink to="/login" class="link-color link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Login</RouterLink></li>
             </template>
           </ul>
         </div>

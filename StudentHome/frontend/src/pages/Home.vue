@@ -80,6 +80,8 @@ h1 {
   margin-top: 10px;
 }
 </style>
+
+
  
 <template>
   <div class="container-fluid">
