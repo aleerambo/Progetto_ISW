@@ -3,8 +3,13 @@ import { type PropType, defineComponent } from 'vue';
 import axios from 'axios';
 import { getImageUrl } from '../utils/metodiComuni'
 import type { Annuncio, User } from '../types';
+import ComponentAnnuncio from '../components/annuncio.vue';
 
 export default defineComponent({
+  name: 'Utente',
+  components: {
+    ComponentAnnuncio,
+  },
   props: {
     user: {
       type: Object as PropType<User>,
@@ -66,24 +71,12 @@ export default defineComponent({
       Non hai ancora aggiunto alcun annuncio ai preferiti!
     </div>
     <div v-else>
-      <div v-for="annuncio in preferiti" :key="annuncio.id" class="card mb-4 shadow-sm">
-        <div class="row g-0">
-          <!-- Sezione Immagini -->
-          <div class="col-md-3">
-            <img :src="getImageUrl(annuncio.foto_annuncio)" class="img-fluid rounded" alt="Immagine principale annuncio" />
-          </div>
-          <div class="card-body col-md-5">
-            <h5 class="card-title">
-              <RouterLink :to="`/annunci/${annuncio.id}`">{{ annuncio.descrizione }}</RouterLink>
-            </h5>
-            <p class="card-text">{{ annuncio.prezzo }} €/mese</p>
-            <p class="card-text">Locali: {{ annuncio.locali }}</p>
-            <p class="card-text">MQ: {{ annuncio.mq }}</p>
-            <p class="card-text">Piano: {{ annuncio.piano }}</p>
-            <p class="card-text">Servizi: {{ annuncio.servizi }}</p>
-          </div>
-        </div>
-      </div>
+      <ComponentAnnuncio 
+        v-for="annuncio in preferiti"
+        :key="annuncio.id"
+        :annuncio="annuncio"
+        :user="user"
+        apiPath="/api/preferiti" />
     </div>
     <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">I miei annunci attivi</h1>
     <div class="container-fluid">   
