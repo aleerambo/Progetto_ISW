@@ -43,6 +43,7 @@ export default defineComponent({
         if (annuncio.isPreferito) {
           await axios.delete(`/api/preferiti/${annuncio.id}`);
           annuncio.isPreferito = false;
+          location.reload();
         } else {
           await axios.post('/api/preferiti', { annuncio_id: annuncio.id });
           annuncio.isPreferito = true;
