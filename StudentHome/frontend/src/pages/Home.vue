@@ -1,13 +1,16 @@
 <script lang="ts">
 import axios from 'axios';
-import { defineComponent } from 'vue';
+import { defineComponent, type PropType } from 'vue';
 import Annuncio from '../components/annuncio.vue';
-import type { tipologiaAnnuncio, Quartiere } from '../types';
+import type { tipologiaAnnuncio, Quartiere, User } from '../types';
 
 export default defineComponent({
   name: 'Home',
   components: {
     Annuncio,
+  },
+  props: {
+    user: Object as PropType<User>,
   },
   data() {
     return {
@@ -133,7 +136,7 @@ h1 {
     <div class="row mt-4">
       <div class="col-12 px-4">
         <!-- Inclusione del componente Annuncio -->
-        <Annuncio :apiPath="apiPath" v-if="showAnnuncio" />
+        <Annuncio :apiPath="apiPath" v-if="showAnnuncio" :user="user" />
       </div>
     </div>
   </div>

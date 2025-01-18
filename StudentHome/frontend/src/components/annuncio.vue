@@ -1,8 +1,8 @@
 <script lang="ts">
 import axios from 'axios';
-import { defineComponent } from 'vue';
+import { defineComponent, type PropType } from 'vue';
 import { ConvertiDataTesto, CreaUrlMaps, getImageUrl } from '../utils/metodiComuni';
-import type { Annuncio } from '../types';
+import type { Annuncio, User } from '../types';
 
 export default defineComponent({
   name: 'Annuncio',
@@ -11,14 +11,12 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    user: Object as PropType<User>,
   },
   data() {
     return {
       annunci: [] as Annuncio[],
     };
-  },
-  created() {
-    this.fetchAnnunci();
   },
   methods: {
     async fetchAnnunci() {
@@ -37,6 +35,10 @@ export default defineComponent({
       }
     },
     async togglePreferito(annuncio: Annuncio) {
+      if (!this.user) {
+        alert('Devi effettuare il login per aggiungere ai preferiti.');
+        return;
+      }
       try {
         if (annuncio.isPreferito) {
           await axios.delete(`/api/preferiti/${annuncio.id}`);
@@ -52,6 +54,9 @@ export default defineComponent({
     ConvertiDataTesto,
     CreaUrlMaps,
     getImageUrl,
+  },
+  mounted() {
+    this.fetchAnnunci();
   },
 });
 </script>
@@ -80,7 +85,7 @@ export default defineComponent({
             <button type="button" class="btn btn-outline-danger btn-sm" @click="togglePreferito(annuncio)">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi" :class="annuncio.isPreferito ? 'bi-heart-fill text-danger' : 'bi-heart'" viewBox="0 0 16 16">
                 <path v-if="annuncio.isPreferito" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                <path v-else d="M8 2.748-.717-3.737C5.6-1.522 8 1.314 8 1.314s2.4-2.837 8.717-5.051C16.717 1.522 8 2.748 8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.171C12.721-3.04 23.333 4.868 8 15z"/>
+                <path v-else d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
               </svg>
             </button>
           </div>
