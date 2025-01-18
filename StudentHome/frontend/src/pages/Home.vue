@@ -91,7 +91,7 @@ h1 {
             <label class="form-label mb-0" for="cerco">Cerca tipologia:</label>
           </div>
           <div class="col-12 col-md-3 mb-2 mb-md-0">
-            <select class="form-select form-select-sm bg-body-tertiary" 
+            <select class="form-select form-select-sm bg-body" 
               aria-label="form-select-sm" 
               id="cerco tipo"
               v-model="selectedCategory">
@@ -103,7 +103,7 @@ h1 {
             <label class="form-label mb-0" for="cerco">Zona:</label>
           </div>
           <div class="col-12 col-md-3 mb-2 mb-md-0">
-            <select class="form-select form-select-sm bg-body-tertiary" 
+            <select class="form-select form-select-sm bg-body" 
               aria-label="form-select-sm" 
               id="cerco quartiere"
               v-model="selectedQuartiere">
