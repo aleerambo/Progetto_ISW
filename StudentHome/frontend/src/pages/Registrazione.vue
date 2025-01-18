@@ -117,7 +117,7 @@ export default defineComponent({
                 required 
               />
             </div>
-            <button type="submit" class="btn btn-primary w-100">Registrati</button>
+            <button type="submit" class="btn btn-primary w-100 fw-bold">Registrati</button>
           </form>
           <p class="mt-3 text-center">
             Sei già iscritto? Clicca qui e 

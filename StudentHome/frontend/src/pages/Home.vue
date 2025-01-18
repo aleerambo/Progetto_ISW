@@ -84,14 +84,14 @@ h1 {
 <template>
   <div class="container-fluid">
     <!-- Sezione di ricerca -->
-    <div class="mt-3 row bg-body-secondary p-3">
+    <div class="mt-3 row bg-secondary-subtle p-3">
       <div class="col-12">
         <div class="row align-items-center">
           <div class="col-12 col-md-auto mb-2 mb-md-0">
             <label class="form-label mb-0" for="cerco">Cerca tipologia:</label>
           </div>
           <div class="col-12 col-md-3 mb-2 mb-md-0">
-            <select class="form-select form-select-sm bg-body-secondary" 
+            <select class="form-select form-select-sm bg-body-tertiary" 
               aria-label="form-select-sm" 
               id="cerco tipo"
               v-model="selectedCategory">
@@ -103,7 +103,7 @@ h1 {
             <label class="form-label mb-0" for="cerco">Zona:</label>
           </div>
           <div class="col-12 col-md-3 mb-2 mb-md-0">
-            <select class="form-select form-select-sm bg-body-secondary" 
+            <select class="form-select form-select-sm bg-body-tertiary" 
               aria-label="form-select-sm" 
               id="cerco quartiere"
               v-model="selectedQuartiere">
@@ -128,7 +128,7 @@ h1 {
             <label id="rangeval">€ {{ rangeValue }}</label>
           </div>
           <div class="col-12 col-md-auto">
-            <button type="button" class="btn btn-secondary" @click="updateApiPath">Cerca</button>
+            <button type="button" class="btn btn-primary fw-bold" @click="updateApiPath">Cerca</button>
           </div>
         </div>
       </div>

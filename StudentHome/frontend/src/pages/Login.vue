@@ -64,7 +64,7 @@ export default defineComponent({
                 required 
               />
             </div>
-            <button type="submit" class="btn btn-primary w-100">Accedi</button>
+            <button type="submit" class="btn btn-primary w-100 fw-bold">Accedi</button>
           </form>
           <p class="mt-3 text-center">
             Non sei ancora iscritto? Clicca qui e 
