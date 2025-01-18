@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `studenthome` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `studenthome`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: studenthome
@@ -48,7 +50,7 @@ CREATE TABLE `annuncio` (
 
 LOCK TABLES `annuncio` WRITE;
 /*!40000 ALTER TABLE `annuncio` DISABLE KEYS */;
-INSERT INTO `annuncio` VALUES (1,1,1,'2025-01-02 09:00:00',500.00,'Camera singola vicino al centro.',1,20,2,'via nervi 10, cesena','attivo','Appartamento1.jpeg','Appartamento1.jpeg, Appartamento2.jpeg'),(2,2,2,'2023-12-12 11:30:00',800.00,'Appartamento bilocale arredato.',2,60,1,'Via Cerchia di Sant\'Egidio, 807, Cesena','attivo','Appartamento2.jpeg','Appartamento1.jpeg, Appartamento2.jpeg'),(3,1,3,'2023-12-05 15:00:00',300.00,'Posto letto in stanza doppia.',1,15,3,'Via Portofino, 280, Cesena','attivo','postoletto.jpeg','Appartamento1.jpeg, Appartamento2.jpeg'),(25,17,1,'2025-01-16 18:18:45',0.00,'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',0,3,0,'AAAAAAAAAAAAAAAAAAAAAAAA','attivo','1737047925302-DJI_0840.JPG',NULL),(26,19,4,'2025-01-17 09:22:13',0.00,'gggggggg',0,5,0,'gggggg','non attivo','1737102133274-DJI_0839.JPG',NULL);
+INSERT INTO `annuncio` VALUES (1,1,1,'2025-01-02 09:00:00',500.00,'Camera singola vicino al centro.',1,20,2,'via nervi 10, cesena','attivo','Appartamento1.jpeg','Appartamento1.jpeg, Appartamento2.jpeg'),(2,2,2,'2023-12-12 11:30:00',800.00,'Appartamento bilocale arredato.',2,60,1,'Via Cerchia di Sant\'Egidio, 807, Cesena','attivo','Appartamento2.jpeg','Appartamento1.jpeg, Appartamento2.jpeg'),(3,1,3,'2023-12-05 15:00:00',300.00,'Posto letto in stanza doppia.',1,15,3,'Via Portofino, 280, Cesena','attivo','postoletto.jpeg','Appartamento1.jpeg, Appartamento2.jpeg'),(25,17,1,'2025-01-16 18:18:45',0.00,'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',0,3,0,'AAAAAAAAAAAAAAAAAAAAAAAA','attivo','1737047925302-DJI_0840.JPG',NULL),(26,19,4,'2025-01-17 09:22:13',0.00,'bbbbbbbbbbbbbbbbb',0,5,0,'gggggg','attivo','1737102133274-DJI_0839.JPG',NULL);
 /*!40000 ALTER TABLE `annuncio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +161,7 @@ CREATE TABLE `preferiti` (
 
 LOCK TABLES `preferiti` WRITE;
 /*!40000 ALTER TABLE `preferiti` DISABLE KEYS */;
-INSERT INTO `preferiti` VALUES (19,1);
+INSERT INTO `preferiti` VALUES (19,26);
 /*!40000 ALTER TABLE `preferiti` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,4 +281,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-17 19:02:54
+-- Dump completed on 2025-01-18 12:19:39
