@@ -85,7 +85,7 @@ export default defineComponent({
           <!-- Colonna immagine -->
           <div class="col-12 col-md-5">
             <img 
-              :src="`/api/uploads/${annuncio.foto_annuncio}`" 
+            :src="annuncio.foto_annuncio ? `/api/uploads/${annuncio.foto_annuncio}` : '/api/uploads/placeholder.jpg'" 
               class="img-fluid rounded" 
               alt="Immagine principale" />
           </div>
