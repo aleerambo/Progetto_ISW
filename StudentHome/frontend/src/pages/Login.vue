@@ -32,51 +32,36 @@ export default defineComponent({
 <template>
   <h1 class="p-2 mb-2 bg-secondary-subtle text-center mt-4" style="color: #1E3A8A;">Login</h1>
   
+  <!-- Contenitore principale -->
   <div class="container">
     <div class="row">
-      <!-- Colonna del testo (8/12 = circa 2/3) -->
-      <div class="col-md-8 mt-3">
-        <h2>Perché iscriversi</h2>
-        <div class="fs-5">
-          <p>
-            StudentHome è la piattaforma creata pensando alle esigenze di chi studia e cerca un alloggio ideale. Accedendo alla tua area personale, potrai esplorare un'ampia selezione di appartamenti e stanze in affitto, con soluzioni pensate su misura per studenti come te.
-          </p>
-          <p>
-            Iscrivendoti, avrai accesso a funzionalità esclusive:
-          </p>
-            <ul>
-              <li>Ricerca rapida e personalizzata: filtra gli alloggi in base alle tue preferenze e trova quello perfetto in pochi clic.</li>
-              <li>Consigli e supporto: ricevi suggerimenti pratici e assistenza dedicata durante tutta la tua ricerca.</li>
-              <li>Un mondo di opportunità: scopri offerte esclusive e soluzioni abitative che combinano comodità, qualità e convenienza.</li>
-            </ul>
-          <p>
-            Non lasciare che trovare casa diventi una fonte di stress: StudentHome è qui per rendere il processo semplice e veloce.
-            Iscriviti subito e fai il primo passo verso il tuo alloggio ideale
-          </p>
-        </div>
-      </div>
-
-      <!-- Colonna del form (4/12 = circa 1/3) -->
-      <div class="col-md-4">
-        <div class="card p-3">
-          <img src="/img/undraw_secure_login_pdn4.svg" alt="Computer con lucchetto per rappresentare sicurezza" class="img-fluid mb-3">
+      <!-- Colonna del Form: Viene visualizzato sopra nella modalità mobile -->
+      <div class="col-md-4 order-1 order-md-2 mb-4">
+        <div class="card shadow p-4">
+          <img 
+            src="/img/undraw_secure_login_pdn4.svg" 
+            alt="Computer con lucchetto per rappresentare sicurezza" 
+            class="img-fluid mb-3 rounded"
+          />
           <form @submit.prevent="onSubmit">
             <div class="mb-3">
-              <input
-                type="email"
-                v-model="mail"
-                class="form-control"
-                placeholder="Mail"
-                required
+              <input 
+                type="email" 
+                v-model="mail" 
+                class="form-control" 
+                placeholder="Mail" 
+                aria-label="Email"
+                required 
               />
             </div>
             <div class="mb-3">
-              <input
-                type="password"
-                v-model="password"
-                class="form-control"
-                placeholder="Password"
-                required
+              <input 
+                type="password" 
+                v-model="password" 
+                class="form-control" 
+                placeholder="Password" 
+                aria-label="Password"
+                required 
               />
             </div>
             <button type="submit" class="btn btn-primary w-100">Accedi</button>
@@ -84,6 +69,26 @@ export default defineComponent({
           <p class="mt-3 text-center">
             Non sei ancora iscritto? Clicca qui e 
             <RouterLink to="/registrazione">REGISTRATI</RouterLink>
+          </p>
+        </div>
+      </div>
+
+      <!-- Colonna del Testo: Viene visualizzato sotto nella modalità mobile -->
+      <div class="col-md-8 order-2 order-md-1 mt-3">
+        <h2>Perché iscriversi</h2>
+        <div class="fs-5">
+          <p>
+            StudentHome è la piattaforma creata pensando alle esigenze di chi studia e cerca un alloggio ideale. Accedendo alla tua area personale, potrai esplorare un'ampia selezione di appartamenti e stanze in affitto, con soluzioni pensate su misura per studenti come te.
+          </p>
+          <p>Iscrivendoti, avrai accesso a funzionalità esclusive:</p>
+          <ul>
+            <li>Ricerca rapida e personalizzata: filtra gli alloggi in base alle tue preferenze e trova quello perfetto in pochi clic.</li>
+            <li>Consigli e supporto: ricevi suggerimenti pratici e assistenza dedicata durante tutta la tua ricerca.</li>
+            <li>Un mondo di opportunità: scopri offerte esclusive e soluzioni abitative che combinano comodità, qualità e convenienza.</li>
+          </ul>
+          <p>
+            Non lasciare che trovare casa diventi una fonte di stress: StudentHome è qui per rendere il processo semplice e veloce.
+            Iscriviti subito e fai il primo passo verso il tuo alloggio ideale.
           </p>
         </div>
       </div>
