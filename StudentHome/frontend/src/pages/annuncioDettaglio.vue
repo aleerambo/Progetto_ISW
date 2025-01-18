@@ -1,4 +1,5 @@
 <script lang="ts">
+import axios from 'axios';
 import { defineComponent, type PropType } from 'vue';
 import * as metodiComuni from '../utils/metodiComuni';
 import type { Annuncio, User } from '../types';
@@ -17,15 +18,22 @@ export default defineComponent({
     };
   },
   methods: {
-    async fetchAnnuncio(id: string) {
-      try {
-        const response = await fetch(`/api/annunci/${id}`);
-        const data = await response.json();
-        this.annuncio = Array.isArray(data) ? data[0] : data;
-      } catch (error) {
-        console.error('Errore durante il caricamento dell\'annuncio:', error);
+  async fetchAnnuncio(id: string) {
+    try {
+      const response = await fetch(`/api/annunci/${id}`);
+      const data = await response.json();
+      this.annuncio = Array.isArray(data) ? data[0] : data;
+
+      // Verifica se l'annuncio è nei preferiti
+      const preferitiResponse = await axios.get('/api/preferiti');
+      const preferiti = preferitiResponse.data;
+      if (this.annuncio) {
+        this.annuncio.isPreferito = preferiti.some((p: any) => p.id === this.annuncio!.id);
       }
-    },
+    } catch (error) {
+      console.error('Errore durante il caricamento dell\'annuncio:', error);
+    }
+  },
     mostraContatto(tipo: 'mail' | 'telefono') {
       if (!this.user) {
         this.messaggioErrore = 'Devi effettuare il login per visualizzare queste informazioni.';
@@ -36,6 +44,23 @@ export default defineComponent({
         this.mostraEmail = true;
       } else if (tipo === 'telefono') {
         this.mostraTelefono = true;
+      }
+    },
+    async togglePreferito(annuncio: Annuncio) {
+      if (!this.user) {
+        alert('Devi effettuare il login per aggiungere ai preferiti.');
+        return;
+      }
+      try {
+        if (annuncio.isPreferito) {
+          await axios.delete(`/api/preferiti/${annuncio.id}`);
+          annuncio.isPreferito = false;
+        } else {
+          await axios.post('/api/preferiti', { annuncio_id: annuncio.id });
+          annuncio.isPreferito = true;
+        }
+      } catch (error) {
+        console.error('Errore durante la gestione dei preferiti:', error);
       }
     },
     ConvertiDataTesto: metodiComuni.ConvertiDataTesto,
@@ -68,7 +93,7 @@ export default defineComponent({
           <!-- Colonna dettagli annuncio -->
           <div class="col-12 col-md-7">
             <div class="card-body">
-              <h5 class="card-title">{{ annuncio.descrizione }}</h5>
+              <h5 class="card-title" style="max-width: 750px;">{{ annuncio.descrizione }}</h5>
               <p class="card-text fs-4 fw-bold text-success">
                 Prezzo: {{ annuncio.prezzo || 'Non specificato' }} €
               </p>
@@ -117,6 +142,15 @@ export default defineComponent({
               <p v-if="mostraTelefono" class="mt-3">Telefono: {{ annuncio.telefono }}</p>
             </div>
           </div>
+        </div>
+        <!-- Pulsante Preferiti -->
+        <div class="position-absolute top-0 end-0 p-2">
+          <button type="button" class="btn btn-outline-danger btn-sm" @click="togglePreferito(annuncio)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi" :class="annuncio.isPreferito ? 'bi-heart-fill text-danger' : 'bi-heart'" viewBox="0 0 16 16">
+              <path v-if="annuncio.isPreferito" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+              <path v-else d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
