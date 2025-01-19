@@ -8,12 +8,13 @@ export function ConvertiDataTesto(dateString: string): string {
   if (diffDays < 60) return "poco recente"
   return "meno recente"
 }
-  
+// funzione per creare la url per google maps
 export function CreaUrlMaps(indirizzo: string): string {
   const baseUrl = "https://www.google.com/maps/dir/?api=1&origin=";
   const destUrl = "Cesena+FC&destination=via+dell%27università%2B+50%2C+cesena%2C+FC&travelmode=bicycling";
   const encodeIndirizzo = encodeURIComponent(indirizzo)
-      .replace(/%20/g, "+"); 
+      .replace(/%20/g, "+");
+  //commento perchè mi restituisce degli errori
   /*const encodeIndirizzo=indirizzo
   //.replace(/\s/g, "+")
   //.replace(/%20/g, "+")
