@@ -1,5 +1,5 @@
 // src/utils/utils.ts
-
+//funzione per convertire data in testo in un determinato range di tempo
 export function ConvertiDataTesto(dateString: string): string {
   const announcementDate = new Date(dateString)
   const today = new Date()
