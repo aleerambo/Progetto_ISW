@@ -744,3 +744,63 @@ export const deleteAnnuncio = async (req: Request, res: Response) => {
   res.json({ success: true })
   
 }
+
+export const modificaAnnuncio = async (req: Request, res: Response) => {
+  const user = getUser(req, res)
+  if (!user) {
+    res.status(401).send("Questa operazione richiede l'autenticazione.")
+    return
+  }
+
+  const id = req.params.id;
+  const { 
+    id_quartiere, 
+    prezzo, 
+    descrizione, 
+    locali, 
+    mq, 
+    piano, 
+    indirizzo, 
+    selectedServizi, 
+    tipologia, 
+    numero_inquilini, 
+    contratto_min, 
+    contratto_max 
+  } = req.body
+
+  const foto_annuncio = req.file ? req.file.filename : null;
+
+  try {
+    // Aggiorna la tabella annuncio
+    await connection.execute(
+      `UPDATE annuncio 
+       SET id_quartiere = ?, prezzo = ?, descrizione = ?, locali = ?, 
+           mq = ?, piano = ?, indirizzo = ?, foto_annuncio = COALESCE(?, foto_annuncio)
+       WHERE id = ?`,
+      [id_quartiere, prezzo, descrizione, locali, mq, piano, indirizzo, foto_annuncio, id]
+    )
+
+    // Aggiorna i servizi
+    const servizi = JSON.parse(selectedServizi);
+    await connection.execute("DELETE FROM annuncioservizio WHERE annuncio_id = ?", [id])
+    for (const servizioID of servizi) {
+      await connection.execute(
+        "INSERT INTO annuncioservizio (annuncio_id, servizio_id) VALUES (?, ?)",
+        [id, servizioID]
+      )
+    }
+
+    // Aggiorna i dettagli annuncio
+    await connection.execute(
+      `UPDATE dettagli_annuncio 
+       SET tipologia_id = ?, numero_inquilini = ?, contratto_min = ?, contratto_max = ?
+       WHERE annuncio_id = ?`,
+      [tipologia, numero_inquilini, contratto_min, contratto_max, id]
+    )
+
+    res.json({ success: true })
+  } catch (error) {
+    console.error(error)
+    res.status(500).send("Errore durante la modifica dell'annuncio")
+  }
+}

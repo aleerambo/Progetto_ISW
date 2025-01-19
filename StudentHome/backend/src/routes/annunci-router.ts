@@ -69,6 +69,7 @@ router.get("/api/preferiti", annunciController.getPreferiti);
 router.post("/api/annunci/create", uploadMiddleware, annunciController.createAnnuncio)
 router.post("/api/annunci/update/:id", uploadMiddleware, annunciController.updateAnnuncio)
 router.delete("/api/annunci/delete/:id", annunciController.deleteAnnuncio)
+router.post("/api/annunci/modifica/:id", annunciController.modificaAnnuncio)
 
 // Rotta dedicata per servire le immagini
 router.get('/api/uploads/:filename', (req, res) => {

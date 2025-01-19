@@ -55,6 +55,9 @@ export default defineComponent({
         }
       }
     },
+    async modificaAnnuncio(annuncioID: number) {
+      this.$router.push(`modifica-annuncio/${annuncioID}`);
+    },
     async getPreferiti() {
     const response = await axios.get('/api/preferiti');
     this.preferiti = response.data;
@@ -108,6 +111,7 @@ export default defineComponent({
             <div class="position-absolute top-0 end-0">
               <button class="btn btn-warning m-3" @click="modificaAnnuncio(annuncio.id)">Modifica</button>
               <button class="btn btn-danger m-3" @click="deleteAnnuncio(annuncio.id)">Elimina</button>
+              <button class="btn btn-success m-3" @click="modificaAnnuncio(annuncio.id)">Modifica</button>
             </div>
         </div>
       </template>
