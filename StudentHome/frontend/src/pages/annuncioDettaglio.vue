@@ -138,8 +138,8 @@ export default defineComponent({
 
               <!-- Errori e contatti -->
               <p v-if="messaggioErrore" class="text-danger mt-3">{{ messaggioErrore }}</p>
-              <p v-if="mostraEmail" class="mt-3">Email: {{ annuncio.mail }}</p>
-              <p v-if="mostraTelefono" class="mt-3">Telefono: {{ annuncio.telefono }}</p>
+              <p v-if="mostraEmail" class="mt-3">Email: <a href="mailto:{{ annuncio.mail }}">{{ annuncio.mail }}</a></p>
+              <p v-if="mostraTelefono" class="mt-3">Telefono: <a href="tel:{{ annuncio.telefono }}">{{ annuncio.telefono }}</a></p>
             </div>
           </div>
         </div>

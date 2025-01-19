@@ -20,7 +20,6 @@ import type { User } from "./types"
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "bootstrap-icons/font/bootstrap-icons.css"
-import ModificaAnnuncio from './pages/ModificaAnnuncio.vue'
 
 const router: Router = createRouter({
   history: createWebHistory(),

@@ -33,9 +33,6 @@ export default defineComponent({
     inserisciAnnuncio() {
       this.$router.push({ path: "/inserimento-annuncio" });
     },
-    modificaAnnuncio(annuncioID: number) {
-      this.$router.push({ path: `/modifica-annuncio/${annuncioID}` });
-    },
     async deleteAnnuncio(annuncioID: number) {
       const confirmed = confirm("Sei sicuro di voler eliminare questo annuncio?");
       if (!confirmed) {
