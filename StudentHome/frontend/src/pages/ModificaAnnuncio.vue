@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import axios from 'axios'
-import type { Servizio, Quartiere, tipologiaAnnuncio } from '../types'
+import type { Servizio, Quartiere, tipologiaAnnuncio, Annuncio } from '../types'
 
 export default defineComponent({
   data() {
@@ -23,9 +23,36 @@ export default defineComponent({
       quartieri: [] as Quartiere[],
       file: null as File | null,
       errorMessage: "",
+
+      annuncio: null as Annuncio | null,
     }
   },
   methods: {
+    getAnnuncio() {
+      const annuncioID = this.$route.params.id
+      axios.get(`/api/annunci/${annuncioID}`)
+        .then(response => {
+          this.annuncio = response.data[0]
+          if (this.annuncio) {
+            // Popola i campi del form con i dati dell'annuncio
+            this.descrizione = this.annuncio.descrizione
+            this.indirizzo = this.annuncio.indirizzo
+            this.prezzo = Number(this.annuncio.prezzo)
+            this.locali = this.annuncio.locali ?? 0
+            this.mq = this.annuncio.mq?.toString() || ""
+            this.piano = this.annuncio.piano ?? 0
+            this.tipologia = this.annuncio.id_tipologia
+            this.numero_inquilini = this.annuncio.numero_inquilini
+            this.contratto_min = this.annuncio.contratto_min
+            this.contratto_max = this.annuncio.contratto_max
+            this.selectedServizi = this.annuncio.id_servizi ? String(this.annuncio.id_servizi).split(',').filter(Boolean).map(Number) : []
+            this.quartiere = this.annuncio.id_quartiere
+          }
+        })
+        .catch(() => {
+          this.errorMessage = "Errore nel recupero dell'annuncio"
+        })
+    },
     getTipiAnnuncio() {
       axios.get('/api/tipi-annuncio')
         .then(response => this.tipiAnnuncio = response.data)
@@ -38,7 +65,8 @@ export default defineComponent({
       axios.get('/api/quartieri')
         .then(response => this.quartieri = response.data)
     },
-    async inserisciAnnuncio() {
+    async modificaAnnuncio() {
+      const annuncioID = this.$route.params.id
       const formData = new FormData()
       formData.append('id_quartiere', this.quartiere.toString())
       formData.append('prezzo', this.prezzo.toString())
@@ -57,7 +85,7 @@ export default defineComponent({
       }
 
       try {
-        await axios.post('/api/annunci/create', formData, {
+        await axios.post(`/api/annunci/update/${annuncioID}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -79,6 +107,7 @@ export default defineComponent({
     },
   },
   mounted() {
+    this.getAnnuncio()
     this.getTipiAnnuncio()
     this.getServizi()
     this.getQuartieri()
@@ -87,9 +116,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">Inserisci Nuovo Annuncio</h1>
+  <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">Modifica Annuncio</h1>
   <div class="container mx-auto px-3 mt-4">
-    <form @submit.prevent="inserisciAnnuncio">
+    <form @submit.prevent="modificaAnnuncio">
       <!-- Sezione Tipologia -->
       <div class="mb-3">
         <label for="tipologia" class="form-label fw-bold">Tipologia</label>
@@ -255,7 +284,7 @@ export default defineComponent({
       </div>
 
       <!-- Pulsante di Invio -->
-      <button type="submit" class="btn btn-primary mt-4 w-100">Inserisci</button>
+      <button type="submit" class="btn btn-primary mt-4 w-100">Salva modifiche</button>
     </form>
 
     <!-- Messaggio di Errore -->

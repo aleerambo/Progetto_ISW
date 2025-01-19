@@ -33,6 +33,9 @@ export default defineComponent({
     inserisciAnnuncio() {
       this.$router.push({ path: "/inserimento-annuncio" });
     },
+    modificaAnnuncio(annuncioID: number) {
+      this.$router.push({ path: `/modifica-annuncio/${annuncioID}` });
+    },
     async deleteAnnuncio(annuncioID: number) {
       const confirmed = confirm("Sei sicuro di voler eliminare questo annuncio?");
       if (!confirmed) {
@@ -92,7 +95,7 @@ export default defineComponent({
                 <img :src="getImageUrl(annuncio.foto_annuncio)" class="img-fluid rounded" alt="Immagine principale annuncio" />
               </div>
             <div class="card-body col-md-5">
-                <h5 class="card-title">
+                <h5 class="card-title text-truncate" style="max-width: 600px;">
                   <RouterLink :to="`/annunci/${annuncio.id}`">{{ annuncio.descrizione }}</RouterLink>
                 </h5>
                 <p class="card-text">{{ annuncio.prezzo }} €/mese</p>
@@ -103,6 +106,7 @@ export default defineComponent({
               </div>
             </div>
             <div class="position-absolute top-0 end-0">
+              <button class="btn btn-warning m-3" @click="modificaAnnuncio(annuncio.id)">Modifica</button>
               <button class="btn btn-danger m-3" @click="deleteAnnuncio(annuncio.id)">Elimina</button>
             </div>
         </div>
