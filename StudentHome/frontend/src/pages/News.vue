@@ -1,9 +1,12 @@
 <script lang="ts">
-import { defineComponent } from "vue"
+import { defineComponent, type PropType } from "vue"
 import axios from "axios"
-import type { DettagliNews } from "../types";
+import type { DettagliNews, User } from "../types";
 
 export default defineComponent({
+  props: {
+    user: Object as PropType<User>,
+  },
   data() {
     return {
       news: null as DettagliNews | null
