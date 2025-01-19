@@ -18,7 +18,7 @@ export default defineComponent({
       contratto_min: 0,
       contratto_max: 0,
       servizi: [] as Servizio[],
-      selectedServizi: [],
+      selectedServizi: [] as number[],
       quartiere: 1, // Default to 'Centro'
       quartieri: [] as Quartiere[],
       file: null as File | null,
@@ -103,7 +103,8 @@ export default defineComponent({
               type="radio" 
               :value="t.id" 
               v-model="tipologia" 
-              id="tipologia-{{ t.id }}">
+              id="tipologia-{{ t.id }}"
+              required>
             <label class="form-check-label" :for="'tipologia-' + t.id">
               {{ t.nome }}
             </label>

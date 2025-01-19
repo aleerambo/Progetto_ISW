@@ -20,6 +20,7 @@ import type { User } from "./types"
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "bootstrap-icons/font/bootstrap-icons.css"
+import ModificaAnnuncio from './pages/ModificaAnnuncio.vue'
 
 const router: Router = createRouter({
   history: createWebHistory(),
@@ -75,7 +76,7 @@ const router: Router = createRouter({
     {
       path: "/modifica-annuncio/:id",
       component: ModificaAnnuncio,
-      meta: { requireLogin:true },
+      meta: { requireLogin: true }, // Assicurati che l'utente sia loggato 
     },
     { 
       path: "/:pathMatch(.*)*", 

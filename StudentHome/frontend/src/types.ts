@@ -25,16 +25,21 @@ export interface DettagliNews {
 
 export interface Annuncio {
   id: number;
+  id_tipologia: number;
   prezzo: string;
   dettagli: string;
   descrizione: string;
   data: string;
   servizi: string;
   foto_annuncio: string;
-  //thumbnails: string | string[];
   locali?: number;
   mq?: number;
   piano?: number;
+  contratto_min: number;
+  contratto_max: number;
+  numero_inquilini: number;
+  id_quartiere: number;
+  id_servizi: number[];
   distanza?: string;
   indirizzo: string;
   mail: string;

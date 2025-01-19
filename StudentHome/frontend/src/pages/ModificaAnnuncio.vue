@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import axios from 'axios'
-import type { Servizio, Quartiere, tipologiaAnnuncio } from '../types'
+import type { Servizio, Quartiere, tipologiaAnnuncio, Annuncio } from '../types'
 
 export default defineComponent({
   data() {
@@ -18,14 +18,41 @@ export default defineComponent({
       contratto_min: 0,
       contratto_max: 0,
       servizi: [] as Servizio[],
-      selectedServizi: [],
+      selectedServizi: [] as number[],
       quartiere: 1, // Default to 'Centro'
       quartieri: [] as Quartiere[],
       file: null as File | null,
       errorMessage: "",
+
+      annuncio: null as Annuncio | null,
     }
   },
   methods: {
+    getAnnuncio() {
+      const annuncioID = this.$route.params.id
+      axios.get(`/api/annunci/${annuncioID}`)
+        .then(response => {
+          this.annuncio = response.data[0]
+          if (this.annuncio) {
+            // Popola i campi del form con i dati dell'annuncio
+            this.descrizione = this.annuncio.descrizione
+            this.indirizzo = this.annuncio.indirizzo
+            this.prezzo = Number(this.annuncio.prezzo)
+            this.locali = this.annuncio.locali ?? 0
+            this.mq = this.annuncio.mq?.toString() || ""
+            this.piano = this.annuncio.piano ?? 0
+            this.tipologia = this.annuncio.id_tipologia
+            this.numero_inquilini = this.annuncio.numero_inquilini
+            this.contratto_min = this.annuncio.contratto_min
+            this.contratto_max = this.annuncio.contratto_max
+            this.selectedServizi = this.annuncio.id_servizi ? String(this.annuncio.id_servizi).split(',').filter(Boolean).map(Number) : []
+            this.quartiere = this.annuncio.id_quartiere
+          }
+        })
+        .catch(() => {
+          this.errorMessage = "Errore nel recupero dell'annuncio"
+        })
+    },
     getTipiAnnuncio() {
       axios.get('/api/tipi-annuncio')
         .then(response => this.tipiAnnuncio = response.data)
@@ -38,30 +65,8 @@ export default defineComponent({
       axios.get('/api/quartieri')
         .then(response => this.quartieri = response.data)
     },
-    async loadAnnuncioData() {
-  try {
-    const id = this.$route.params.id
-    const response = await axios.get(`/api/annunci/${id}`)
-    const annuncio = response.data[0]
-    
-    this.descrizione = annuncio.descrizione
-    this.indirizzo = annuncio.indirizzo
-    this.prezzo = annuncio.prezzo
-    this.locali = annuncio.locali
-    this.mq = annuncio.mq
-    this.piano = annuncio.piano
-    this.tipologia = annuncio.tipologia_id
-    this.numero_inquilini = annuncio.numero_inquilini
-    this.contratto_min = annuncio.contratto_min
-    this.contratto_max = annuncio.contratto_max
-    this.quartiere = annuncio.id_quartiere
-    this.selectedServizi = annuncio.servizi.split(',').map(Number)
-  } catch (error) {
-    console.error('Errore nel caricamento dei dati:', error)
-  }
-},
     async modificaAnnuncio() {
-      const id = this.$route.params.id
+      const annuncioID = this.$route.params.id
       const formData = new FormData()
       formData.append('id_quartiere', this.quartiere.toString())
       formData.append('prezzo', this.prezzo.toString())
@@ -80,7 +85,7 @@ export default defineComponent({
       }
 
       try {
-        await axios.post(`/api/annunci/modifica/${id}`, formData, {
+        await axios.post(`/api/annunci/update/${annuncioID}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -102,10 +107,10 @@ export default defineComponent({
     },
   },
   mounted() {
+    this.getAnnuncio()
     this.getTipiAnnuncio()
     this.getServizi()
     this.getQuartieri()
-    this.loadAnnuncioData()
   },
 })
 </script>
@@ -113,7 +118,7 @@ export default defineComponent({
 <template>
   <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">Modifica Annuncio</h1>
   <div class="container mx-auto px-3 mt-4">
-    <form> <!--@submit.prevent="inserisciAnnuncio"-->
+    <form @submit.prevent="modificaAnnuncio">
       <!-- Sezione Tipologia -->
       <div class="mb-3">
         <label for="tipologia" class="form-label fw-bold">Tipologia</label>
@@ -127,7 +132,8 @@ export default defineComponent({
               type="radio" 
               :value="t.id" 
               v-model="tipologia" 
-              id="tipologia-{{ t.id }}">
+              id="tipologia-{{ t.id }}"
+              required>
             <label class="form-check-label" :for="'tipologia-' + t.id">
               {{ t.nome }}
             </label>
@@ -243,8 +249,7 @@ export default defineComponent({
               class="form-check-input me-1" 
               type="checkbox" 
               v-model="selectedServizi" 
-              :value="s.id"
-              :key="s.id" 
+              :value="s.id" 
               id="servizio-{{ s.id }}">
             <label class="form-check-label" :for="'servizio-' + s.id">
               {{ s.nome_servizio }}
@@ -279,7 +284,7 @@ export default defineComponent({
       </div>
 
       <!-- Pulsante di Invio -->
-      <button type="submit" class="btn btn-primary mt-4 w-100">Salva Modifiche</button>
+      <button type="submit" class="btn btn-primary mt-4 w-100">Salva modifiche</button>
     </form>
 
     <!-- Messaggio di Errore -->

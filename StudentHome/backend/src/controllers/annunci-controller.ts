@@ -80,33 +80,37 @@ export async function AnnuncioDettaglio(req: Request, res: Response) {
       a.piano,
       a.indirizzo,
       a.foto_annuncio,
+      qz.id AS id_quartiere,
       qz.descrizione AS quartiere_zona_descrizione,
+      GROUP_CONCAT(s.id ORDER BY s.id ASC) AS id_servizi,
       GROUP_CONCAT(s.nome_servizio ORDER BY s.nome_servizio ASC) AS servizi,
+      da.tipologia_id AS id_tipologia,
       da.contratto_max,
       da.contratto_min,
       da.numero_inquilini,
       t.nome AS tipologia
     FROM 
-        studenthome.annuncio a
+          studenthome.annuncio a
     JOIN 
-        studenthome.utente u ON a.utente_id = u.id
+          studenthome.utente u ON a.utente_id = u.id
     JOIN
-        studenthome.quartierezona qz ON a.id_quartiere = qz.id
+          studenthome.quartierezona qz ON a.id_quartiere = qz.id
     JOIN 
-        studenthome.annuncioservizio asv ON a.id = asv.annuncio_id
+          studenthome.annuncioservizio asv ON a.id = asv.annuncio_id
     JOIN 
-        studenthome.servizio s ON asv.servizio_id = s.id
+          studenthome.servizio s ON asv.servizio_id = s.id
     JOIN 
-        studenthome.dettagli_annuncio da ON a.id = da.annuncio_id
+          studenthome.dettagli_annuncio da ON a.id = da.annuncio_id
     JOIN 
-        studenthome.tipologia t ON da.tipologia_id = t.id
+          studenthome.tipologia t ON da.tipologia_id = t.id
     WHERE 
-        a.id = ? AND a.stato = "attivo"
+          a.id = ? AND a.stato = "attivo"
     GROUP BY 
-        a.id, u.cognome, u.nome, u.mail, u.telefono, u.ruolo, u.foto_profilo,
-        a.data, a.prezzo, a.descrizione, a.locali, a.mq, a.piano, a.indirizzo,
-        a.foto_annuncio, qz.descrizione, da.contratto_max, da.contratto_min,
-        da.numero_inquilini, t.nome;
+          a.id, u.cognome, u.nome, u.mail, u.telefono, u.ruolo, u.foto_profilo,
+          a.data, a.prezzo, a.descrizione, a.locali, a.mq, a.piano, a.indirizzo,
+          a.foto_annuncio, qz.id, qz.descrizione, da.tipologia_id, da.contratto_max,
+          da.contratto_min, da.numero_inquilini, t.nome;
+
     `,
     [id]
   );
@@ -633,6 +637,80 @@ export const createAnnuncio = async (req: Request, res: Response) => {
     contratto_min,
     contratto_max
   ])
+}
+
+export const updateAnnuncio = async (req: Request, res: Response) => {
+  const user = getUser(req, res);
+  if (!user) {
+    res.status(401).send("Questa operazione richiede l'autenticazione.");
+    return;
+  }
+
+  const { 
+    id_quartiere, 
+    prezzo, 
+    descrizione, 
+    locali, 
+    mq, 
+    piano, 
+    indirizzo, 
+    selectedServizi, 
+    tipologia, 
+    numero_inquilini, 
+    contratto_min, 
+    contratto_max 
+  } = req.body;
+
+  const foto_annuncio = req.file ? req.file.filename : null;
+  const annuncioID = req.params.id;
+
+  await connection.execute(
+    `UPDATE annuncio SET 
+      id_quartiere = ?, 
+      prezzo = ?, 
+      descrizione = ?, 
+      locali = ?, 
+      mq = ?, 
+      piano = ?, 
+      indirizzo = ?, 
+      foto_annuncio = ? 
+    WHERE id = ? AND utente_id = ?`, [
+    id_quartiere,
+    prezzo,
+    descrizione,
+    locali,
+    mq,
+    piano,
+    indirizzo,
+    foto_annuncio,
+    annuncioID,
+    user.id
+  ]);
+
+  await connection.execute("DELETE FROM annuncioservizio WHERE annuncio_id = ?", [annuncioID]);
+  const servizi = JSON.parse(selectedServizi);
+  for (const servizioID of servizi) {
+    await connection.execute("INSERT INTO annuncioservizio (annuncio_id, servizio_id) VALUES (?, ?)", [
+      annuncioID,
+      servizioID
+    ]);
+  }
+
+  await connection.execute(
+    `UPDATE dettagli_annuncio SET 
+      tipologia_id = ?, 
+      numero_inquilini = ?, 
+      contratto_min = ?, 
+      contratto_max = ? 
+    WHERE annuncio_id = ?`, [
+    tipologia,
+    numero_inquilini,
+    contratto_min,
+    contratto_max,
+    annuncioID
+  ]);
+
+  res.json({ success: true });
 }
 
 export const deleteAnnuncio = async (req: Request, res: Response) => {
