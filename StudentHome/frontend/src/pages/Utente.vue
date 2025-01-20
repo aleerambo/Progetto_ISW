@@ -20,6 +20,7 @@ export default defineComponent({
     return {
       annunci: [] as Annuncio[],
       preferiti: [] as Annuncio[],
+      nonAttivi: [] as Annuncio[],
     };
   },
   async created() {
@@ -59,10 +60,28 @@ export default defineComponent({
     const response = await axios.get('/api/preferiti');
     this.preferiti = response.data;
     },
+    async getNonAttivi(){
+      const response = await axios.get('/api/annuncinoattivi');
+      this.nonAttivi = response.data;
+    },
+    async activateAnnuncio(annuncioID: number) {
+      try {
+        await axios.post(`/api/annunci/attiva/${annuncioID}`);
+        this.getNonAttivi();
+        location.reload();
+      } catch (e: any) {
+        if (e.response) {
+          alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
+        } else {
+          alert(e.message)
+        }
+      }
+    },
     getImageUrl,
   },
   mounted() {
     this.getPreferiti();
+    this.getNonAttivi();
   },
 });
 </script>
@@ -80,6 +99,37 @@ export default defineComponent({
         :annuncio="annuncio"
         :user="user"
         apiPath="/api/preferiti" />
+    </div>
+      <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">Annunci da attivare</h1>
+      <div v-if="nonAttivi.length === 0" class="h2 bg-secondary text-white-50 text-center mt-4">
+        Non ci sono annunci da attivare
+      </div>
+      <div v-else>
+        <div v-for="annuncio in nonAttivi" :key="annuncio.id" class="card mb-4 shadow-sm">
+          <div class="row g-0">
+              <!-- Sezione Immagini -->
+              <div class="col-md-3">
+                <img :src="getImageUrl(annuncio.foto_annuncio)" class="img-fluid rounded" alt="Immagine principale annuncio" />
+              </div>
+            <div class="card-body col-md-5">
+                <h5 class="card-title text-truncate" style="max-width: 600px;">
+                  <RouterLink :to="`/annunci/${annuncio.id}`">{{ annuncio.descrizione }}</RouterLink>
+                </h5>
+                <p class="card-text fs-4 fw-bold text-success">{{ annuncio.prezzo }} €/mese</p>
+                <p class="card-text">Locali: {{ annuncio.locali }}</p>
+                <p class="card-text">MQ: {{ annuncio.mq }}</p>
+                <p class="card-text">Piano: {{ annuncio.piano }}</p>
+                <p class="card-text">Servizi: {{ annuncio.servizi }}</p>
+              </div>
+            </div>
+            <div class="m-3 p-2 position-absolute bottom-0 end-0 p-2">
+              <button v-if="user?.ruolo == 'admin'"
+                class="btn btn-success fw-bold"
+                @click="activateAnnuncio(annuncio.id)">
+                Attiva
+              </button>
+            </div>
+        </div>
     </div>
     <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">I miei annunci attivi</h1>
     <div class="container-fluid">   

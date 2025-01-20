@@ -80,6 +80,7 @@ Suddiviso in frontend e backend realizzati rispettivamente con Vue.js e Express.
  - /api/annunci/create
  - /api/annunci/update/:id
  - /api/annunci/modifica/:id
+ - /api/annunci/attiva/:id
 
 ### DELETE
  - /api/preferiti/:annuncio_id

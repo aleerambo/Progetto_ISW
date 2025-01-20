@@ -463,6 +463,12 @@ export async function AnnunciNoAttivi(req: Request, res: Response) {
   res.json(results)
 }
 
+export async function attivaAnnuncio(req: Request, res: Response) {
+  const id = req.params.id;
+  await connection.execute("UPDATE annuncio SET stato = 'attivo' WHERE id = ?", [id]);
+  res.json({ success: true });
+}
+
 export async function AnnunciUtente(req: Request, res: Response) {
   const [results] = await connection.execute(
     `SELECT
