@@ -100,6 +100,7 @@ export default defineComponent({
         :user="user"
         apiPath="/api/preferiti" />
     </div>
+    <div v-if="user?.ruolo == 'admin'">
       <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">Annunci da attivare</h1>
       <div v-if="nonAttivi.length === 0" class="h2 bg-secondary text-white text-center mt-4">
         Non ci sono annunci da attivare
@@ -123,13 +124,14 @@ export default defineComponent({
               </div>
             </div>
             <div class="m-3 p-2 position-absolute bottom-0 end-0 p-2">
-              <button v-if="user?.ruolo == 'admin'"
+              <button
                 class="btn btn-success fw-bold"
                 @click="activateAnnuncio(annuncio.id)">
                 Attiva
               </button>
             </div>
         </div>
+      </div>
     </div>
     <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">I miei annunci attivi</h1>
     <div class="container-fluid">   
