@@ -29,7 +29,8 @@ Benvenuti nel sito di StudentHome. Questa applicazione web è un servizio gratui
  
 ## Feature per amministratori
  - Effettuare il login nella sezione dedicata
- - Eliminare qualsiasi annuncio.
+ - Eliminare qualsiasi annuncio
+ - Attraverso il DB possono abilitare gli annunci non attivi
 
 ## Tecnologie utilizzate
  - XAMPP per avviare il server mysql
