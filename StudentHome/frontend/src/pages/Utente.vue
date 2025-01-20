@@ -83,7 +83,7 @@ export default defineComponent({
     </div>
     <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">I miei annunci attivi</h1>
     <div class="container-fluid">   
-      <button @click="inserisciAnnuncio" class="btn btn-primary mb-4">Inserisci nuovo annuncio</button>
+      <button @click="inserisciAnnuncio" class="btn btn-primary mb-4 fw-bold">Inserisci nuovo annuncio</button>
       <div v-if="annunci.length === 0" class="h2 bg-secondary text-white-50 text-center mt-4">
         Non hai ancora pubblicato alcun annuncio!
       </div>
@@ -98,7 +98,7 @@ export default defineComponent({
                 <h5 class="card-title text-truncate" style="max-width: 600px;">
                   <RouterLink :to="`/annunci/${annuncio.id}`">{{ annuncio.descrizione }}</RouterLink>
                 </h5>
-                <p class="card-text">{{ annuncio.prezzo }} €/mese</p>
+                <p class="card-text fs-4 fw-bold text-success">{{ annuncio.prezzo }} €/mese</p>
                 <p class="card-text">Locali: {{ annuncio.locali }}</p>
                 <p class="card-text">MQ: {{ annuncio.mq }}</p>
                 <p class="card-text">Piano: {{ annuncio.piano }}</p>
@@ -106,8 +106,8 @@ export default defineComponent({
               </div>
             </div>
             <div class="position-absolute top-0 end-0">
-              <button class="btn btn-warning m-3" @click="modificaAnnuncio(annuncio.id)">Modifica</button>
-              <button class="btn btn-danger m-3" @click="deleteAnnuncio(annuncio.id)">Elimina</button>
+              <button class="btn btn-warning m-3 fw-bold" @click="modificaAnnuncio(annuncio.id)">Modifica</button>
+              <button class="btn btn-danger m-3 fw-bold" @click="deleteAnnuncio(annuncio.id)">Elimina</button>
             </div>
         </div>
       </template>
