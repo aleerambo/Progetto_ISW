@@ -89,7 +89,7 @@ export default defineComponent({
 <template>
   <div>
     <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">I miei preferiti</h1>
-    <div v-if="preferiti.length === 0" class="h2 bg-secondary text-white-50 text-center mt-4">
+    <div v-if="preferiti.length === 0" class="h2 bg-secondary text-white text-center mt-4">
       Non hai ancora aggiunto alcun annuncio ai preferiti!
     </div>
     <div v-else>
@@ -101,7 +101,7 @@ export default defineComponent({
         apiPath="/api/preferiti" />
     </div>
       <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">Annunci da attivare</h1>
-      <div v-if="nonAttivi.length === 0" class="h2 bg-secondary text-white-50 text-center mt-4">
+      <div v-if="nonAttivi.length === 0" class="h2 bg-secondary text-white text-center mt-4">
         Non ci sono annunci da attivare
       </div>
       <div v-else>
@@ -134,7 +134,7 @@ export default defineComponent({
     <h1 class="p-2 my-4 bg-secondary-subtle text-center" style="color: #1E3A8A;">I miei annunci attivi</h1>
     <div class="container-fluid">   
       <button @click="inserisciAnnuncio" class="btn btn-primary mb-4 fw-bold">Inserisci nuovo annuncio</button>
-      <div v-if="annunci.length === 0" class="h2 bg-secondary text-white-50 text-center mt-4">
+      <div v-if="annunci.length === 0" class="h2 bg-secondary text-white text-center mt-4">
         Non hai ancora pubblicato alcun annuncio!
       </div>
       <template v-else>

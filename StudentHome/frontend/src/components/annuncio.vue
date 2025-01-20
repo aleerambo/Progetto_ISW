@@ -64,8 +64,8 @@ export default defineComponent({
 
 <template>
   <div>
-    <div class="h2 bg-secondary text-white-50 text-center" v-if="annunci.length === 0">
-      Annuncio non trovato con i filtri utilizzati!
+    <div class="h2 bg-secondary text-white text-center" v-if="annunci.length === 0">
+      Annunci non trovati con i filtri utilizzati!
     </div>
     <div v-for="annuncio in annunci" :key="annuncio.id" class="card mb-4 shadow-sm">
       <div class="row g-0">
