@@ -1,3 +1,15 @@
+<script lang="ts">
+import { defineComponent, type PropType } from "vue"
+import type { User } from "../types";
+
+export default defineComponent({
+  props: {
+    user: Object as PropType<User>,
+  },
+})
+
+</script>
+
 <template>  
     <h1 class="p-2 mb-2 bg-secondary-subtle text-center mt-4" style="color: #1E3A8A;">Contatti</h1>
     <div class="p-3">

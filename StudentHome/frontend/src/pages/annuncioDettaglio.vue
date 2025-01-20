@@ -1,8 +1,8 @@
 <script lang="ts">
-import axios from 'axios';
-import { defineComponent, type PropType } from 'vue';
-import * as metodiComuni from '../utils/metodiComuni';
-import type { Annuncio, User } from '../types';
+import axios from 'axios'
+import { defineComponent, type PropType } from 'vue'
+import * as metodiComuni from '../utils/metodiComuni'
+import type { Annuncio, User } from '../types'
 
 export default defineComponent({
   name: 'AnnuncioDettaglio',
@@ -15,66 +15,85 @@ export default defineComponent({
       mostraEmail: false,
       mostraTelefono: false,
       messaggioErrore: ''
-    };
+    }
   },
   methods: {
+  async deleteAnnuncio(annuncioID: number) {
+    const confirmed = confirm("Sei sicuro di voler eliminare questo annuncio?")
+    if (!confirmed) {
+      return
+    }
+
+    try {
+      await axios.delete(`/api/annunci/delete/${annuncioID}`)
+      this.$emit("delete")
+      // Ricarica la pagina dopo aver eliminato l'annuncio
+      location.href = "/"
+    } catch (e: any) {
+      if (e.response) {
+        alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
+      } else {
+        alert(e.message)
+      }
+    }
+  },
   async fetchAnnuncio(id: string) {
     try {
-      const response = await fetch(`/api/annunci/${id}`);
-      const data = await response.json();
-      this.annuncio = Array.isArray(data) ? data[0] : data;
+      const response = await fetch(`/api/annunci/${id}`)
+      const data = await response.json()
+      this.annuncio = Array.isArray(data) ? data[0] : data
 
       // Verifica se l'annuncio è nei preferiti
-      const preferitiResponse = await axios.get('/api/preferiti');
-      const preferiti = preferitiResponse.data;
+      const preferitiResponse = await axios.get('/api/preferiti')
+      const preferiti = preferitiResponse.data
       if (this.annuncio) {
-        this.annuncio.isPreferito = preferiti.some((p: any) => p.id === this.annuncio!.id);
+        this.annuncio.isPreferito = preferiti.some((p: any) => p.id === this.annuncio!.id)
       }
     } catch (error) {
-      console.error('Errore durante il caricamento dell\'annuncio:', error);
+      console.error('Errore durante il caricamento dell\'annuncio:', error)
     }
   },
-    mostraContatto(tipo: 'mail' | 'telefono') {
-      if (!this.user) {
-        this.messaggioErrore = 'Devi effettuare il login per visualizzare queste informazioni.';
-        return;
-      }
-      this.messaggioErrore = '';
-      if (tipo === 'mail') {
-        this.mostraEmail = true;
-      } else if (tipo === 'telefono') {
-        this.mostraTelefono = true;
-      }
-    },
-    async togglePreferito(annuncio: Annuncio) {
-      if (!this.user) {
-        alert('Devi effettuare il login per aggiungere ai preferiti.');
-        return;
-      }
-      try {
-        if (annuncio.isPreferito) {
-          await axios.delete(`/api/preferiti/${annuncio.id}`);
-          annuncio.isPreferito = false;
-        } else {
-          await axios.post('/api/preferiti', { annuncio_id: annuncio.id });
-          annuncio.isPreferito = true;
-        }
-      } catch (error) {
-        console.error('Errore durante la gestione dei preferiti:', error);
-      }
-    },
-    ConvertiDataTesto: metodiComuni.ConvertiDataTesto,
-    CreaUrlMaps: metodiComuni.CreaUrlMaps,
-  },
-  created() {
-    const id = this.$route.params.n as string;
-    if (typeof id === 'string') {
-      this.fetchAnnuncio(id);
-    } else {
-      console.error('Invalid ID type:', typeof id);
+  mostraContatto(tipo: 'mail' | 'telefono') {
+    if (!this.user) {
+      this.messaggioErrore = 'Devi effettuare il login per visualizzare queste informazioni.'
+      return
+    }
+    this.messaggioErrore = ''
+    if (tipo === 'mail') {
+      this.mostraEmail = true
+    } else if (tipo === 'telefono') {
+      this.mostraTelefono = true
     }
   },
-});
+  async togglePreferito(annuncio: Annuncio) {
+    if (!this.user) {
+      alert('Devi effettuare il login per aggiungere ai preferiti.')
+      return
+    }
+    try {
+      if (annuncio.isPreferito) {
+        await axios.delete(`/api/preferiti/${annuncio.id}`)
+        annuncio.isPreferito = false
+      } else {
+        await axios.post('/api/preferiti', { annuncio_id: annuncio.id })
+        annuncio.isPreferito = true
+      }
+    } catch (error) {
+      console.error('Errore durante la gestione dei preferiti:', error)
+    }
+  },
+  ConvertiDataTesto: metodiComuni.ConvertiDataTesto,
+  CreaUrlMaps: metodiComuni.CreaUrlMaps,
+},
+created() {
+  const id = this.$route.params.n as string
+  if (typeof id === 'string') {
+    this.fetchAnnuncio(id)
+  } else {
+    console.error('Invalid ID type:', typeof id)
+  }
+},
+})
 </script>
 
 <template>
@@ -93,7 +112,7 @@ export default defineComponent({
           <!-- Colonna dettagli annuncio -->
           <div class="col-12 col-md-7">
             <div class="card-body">
-              <h5 class="card-title" style="max-width: 750px;">{{ annuncio.descrizione }}</h5>
+              <h5 class="card-title" style="max-width: 750px">{{ annuncio.descrizione }}</h5>
               <p class="card-text fs-4 fw-bold text-success">
                 Prezzo: {{ annuncio.prezzo || 'Non specificato' }} €
               </p>
@@ -135,11 +154,11 @@ export default defineComponent({
                   Chiama
                 </button>
               </div>
-
+              
               <!-- Errori e contatti -->
               <p v-if="messaggioErrore" class="text-danger mt-3">{{ messaggioErrore }}</p>
-              <p v-if="mostraEmail" class="mt-3">Email: {{ annuncio.mail }}</p>
-              <p v-if="mostraTelefono" class="mt-3">Telefono: {{ annuncio.telefono }}</p>
+              <p v-if="mostraEmail" class="mt-3">Email: <a href="mailto:{{ annuncio.mail }}">{{ annuncio.mail }}</a></p>
+              <p v-if="mostraTelefono" class="mt-3">Telefono: <a href="tel:{{ annuncio.telefono }}">{{ annuncio.telefono }}</a></p>
             </div>
           </div>
         </div>
@@ -152,6 +171,12 @@ export default defineComponent({
             </svg>
           </button>
         </div>
+        <button v-if="user?.ruolo == 'admin'"
+          class="btn btn-danger m-3 p-2 position-absolute bottom-0 end-0 p-2" 
+          :canDelete="annuncio.mail == user?.mail || user?.ruolo == 'admin'" 
+          @click="deleteAnnuncio(annuncio.id)">
+          Elimina
+        </button>
       </div>
     </div>
   </div>

@@ -77,7 +77,7 @@ export default defineComponent({
           <h5 class="card-title text-truncate" style="max-width: 600px;">
             <RouterLink :to="`/annunci/${annuncio.id}`">{{ annuncio.descrizione }}</RouterLink>
           </h5>
-          <p class="card-text">{{ annuncio.prezzo }} €/mese</p>
+          <p class="card-text fs-4 fw-bold text-success">{{ annuncio.prezzo }} €/mese</p>
           <p class="card-text">Locali: {{ annuncio.locali }}</p>
           <p class="card-text">MQ: {{ annuncio.mq }}</p>
           <p class="card-text">Piano: {{ annuncio.piano }}</p>
