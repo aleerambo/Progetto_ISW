@@ -104,7 +104,7 @@ export async function AnnuncioDettaglio(req: Request, res: Response) {
     JOIN 
           studenthome.tipologia t ON da.tipologia_id = t.id
     WHERE 
-          a.id = ? AND a.stato = "attivo"
+          a.id = ? 
     GROUP BY 
           a.id, u.cognome, u.nome, u.mail, u.telefono, u.ruolo, u.foto_profilo,
           a.data, a.prezzo, a.descrizione, a.locali, a.mq, a.piano, a.indirizzo,
