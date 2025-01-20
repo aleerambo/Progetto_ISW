@@ -65,7 +65,7 @@ export default defineComponent({
                 type="text" 
                 v-model="nome" 
                 class="form-control" 
-                placeholder="Nome" 
+                placeholder="Nome*" 
                 aria-label="Nome"
                 required 
               />
@@ -75,7 +75,7 @@ export default defineComponent({
                 type="text" 
                 v-model="cognome" 
                 class="form-control" 
-                placeholder="Cognome" 
+                placeholder="Cognome*" 
                 aria-label="Cognome"
                 required 
               />
@@ -86,7 +86,7 @@ export default defineComponent({
                 pattern="[0-9]{10}" 
                 v-model="telefono" 
                 class="form-control" 
-                placeholder="Telefono (es. 3337779911)" 
+                placeholder="Telefono (es. 3337779911)*" 
                 aria-label="Telefono"
                 required 
               />
@@ -96,7 +96,7 @@ export default defineComponent({
                 type="email" 
                 v-model="mail" 
                 class="form-control" 
-                placeholder="Email" 
+                placeholder="Email*" 
                 aria-label="Email"
                 required 
               />
@@ -106,7 +106,7 @@ export default defineComponent({
                 type="password" 
                 v-model="password" 
                 class="form-control" 
-                placeholder="Password" 
+                placeholder="Password*" 
                 aria-label="Password"
                 required 
               />
@@ -116,14 +116,15 @@ export default defineComponent({
                 type="password" 
                 v-model="confirmPassword" 
                 class="form-control" 
-                placeholder="Conferma password" 
+                placeholder="Conferma password*" 
                 aria-label="Conferma password"
                 required 
               />
             </div>
             <button type="submit" class="btn btn-primary w-100 fw-bold">Registrati</button>
           </form>
-          <p class="mt-3 text-center">
+          <p class="mt-3 text-center">(*) indica un campo obbligatorio</p>
+          <p class="text-center">
             Sei già iscritto? Clicca qui e 
             <RouterLink to="/login">ACCEDI</RouterLink>
           </p>

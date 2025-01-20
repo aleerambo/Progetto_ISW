@@ -143,6 +143,7 @@ export default defineComponent({
           <label for="prezzo" class="form-label fw-bold">Prezzo (€/mese)</label>
           <input 
             type="number" 
+            min="0"
             class="form-control" 
             id="prezzo" 
             v-model="prezzo" 
@@ -152,6 +153,7 @@ export default defineComponent({
           <label for="numero_inquilini" class="form-label fw-bold">Numero inquilini</label>
           <input 
             type="number" 
+            min="0"
             class="form-control" 
             id="numero_inquilini" 
             v-model="numero_inquilini" 
@@ -165,6 +167,7 @@ export default defineComponent({
           <label for="contratto_min" class="form-label fw-bold">Contratto Minimo (mesi)</label>
           <input 
             type="number" 
+            min="0"
             class="form-control" 
             id="contratto_min" 
             v-model="contratto_min" 
@@ -174,6 +177,7 @@ export default defineComponent({
           <label for="contratto_max" class="form-label fw-bold">Contratto Massimo (mesi)</label>
           <input 
             type="number" 
+            min="0"
             class="form-control" 
             id="contratto_max" 
             v-model="contratto_max" 
@@ -187,6 +191,7 @@ export default defineComponent({
           <label for="locali" class="form-label fw-bold">Locali</label>
           <input 
             type="number" 
+            min="0"
             class="form-control" 
             id="locali" 
             v-model="locali" 
@@ -196,6 +201,7 @@ export default defineComponent({
           <label for="mq" class="form-label fw-bold">Metri Quadrati</label>
           <input 
             type="number" 
+            min="0"
             class="form-control" 
             id="mq" 
             v-model="mq" 
