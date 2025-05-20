@@ -1,5 +1,6 @@
 // src/app.ts
 import express from "express";
+import cors from "cors";
 import path3 from "path";
 import { fileURLToPath as fileURLToPath3 } from "url";
 import { dirname as dirname2 } from "path";
@@ -200,7 +201,7 @@ async function AnnuncioDettaglio(req, res) {
     JOIN 
           studenthome.tipologia t ON da.tipologia_id = t.id
     WHERE 
-          a.id = ? AND a.stato = "attivo"
+          a.id = ? 
     GROUP BY 
           a.id, u.cognome, u.nome, u.mail, u.telefono, u.ruolo, u.foto_profilo,
           a.data, a.prezzo, a.descrizione, a.locali, a.mq, a.piano, a.indirizzo,
@@ -559,6 +560,11 @@ async function AnnunciNoAttivi(req, res) {
   );
   res.json(results);
 }
+async function attivaAnnuncio(req, res) {
+  const id = req.params.id;
+  await connection.execute("UPDATE annuncio SET stato = 'attivo' WHERE id = ?", [id]);
+  res.json({ success: true });
+}
 async function AnnunciUtente(req, res) {
   const [results] = await connection.execute(
     `SELECT
@@ -905,6 +911,7 @@ router2.get("/api/annunci", allAnnunci);
 router2.get("/api/lastannunci", lastAnnunci);
 router2.get("/api/annunci/:id", AnnuncioDettaglio);
 router2.get("/api/annuncinoattivi", AnnunciNoAttivi);
+router2.post("/api/annunci/attiva/:id", attivaAnnuncio);
 router2.get("/api/annunci/prezzo/:prezzomax", allAnnunciPrezzo);
 router2.get("/api/annunci/tipo/:tipo/:prezzomax", allAnnunciTipo);
 router2.get("/api/annunci/quartiere/:id/:prezzomax", allAnnunciQuartiere);
@@ -1026,6 +1033,7 @@ var app = express();
 var port = 3e3;
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(cors());
 app.use(auth_router_default);
 app.use(news_router_default);
 app.use(annunci_router_default);

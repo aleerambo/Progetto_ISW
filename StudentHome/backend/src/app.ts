@@ -1,4 +1,5 @@
 import express, { Express } from "express"
+import cors from "cors"
 import path from "path"
 import { fileURLToPath } from "url"
 import { dirname } from "path"
@@ -19,6 +20,8 @@ const port: number = 3000
 
 app.use(bodyParser.json())
 app.use(cookieParser())
+
+app.use(cors())
 
 app.use(authRouter)
 app.use(newsRouter)
