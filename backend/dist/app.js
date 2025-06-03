@@ -69,6 +69,7 @@ var setUser = (req, res, user) => {
     sameSite: true
     // secure: true
   });
+  return accessToken;
 };
 var getUser = (req, res) => {
   const accessToken = req.cookies[COOKIE_NAME];
@@ -981,8 +982,16 @@ var register = async (req, res) => {
     ]
   );
   const newUser = results[0];
-  setUser(req, res, newUser);
-  res.json({ message: "Registrazione effettuata con successo" });
+  const token = setUser(req, res, newUser);
+  res.json({
+    message: "Registrazione effettuata con successo",
+    token,
+    user: {
+      id: newUser.id,
+      mail: newUser.mail,
+      ruolo: newUser.ruolo
+    }
+  });
 };
 var login = async (req, res) => {
   const user = getUser(req, res);
@@ -1006,8 +1015,16 @@ var login = async (req, res) => {
     return;
   }
   delete userData.password;
-  setUser(req, res, userData);
-  res.json({ message: "Login effettuato con successo" });
+  const token = setUser(req, res, userData);
+  res.json({
+    message: "Login effettuato con successo",
+    token,
+    user: {
+      id: userData.id,
+      mail: userData.mail,
+      ruolo: userData.ruolo
+    }
+  });
 };
 var logout = async (req, res) => {
   const user = getUser(req, res);

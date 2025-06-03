@@ -28,6 +28,7 @@ export const setUser = (req: Request, res: Response, user: any) => {
     sameSite: true,
     // secure: true
   })
+  return accessToken
 }
 
 /**

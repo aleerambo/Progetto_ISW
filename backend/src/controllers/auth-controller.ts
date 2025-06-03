@@ -50,9 +50,17 @@ export const register = async (req: Request, res: Response) => {
   const newUser = (results as User[])[0]
 
   // Crea un JWT contenente i dati dell'utente e lo imposta come cookie
-  setUser(req, res, newUser)
+  const token = setUser(req, res, newUser)
 
-  res.json({ message: "Registrazione effettuata con successo" })
+    res.json({
+    message: "Registrazione effettuata con successo",
+    token,
+    user: {
+      id: newUser.id,
+      mail: newUser.mail,
+      ruolo: newUser.ruolo
+    }
+  })
 }
 
 export const login = async (req: Request, res: Response) => {
@@ -93,9 +101,17 @@ export const login = async (req: Request, res: Response) => {
   delete userData.password
 
   // Crea un JWT contenente i dati dell'utente e lo imposta come cookie
-  setUser(req, res, userData)
+  const token = setUser(req, res, userData)
 
-  res.json({ message: "Login effettuato con successo" })
+  res.json({ 
+    message: "Login effettuato con successo",
+    token,
+    user: {
+      id: userData.id,
+      mail: userData.mail,
+      ruolo: userData.ruolo
+    }
+  })
 }
 
 export const logout = async (req: Request, res: Response) => {
