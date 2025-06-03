@@ -38,7 +38,7 @@ app.use(function(req, res, next) {
   res.status(404).send("Ops... Pagina non trovata")
 })
 
-app.listen(port, function() {
+app.listen(port,"0.0.0.0", function() {
   console.log(`Listening on http://localhost:${port}`)
 })
 

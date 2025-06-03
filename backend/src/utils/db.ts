@@ -1,10 +1,10 @@
-import { createConnection } from 'mysql2/promise';  
+import { createConnection } from 'mysql2/promise';
 
 export const connection = await createConnection({
   host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'StudentHome'
+  user: 'admin',
+  password: 'admin',
+  database: 'studenthome'
 })
 // Verifica la connessione al database
 try {
@@ -13,4 +13,3 @@ try {
 } catch (error) {
   console.error("Errore di connessione al database:", error);
 }
-
